@@ -5,9 +5,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "coveralls": "^3.0.4",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.1",
     "eslint-plugin-react": "^7.13.0",
     "jest": "^24.8.0",
     "react": "^16.8.6",
@@ -20,7 +18,9 @@
     "develop": "webpack-dev-server",
     "build": "webpack --mode production",
     "test": "jest --verbose --coverage",
-    "coveralls": "jest --detectOpenHandles --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "jest --detectOpenHandles --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
   },
   "devDependencies": {
     "@babel/cli": "7.1.0",
@@ -31,12 +31,21 @@
     "babel-loader": "8.0.2",
     "babel-polyfill": "^6.26.0",
     "css-loader": "1.0.0",
-    "eslint-config-airbnb": "17.1.1",
-    "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "jest": "^24.8.0",
     "style-loader": "0.23.0",
     "webpack": "4.19.1",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "./src/setupTests.js"
+    ]
   }
 }
