@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/andela/ah-baqi-frontend.svg?branch=ch-setup-react-project-166980199)](https://travis-ci.com/andela/ah-baqi-frontend)
+
 # Authors Haven - A Social platform for the creative at heart.
 
 ## Vision
