@@ -4,14 +4,20 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.4.5",
+    "coveralls": "^3.0.4",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.13.0",
+    "jest": "^24.8.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "scripts": {
     "develop": "webpack-dev-server",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "jest --verbose --coverage",
+    "coveralls": "jest --detectOpenHandles --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "devDependencies": {
     "@babel/cli": "7.1.0",
