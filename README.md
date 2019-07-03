@@ -1,7 +1,6 @@
-[![Build Status](https://travis-ci.com/andela/ah-baqi-frontend.svg?branch=ch-setup-react-project-166980199)](https://travis-ci.com/andela/ah-baqi-frontend)
-
 # Authors Haven - A Social platform for the creative at heart.
 
+[![Build Status](https://travis-ci.com/andela/ah-baqi-frontend.svg?branch=develop)](https://travis-ci.com/andela/ah-baqi-frontend)
 [![CircleCI](https://circleci.com/gh/andela/ah-baqi-frontend.svg?style=svg)](https://circleci.com/gh/andela/ah-baqi-frontend) [![Maintainability](https://api.codeclimate.com/v1/badges/24d597618891d205ac41/maintainability)](https://codeclimate.com/github/andela/ah-baqi-frontend/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/24d597618891d205ac41/test_coverage)](https://codeclimate.com/github/andela/ah-baqi-frontend/test_coverage)
 
 ## Vision
