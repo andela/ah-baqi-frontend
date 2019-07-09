@@ -1,0 +1,115 @@
+$grey: #e2e0e0;
+$border_grey: #eae6e6;
+$brown: #4a4343;
+
+.profile-header-component {
+  display: flex;
+  font-family: 'Roboto', sans-serif;
+  min-height: 200px;
+}
+
+.profile-name-holder {
+  min-height: inherit;
+  min-width: inherit;
+  width: 66%;
+}
+.profile-pic-holder {
+  flex-grow: 1;
+
+  img {
+    border-radius: 88px;
+    float: right;
+    height: 146px;
+    object-fit: cover;
+    width: 149px;
+  }
+}
+.profile-header-info {
+  height: inherit;
+
+  &-header {
+    display: flex;
+  }
+
+  &-username {
+    font-size: 32px;
+    line-height: 32px;
+    text-transform: capitalize;
+    width: 65%;
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  &-edit {
+    margin: 2% 0 0 1%;
+    width: 47%;
+  }
+
+  &-bio {
+    color: $brown;
+    font-size: 18px;
+    width: 100%;
+  }
+
+  &-followers {
+    color: $brown;
+    width: 100%;
+  }
+}
+
+.profile-content-component {
+  p {
+    border-bottom: 1px solid $border_grey;
+  }
+  &-articles {
+    box-shadow: 1px -1px 7px 0px $grey;
+    border: 1px solid $grey;
+    border-radius: 2%;
+    height: 500px;
+    padding: 4%;
+
+    &-contentpic {
+      height: 46%;
+      
+      img {
+        display: block;
+        height: auto;
+        margin: auto;
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+      }
+    }
+
+    &-postedon {
+      padding: 2%;
+      p {
+        border-bottom: none;
+        color: $brown;
+      }
+    }
+  }
+
+}
+
+.profile-content-component-articles-header {
+  display: flex;
+
+  &-pic {
+    width: 10%;
+  }
+
+  img {
+    border-radius: 88px;
+    float: right;
+    height: 60px;
+    object-fit: cover;
+    width: 60px;
+  }
+
+  &-postedon {
+    width: 70%;
+  }
+}

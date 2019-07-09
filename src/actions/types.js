@@ -24,6 +24,7 @@ const actionTypes = {
   EMAIL_SIGNUP_REQUEST: 'EMAIL_SIGNUP_REQUEST',
   LOG_IN: 'LOG_IN',
   LOG_OUT: 'LOG_OUT',
+  EDIT_PROFILE_MODAL_FORM: 'EDIT_PROFILE_MODAL_FORM',
 };
 
 export default actionTypes;

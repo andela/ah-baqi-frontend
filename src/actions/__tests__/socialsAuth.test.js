@@ -1,8 +1,9 @@
-import axios from '../../utils/axios';
+import { instance } from '../../utils/axios';
 import store from '../../utils/testUtils';
 import { firebaseAuthAction, socialAuthActions } from '../socialAuthActions';
 
-jest.spyOn(axios, 'post');
+
+jest.spyOn(instance, 'post');
 
 const socialAuthResponse = {
   user: {
@@ -40,7 +41,7 @@ describe('testing firebse calls from twitter', () => {
 
   test('tests that firebase is called for twitter', async () => {
     const resDataFT = { ...firebaseResponse, ...socialAuthResponse };
-    axios.post.mockImplementation(() => Promise.resolve({
+    instance.post.mockImplementation(() => Promise.resolve({
       data: resDataFT,
     }));
 
@@ -52,7 +53,7 @@ describe('testing firebse calls from twitter', () => {
 
   test('tests that firebase failed', async () => {
     const resDataFT = { ...firebaseResponse, ...socialAuthResponse };
-    axios.post.mockImplementation(() => Promise.resolve({
+    instance.post.mockImplementation(() => Promise.resolve({
       data: resDataFT,
     }));
 
@@ -75,7 +76,7 @@ describe('testing facebook and google signin', () => {
   };
 
   test('facebook signin', async () => {
-    axios.post.mockImplementation(() => Promise.resolve({
+    instance.post.mockImplementation(() => Promise.resolve({
       data: { ...socialAuthResponse },
     }));
 
@@ -86,7 +87,7 @@ describe('testing facebook and google signin', () => {
   });
 
   test('google signin', async () => {
-    axios.post.mockImplementation(() => Promise.resolve({
+    instance.post.mockImplementation(() => Promise.resolve({
       data: { ...socialAuthResponse },
     }));
 
@@ -97,7 +98,7 @@ describe('testing facebook and google signin', () => {
   });
 
   test('no provider provided', async () => {
-    axios.post.mockImplementation(() => Promise.resolve({
+    instance.post.mockImplementation(() => Promise.resolve({
       data: { ...providerMissing },
     }));
 
