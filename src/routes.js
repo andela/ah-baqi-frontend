@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
-import Login from './components/login/Login';
-import Home from './components/home/Home';
+import Home from './containers/home/Home';
+import Header from './containers/header/Header';
 
 const Routes = () => (
   <BrowserRouter>
-    <Route path="/login" exact component={Login} />
+    <Header />
     <Route path="/" exact component={Home} />
   </BrowserRouter>
 );

@@ -1,44 +1,46 @@
 {
-    "env": {
-      "browser": true,
-      "es6": true,
-      "jest/globals": true
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": "airbnb",
-    "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "jest"
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "jest",
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
     ],
-    "rules": {
-        "react/jsx-filename-extension": [
-            1,
-            {
-                "extensions": [
-                    ".js",
-                    ".jsx"
-                ]
-            }
+    "react/prop-types": 0,
+    "jsx-a11y/anchor-is-valid": [
+      "error", {
+        "components": [
+          "Link"
         ],
-        "jsx-a11y/anchor-is-valid": [
-          "error", {
-            "components": [
-              "Link"
-            ],
-            "specialLink": [
-              "to"
-            ]
-        }
-      ]
-    }
+        "specialLink": [
+          "to"
+        ]
+      }
+    ]
+  }
 }

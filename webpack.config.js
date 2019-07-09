@@ -8,6 +8,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
+  devtool: 'source-map',
   entry: './src/index.js',
   module: {
     rules: [
@@ -22,6 +23,10 @@ module.exports = {
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+      },
     ],
   },
   resolve: { extensions: ['*', '.js', '.jsx', '.scss'] },
@@ -31,7 +36,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
-    port: 3000,
+    port: 3001,
     historyApiFallback: true,
   },
   plugins: [HtmlWebpackPluginConfig],
