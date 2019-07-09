@@ -1,4 +1,4 @@
-import axios from '../utils/axios';
+import { instance } from '../utils/axios';
 import handleMessages from '../utils/messages';
 
 import actionTypes from './types';
@@ -6,7 +6,7 @@ import actionTypes from './types';
 export const socialAuthActions = (data, provider, cancel) => async (dispatch) => {
   try {
     handleMessages('loading', 'Signing in to your account...');
-    const response = await axios.post(
+    const response = await instance.post(
       '/users/social_auth/',
       data,
     );

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Form, Icon, Input, Button,
 } from 'antd';
-import PropTypes from 'prop-types';
 
 const SignupDetails = (props) => {
   const { submit, form } = props;

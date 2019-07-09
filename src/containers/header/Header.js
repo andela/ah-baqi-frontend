@@ -19,7 +19,7 @@ import {
   firebaseAuthAction,
 } from '../../actions/socialAuthActions';
 
-const Header = ({
+export const UnconnectedHeader = ({
   signupActions,
   hideModalActions,
   formSignupAction,
@@ -146,4 +146,4 @@ export default connect(
     loginActions,
     logoutActions,
   },
-)(Header);
+)(UnconnectedHeader);

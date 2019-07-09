@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Header from '../../header/Header';
+import { UnconnectedHeader } from '../../header/Header';
 import AuthModal from '../../../components/modals/AuthModal';
+
 
 const myMock = jest.fn();
 const propsTest = {
@@ -14,7 +15,7 @@ const propsTest = {
 };
 
 describe('<Routes /> component', () => {
-  const wrapper = shallow(<Header.reactComponent {...propsTest} />);
+  const wrapper = shallow(<UnconnectedHeader {...propsTest} />);
 
   test('renders routes successfully', () => {
     expect(wrapper).toHaveLength(1);

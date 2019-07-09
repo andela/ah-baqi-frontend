@@ -41,7 +41,6 @@ const AuthModal = ({
       )
     );
       break;
-
     case 'signup': (
       modalData = (
         <div style={{ textAlign: 'center' }}>

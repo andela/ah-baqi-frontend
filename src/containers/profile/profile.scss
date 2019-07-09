@@ -1,0 +1,14 @@
+$white: #ffffff;
+$black: #000000;
+
+.profile-container {
+  background: $white;
+  color: $black;
+  margin: 60px;
+  padding: 20px;
+
+  &-wrapper {
+    border-radius: 5px;
+    margin: 0 20%;
+  }
+}

@@ -1,12 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Header from '../header/Header';
+import { UnconnectedHeader } from '../header/Header';
 
-jest.mock('react-redux');
 
 describe('<Header />', () => {
   it('renders without fail', () => {
-    const wrapper = shallow(<Header.reactComponent />);
+    const wrapper = shallow(<UnconnectedHeader />);
     expect(wrapper.find("[data-test='header-section']")).toHaveLength(1);
   });
 });
