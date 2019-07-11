@@ -1,16 +1,17 @@
 import React from 'react';
 import { Modal } from 'antd';
-import PropTypes from 'prop-types';
-import '../auth/authmodalbutton.scss';
+import '../auth/Authmodalbuttons.scss';
 import SocialAuthModalButtons from '../auth/SocialAuthModalButtons';
 import EmailModalButton from '../auth/EmailModalButton';
 import Signup from '../auth/Signup';
+import Login from '../auth/Login';
 
 const AuthModal = ({
   showLoginForm = null,
   showSignupForm = null,
   authAction,
   submitSignup,
+  submitLogin,
   visible,
   onCancel,
   google,
@@ -75,7 +76,9 @@ const AuthModal = ({
     case 'loginForm': (
       modalData = (
         <div style={{ textAlign: 'center' }}>
-          login form
+          <Login
+            submit={submitLogin}
+          />
         </div>
       )
     );
@@ -95,15 +98,6 @@ const AuthModal = ({
       {modalData}
     </Modal>
   );
-};
-
-AuthModal.propTypes = {
-  onCancel: PropTypes.func.isRequired,
-  visible: PropTypes.bool.isRequired,
-  showLoginForm: PropTypes.func,
-  showSignupForm: PropTypes.func,
-  authAction: PropTypes.string.isRequired,
-  submitSignup: PropTypes.func.isRequired,
 };
 
 export default AuthModal;

@@ -1,24 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
-import PropTypes from 'prop-types';
+import { Layout, Menu, Popconfirm } from 'antd';
 
 const { Header } = Layout;
 const { Item } = Menu;
 
-const Navbar = ({ clickedLogin = null, clickedSignup = null }) => (
+const Navbar = ({ clickedLogin = null, clickedSignup = null, logOut = null }) => (
   <Layout className="nav">
     <Header className="nav">
       <Link to="/" className="logo">
                     Author&rsquo;s Haven
       </Link>
-      {localStorage.getItem('isLoggedIn')
+      {localStorage.username && localStorage.token && localStorage.isLoggedIn
         ? (
-          <Menu mode="horizontal" style={{ float: 'right' }}>
-            <Item>Welcome!</Item>
+          <Menu mode="horizontal" style={{ float: 'right' }} data-test="authenticated-menu">
+            <Item>Profile</Item>
+            <Item>
+              <Popconfirm
+                title="Are you sure?"
+                onConfirm={logOut}
+                placement="bottom"
+                okText="Yes"
+                cancelText="No"
+              >
+              Log out
+              </Popconfirm>
+            </Item>
           </Menu>
         ) : (
-          <Menu mode="horizontal" style={{ float: 'right' }}>
+          <Menu mode="horizontal" style={{ float: 'right' }} data-test="unauthenticated-menu">
             <Item onClick={clickedLogin}>Sign in</Item>
             <Item onClick={clickedSignup}>Sign up</Item>
           </Menu>
@@ -28,10 +38,5 @@ const Navbar = ({ clickedLogin = null, clickedSignup = null }) => (
     </Header>
   </Layout>
 );
-
-Navbar.propTypes = {
-  clickedLogin: PropTypes.func,
-  clickedSignup: PropTypes.func,
-};
 
 export default Navbar;

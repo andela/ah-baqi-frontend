@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import AuthModalButton from './AuthModalButtons';
 
 const loginModalBtn = (props) => {
@@ -14,15 +12,6 @@ const loginModalBtn = (props) => {
       {' '}
     </AuthModalButton>
   );
-};
-
-loginModalBtn.propTypes = {
-  clicked: PropTypes.func,
-  action: PropTypes.string.isRequired,
-};
-
-loginModalBtn.defaultProps = {
-  clicked: null,
 };
 
 export default loginModalBtn;

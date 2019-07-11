@@ -1,25 +1,18 @@
-$font-stack: Helvetica, sans-serif;
-$brand-font: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+$primary-white: #fff;
+$primary-black: #000;
+$font-stack: Helvetica,
+sans-serif;
 $brand-color:  #262626;
-$main-color:  #fff;
 
 body {
   font: $font-stack;
 }
 
-.container {
-  margin: 0 auto;
-  width: 75%;
-}
-
 .nav {
-  background-color: $main-color;
-  padding: 10px 100px;
+  background-color: $primary-white;
 }
 
 .logo {
-  color: $brand-color;
-  font-family: $brand-font;
-  font-size: 26px;
-  font-weight: bold; 
+  color: $primary-black;
+  font-size: 17px;
 }

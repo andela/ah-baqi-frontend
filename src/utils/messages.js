@@ -1,9 +1,7 @@
 import { message } from 'antd';
 
 const handleMessages = (status = 'loading', content = 'Loading') => {
-  message.config({
-    maxCount: 1,
-  });
+  message.destroy();
   switch (status) {
     case 'success':
       message.success(content, 2.5);
@@ -12,7 +10,7 @@ const handleMessages = (status = 'loading', content = 'Loading') => {
       message.error(content, 2.5);
       break;
     default:
-      message.loading(content);
+      message.loading(content, 20);
   }
 };
 

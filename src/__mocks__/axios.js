@@ -4,6 +4,8 @@ mockAxios.get = jest.fn(() => Promise.resolve({ data: 'mocked' }));
 mockAxios.post = jest.fn(() => Promise.resolve({
   data: {
     user: {
+      username: 'testUser',
+      token: 'testUserToken',
       message: 'User account created. An activation link has been sent to boniface22@gmail.com.',
       data: {
         username: 'boniface22',
@@ -13,4 +15,5 @@ mockAxios.post = jest.fn(() => Promise.resolve({
     },
   },
 }));
+
 export default mockAxios;

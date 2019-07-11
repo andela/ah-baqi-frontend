@@ -26,6 +26,5 @@ describe('<Routes /> component', () => {
     const authmodal = wrapper.find(AuthModal);
     expect(authmodal).toHaveLength(1);
     authmodal.props().onFailure();
-    // testing the renderProp
   });
 });

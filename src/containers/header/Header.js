@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import AuthModal from '../../components/modals/AuthModal';
 import Navbar from '../../components/navbar/Navbar';
+import loginActions from '../../actions/loginActions';
+import logoutActions from '../../actions/logoutActions';
 
 import {
   displayModalActions,
@@ -29,6 +30,7 @@ const Header = ({
   formLoginAction,
   socialAuthActions,
   firebaseAuthAction,
+  loginActions, logoutActions,
 }) => {
   const handleCancel = () => {
     hideModalActions();
@@ -62,6 +64,23 @@ const Header = ({
     formLoginAction();
   };
 
+  const loginUserHandler = (data) => {
+    loginActions(data);
+  };
+
+  const logOutUserHandler = () => {
+    logoutActions();
+  };
+
+  const handleLoginSubmit = (event, formProp) => {
+    event.preventDefault();
+    formProp.validateFields((error, values) => {
+      if (!error) {
+        loginActions(values, handleCancel);
+      }
+    });
+  };
+
   const handleFirebaseTwitter = () => {
     firebaseAuthAction(handleCancel);
   };
@@ -85,6 +104,7 @@ const Header = ({
       <Navbar
         clickedSignup={signupModalsHandler}
         clickedLogin={loginModalsHandler}
+        logOut={logOutUserHandler}
       />
       <AuthModal
         authAction={authAction}
@@ -99,6 +119,7 @@ const Header = ({
         facebook={socialAuthResponse}
         twitter={handleFirebaseTwitter}
         onFailure={onFailure}
+        submitLogin={handleLoginSubmit}
       />
     </div>
   );
@@ -109,15 +130,6 @@ const mapStateToProps = state => ({
   ...state.modals,
   ...state.login,
 });
-
-Header.propTypes = {
-  hideModalActions: PropTypes.func.isRequired,
-  emailSignupAction: PropTypes.func.isRequired,
-  formSignupAction: PropTypes.func.isRequired,
-  authAction: PropTypes.string.isRequired,
-  visible: PropTypes.bool.isRequired,
-  signupActions: PropTypes.func.isRequired,
-};
 
 export default connect(
   mapStateToProps,
@@ -131,5 +143,7 @@ export default connect(
     formLoginAction,
     socialAuthActions,
     firebaseAuthAction,
+    loginActions,
+    logoutActions,
   },
 )(Header);

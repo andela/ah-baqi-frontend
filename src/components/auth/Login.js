@@ -1,27 +1,17 @@
 import React from 'react';
-import {
-  Form, Icon, Input, Button,
-} from 'antd';
 import PropTypes from 'prop-types';
+import { Form, Icon, Input, Button } from 'antd';
 
-const SignupDetails = (props) => {
+const LoginDetails = (props) => {
   const { submit, form } = props;
   return (
-    <Form onSubmit={event => submit(event, form)} className="login-form">
+    <Form onSubmit={event => submit(event, form)}>
       <Form.Item data-test="username-input">
         {form.getFieldDecorator('username', {
           rules: [{ required: true, message: 'Please input your username!' }],
         })(<Input
           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
           placeholder="Username"
-        />)}
-      </Form.Item>
-      <Form.Item data-test="email-input">
-        {form.getFieldDecorator('email', {
-          rules: [{ required: true, message: 'Please input your email!' }],
-        })(<Input
-          prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-          placeholder="Email"
         />)}
       </Form.Item>
       <Form.Item data-test="password-input">
@@ -37,14 +27,13 @@ const SignupDetails = (props) => {
         <Button
           type="primary"
           htmlType="submit"
-          className="login-form-button"
           block
         >
-          Register
+          Log in
         </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default Form.create()(SignupDetails);
+export default Form.create()(LoginDetails);

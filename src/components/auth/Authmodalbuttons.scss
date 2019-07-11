@@ -1,15 +1,17 @@
-.AuthButton {
-    border: 1px solid #f0f0f0;
-    border-radius: 5px;
-    width: 250px;
-    margin: 10px auto;
-    text-align: justify;
-    padding: 3px 40px;
-    cursor: pointer;
+$auth-button-color: #f0f0f0;
+
+.auth-button {
+  border: 1px solid $auth-button-color;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px auto;
+  padding: 3px 40px;
+  text-align: justify;
+  width: 250px;
 }
 
-.AuthButton:hover {
-    background-color: #f0f0f0;
+.auth-button:hover {
+  background-color: $auth-button-color;
 }
 
 .twitterBtn {
