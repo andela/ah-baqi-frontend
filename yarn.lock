@@ -3572,9 +3572,9 @@ eslint-plugin-import@^2.18.0:
     resolve "^1.11.0"
 
 eslint-plugin-jest@^22.7.2:
-  version "22.7.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.7.2.tgz#7ab118a66a34e46ae5e16a128b5d24fd28b43dca"
-  integrity sha512-Aecqe3ulBVI7amgOycVI8ZPL8o0SnGHOf3zn2/Ciu8TXyXDHcjtwD3hOs3ss/Qh/VAwlW/DMcuiXg5btgF+XMA==
+  version "22.8.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.8.0.tgz#242ef5459e8da25d2c41438e95eb546e03d7fae1"
+  integrity sha512-2VftZMfILmlhL3VMq5ptHRIuyyXb3ShDEDb1J1UjvWNzm4l+UK/YmwNuTuJcM0gv8pJuOfiR/8ZptJ8Ou68pFw==
 
 eslint-plugin-jsx-a11y@^6.2.3:
   version "6.2.3"
@@ -8207,9 +8207,9 @@ rc-switch@~1.9.0:
     react-lifecycles-compat "^3.0.4"
 
 rc-table@~6.6.0:
-  version "6.6.7"
-  resolved "https://registry.yarnpkg.com/rc-table/-/rc-table-6.6.7.tgz#eb26c29df4d4311d42c9e379d14e6aaa817f50cb"
-  integrity sha512-NC6kaHl6q/Eed0THGVSFLfc0xRcctiVEv63oDCrpYRTJPCTfG9q5APDLzwh44dKDAfXHt2JCJ5QtRJH8zaM2IQ==
+  version "6.6.8"
+  resolved "https://registry.yarnpkg.com/rc-table/-/rc-table-6.6.8.tgz#4b18bfebc499f37a2a33b2bccd0ddcf3ecd3a9b6"
+  integrity sha512-G/ICx/jVgWEpnXwVD+WWTm8BjATN0DAWtNFx1O1lxCVs9IY50fZy/GumBpwf91hnWFqlo96Dd/SN50P2O3EM0w==
   dependencies:
     babel-runtime "6.x"
     classnames "^2.2.5"

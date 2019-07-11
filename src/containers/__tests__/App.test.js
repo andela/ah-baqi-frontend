@@ -8,7 +8,6 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('Sample tests to make circle ci build pass', () => {
   test('renders without crashing', () => {
     const appComponent = shallow(<App />);
-
     expect(appComponent.exists()).toBe(true);
   });
 });

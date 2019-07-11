@@ -22,6 +22,8 @@ const actionTypes = {
   FACEBOOK_AUTH: 'FACEBOOK_AUTH',
   SIGNUP_ERROR: 'SIGNUP_ERROR',
   EMAIL_SIGNUP_REQUEST: 'EMAIL_SIGNUP_REQUEST',
+  LOG_IN: 'LOG_IN',
+  LOG_OUT: 'LOG_OUT',
 };
 
 export default actionTypes;

@@ -1,8 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => (
-  <div style={{ textAlign: 'center' }}>
-    <h1>Welcome to the home page</h1>
+  <div>
+    <br />
+    <Link to="/login">Login</Link>
+    <hr />
+    Welcome to the home page
   </div>
 );
 
