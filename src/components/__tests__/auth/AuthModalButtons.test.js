@@ -24,7 +24,6 @@ describe('<SocialAuthModalButtons /> component', () => {
     expect(wrapper.find("[data-test='social-button-test']")).toHaveLength(1);
     expect(wrapper.find('t')).toHaveLength(1);
     expect(wrapper.find('e')).toHaveLength(1);
-    expect(wrapper.find('AuthModalButton')).toHaveLength(1);
   });
 
   test('facebook callback is called', () => {

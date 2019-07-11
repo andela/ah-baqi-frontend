@@ -1,13 +1,23 @@
 import React from 'react';
 import { Modal } from 'antd';
-
-import '../auth/Authmodalbuttons.scss';
-
+import PropTypes from 'prop-types';
+import '../auth/authmodalbutton.scss';
 import SocialAuthModalButtons from '../auth/SocialAuthModalButtons';
 import EmailModalButton from '../auth/EmailModalButton';
+import Signup from '../auth/Signup';
 
-const AuthModal = (props) => {
-  const { visible, onCancel, authAction } = props;
+const AuthModal = ({
+  showLoginForm = null,
+  showSignupForm = null,
+  authAction,
+  submitSignup,
+  visible,
+  onCancel,
+  google,
+  facebook,
+  twitter,
+  onFailure,
+}) => {
   const modalTitle = 'Welcome to Authors Haven';
   let modalData = '';
   switch (authAction) {
@@ -16,12 +26,16 @@ const AuthModal = (props) => {
         <div style={{ textAlign: 'center' }}>
           <SocialAuthModalButtons
             action="Login"
-            googleResponse={props.google}
-            facebookResponse={props.facebook}
-            twitterResponse={props.twitter}
-            onFailure={props.onFailure}
+            googleResponse={google}
+            facebookResponse={facebook}
+            twitterResponse={twitter}
+            onFailure={onFailure}
           />
-          <EmailModalButton action="Login" clicked={props.showLoginForm} />
+          <EmailModalButton
+            action="Login"
+            clicked={showLoginForm}
+            data-test="email-button-test"
+          />
         </div>
       )
     );
@@ -31,28 +45,36 @@ const AuthModal = (props) => {
       modalData = (
         <div style={{ textAlign: 'center' }}>
           <SocialAuthModalButtons
-            googleResponse={props.google}
-            facebookResponse={props.facebook}
-            twitterResponse={props.twitter}
+            googleResponse={google}
+            facebookResponse={facebook}
+            twitterResponse={twitter}
+            onFailure={onFailure}
             action="Signup"
           />
-          <EmailModalButton action="Signup" clicked={props.showSignupForm} />
+          <EmailModalButton
+            action="Signup"
+            clicked={showSignupForm}
+          />
         </div>
       )
     );
       break;
-    case 'signupForm': (
-      modalData = (
-        <div style={{ textAlign: 'center' }} form-data="signup form">
-          signup form
-        </div>
-      )
-    );
+    case 'signupForm':
+      (
+
+        modalData = (
+          <div style={{ textAlign: 'center' }}>
+            <Signup
+              form-data="signup form"
+              submit={submitSignup}
+            />
+          </div>
+        )
+      );
       break;
     case 'loginForm': (
-
       modalData = (
-        <div style={{ textAlign: 'center' }} form-data="login form">
+        <div style={{ textAlign: 'center' }}>
           login form
         </div>
       )
@@ -62,18 +84,26 @@ const AuthModal = (props) => {
     default:
       break;
   }
-
   return (
     <Modal
-      data-test="email-button-test"
       title={modalTitle}
       visible={visible}
       onCancel={onCancel}
-      footer={false}
+      footer={null}
+      form-data="login form"
     >
       {modalData}
     </Modal>
   );
+};
+
+AuthModal.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
+  showLoginForm: PropTypes.func,
+  showSignupForm: PropTypes.func,
+  authAction: PropTypes.string.isRequired,
+  submitSignup: PropTypes.func.isRequired,
 };
 
 export default AuthModal;

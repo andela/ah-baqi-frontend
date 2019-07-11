@@ -3,6 +3,9 @@ import actionTypes from '../actions/types';
 const initialState = {
   visible: false,
   authAction: '',
+  email: '',
+  error: null,
+  isLoggedIn: false,
 };
 
 export default (state = initialState, action) => {
@@ -40,6 +43,13 @@ export default (state = initialState, action) => {
         ...state,
         visible: true,
         authAction: 'signupForm',
+      };
+    case actionTypes.EMAIL_SIGNUP_REQUEST:
+      return {
+        ...state,
+        visible: true,
+        isLoggedIn: true,
+        email: action.payload,
       };
     default:
       return state;

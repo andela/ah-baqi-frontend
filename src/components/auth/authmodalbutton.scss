@@ -1,0 +1,15 @@
+$color: #f0f0f0;
+
+.auth-button {
+  border: 1px solid $color;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px auto;
+  padding: 3px 40px;
+  text-align: justify;
+  width: 250px;
+}
+
+.auth-button:hover {
+  background-color: $color;
+}

@@ -32,6 +32,7 @@ export const socialAuthActions = (data, provider, cancel) => async (dispatch) =>
       payload: response.data,
     });
     localStorage.setItem('token', response.data.user.tokem);
+    localStorage.setItem('isLoggedIn', true);
     handleMessages('success', 'Successfully Signed in 😄');
     cancel();
   } catch (error) {

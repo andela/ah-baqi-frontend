@@ -4,8 +4,8 @@
     "es6": true,
     "jest/globals": true
   },
-  "extends": "airbnb",
   "parser": "babel-eslint",
+  "extends": "airbnb",
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -19,7 +19,7 @@
   },
   "plugins": [
     "react",
-    "jest",
+    "jest"
   ],
   "rules": {
     "react/jsx-filename-extension": [
