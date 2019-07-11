@@ -13,8 +13,11 @@ const SocialAuthModalButtons = (props) => {
     googleResponse,
     action, disabled, onFailure,
   } = props;
+
+  const googgleClientId = '1005118583442-8vl6g21ovisrkasced1n5ea0vpcms2ge.apps.googleusercontent.com';
+  const facebookAppId = '424643588295726';
   return (
-    <div data-test='social-button-test'>
+    <div data-test="social-button-test">
       <AuthModalButton
         titter-button="twitter button"
         iconType="twitter"
@@ -30,7 +33,7 @@ const SocialAuthModalButtons = (props) => {
       </AuthModalButton>
       <FacebookLogin
         facebook-button="facebook button"
-        appId="424643588295726"
+        appId={facebookAppId}
         autoLoad={false}
         fields="name,email,picture"
         callback={response => facebookResponse(response, 'facebook')}
@@ -52,7 +55,7 @@ const SocialAuthModalButtons = (props) => {
       />
       <GoogleLogin
         google-button="google button"
-        clientId="1005118583442-8vl6g21ovisrkasced1n5ea0vpcms2ge.apps.googleusercontent.com"
+        clientId={googgleClientId}
         disabled={disabled}
         onSuccess={response => googleResponse(response, 'google')}
         onFailure={onFailure}

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
+import PropTypes from 'prop-types';
 import AuthModal from '../../components/modals/AuthModal';
 import Navbar from '../../components/navbar/Navbar';
 
@@ -8,41 +8,65 @@ import {
   displayModalActions,
   hideModalActions,
   emailSignupAction,
+  formSignupAction,
   emailLoginAction,
   formLoginAction,
-  formSignupAction,
 } from '../../actions/modalActions';
+import signupActions from '../../actions/signupActions';
 import {
   socialAuthActions,
   firebaseAuthAction,
 } from '../../actions/socialAuthActions';
 
-class Header extends Component {
-  handleCancel = () => {
-    this.props.hideModalActions();
+const Header = ({
+  signupActions,
+  hideModalActions,
+  formSignupAction,
+  emailSignupAction,
+  authAction,
+  visible,
+  emailLoginAction,
+  formLoginAction,
+  socialAuthActions,
+  firebaseAuthAction,
+}) => {
+  const handleCancel = () => {
+    hideModalActions();
+  };
+  const handleSignupSubmit = (event, formProp) => {
+    event.preventDefault();
+    formProp.validateFields((error, values) => {
+      if (!error) {
+        signupActions(values, handleCancel);
+      }
+    });
   };
 
-  signupModalsHandler = () => {
-    this.props.emailSignupAction();
+  const signupUserHandler = (data) => {
+    signupActions(data);
   };
 
-  loginModalsHandler = () => {
-    this.props.emailLoginAction();
+  const showSignupFormHandler = () => {
+    formSignupAction();
   };
 
-  showLoginFormHandler = () => {
-    this.props.formLoginAction();
-  }
+  const signupModalsHandler = () => {
+    emailSignupAction();
+  };
 
-  showSignupFormHandler = () => {
-    this.props.formSignupAction();
-  }
+  const loginModalsHandler = () => {
+    emailLoginAction();
+  };
 
-  handleFirebaseTwitter = () => {
-    this.props.firebaseAuthAction(this.handleCancel);
-  }
+  const showLoginFormHandler = () => {
+    formLoginAction();
+  };
 
-  socialAuthResponse = (response, provider) => {
+  const handleFirebaseTwitter = () => {
+    firebaseAuthAction(handleCancel);
+  };
+
+  const socialAuthResponse = (response, provider) => {
     const authData = {
       token_provider: 'google-oauth2',
       access_token: response.accessToken,
@@ -51,46 +75,49 @@ class Header extends Component {
     if (provider === 'facebook') {
       authData.token_provider = 'facebook';
     }
-    this.props.socialAuthActions(authData, provider, this.handleCancel);
-  }
-
-  onFailure = () => {
-
+    socialAuthActions(authData, provider, handleCancel);
   };
 
-  render() {
-    const { isLoggedIn, modals } = this.props;
-    return (
-      <div data-test="header-section">
-        <Navbar
-          clickedLogin={this.loginModalsHandler}
-          clickedSignup={this.signupModalsHandler}
-          isLoggedIn={isLoggedIn}
-        />
+  const onFailure = () => 'failed';
 
-        <AuthModal
-          authAction={modals.authAction}
-          visible={modals.visible}
-          onCancel={this.handleCancel}
-          showLoginForm={this.showLoginFormHandler}
-          showSignupForm={this.showSignupFormHandler}
-          login={this.loginUserHandler}
-          google={this.socialAuthResponse}
-          facebook={this.socialAuthResponse}
-          twitter={this.handleFirebaseTwitter}
-          onFailure={this.onFailure}
-        />
+  return (
+    <div data-test="header-section">
+      <Navbar
+        clickedSignup={signupModalsHandler}
+        clickedLogin={loginModalsHandler}
+      />
+      <AuthModal
+        authAction={authAction}
+        visible={visible}
+        onCancel={handleCancel}
+        showSignupForm={showSignupFormHandler}
+        signup={signupUserHandler}
+        submitSignup={handleSignupSubmit}
+        showLoginForm={showLoginFormHandler}
+        login={loginModalsHandler}
+        google={socialAuthResponse}
+        facebook={socialAuthResponse}
+        twitter={handleFirebaseTwitter}
+        onFailure={onFailure}
+      />
+    </div>
+  );
+};
 
-        {isLoggedIn ? <Redirect to="/" /> : null}
-      </div>
-    );
-  }
-}
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.login.isLoggedIn,
-  modals: state.modals,
+  ...state.modals,
+  ...state.login,
 });
+
+Header.propTypes = {
+  hideModalActions: PropTypes.func.isRequired,
+  emailSignupAction: PropTypes.func.isRequired,
+  formSignupAction: PropTypes.func.isRequired,
+  authAction: PropTypes.string.isRequired,
+  visible: PropTypes.bool.isRequired,
+  signupActions: PropTypes.func.isRequired,
+};
 
 export default connect(
   mapStateToProps,
@@ -98,9 +125,10 @@ export default connect(
     displayModalActions,
     hideModalActions,
     emailSignupAction,
+    formSignupAction,
+    signupActions,
     emailLoginAction,
     formLoginAction,
-    formSignupAction,
     socialAuthActions,
     firebaseAuthAction,
   },

@@ -1,15 +1,18 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { Col, Icon } from 'antd';
 
-const AuthModalButton = (props) => {
+const authModalButton = (props) => {
   const {
-    clicked, color, theme, iconType, children,
+    clicked, color, iconType, theme, children,
   } = props;
   return (
-    <Col className="AuthButton" data-test="auth-button-test" onClick={clicked}>
+    <Col className="auth-button" data-test="auth-button-test" onClick={clicked}>
       <Icon
-        style={{ fontSize: '16px', color }}
+        style={{
+          fontSize: '16px',
+          color,
+        }}
         theme={theme}
         type={iconType}
       />
@@ -18,4 +21,17 @@ const AuthModalButton = (props) => {
   );
 };
 
-export default AuthModalButton;
+authModalButton.propTypes = {
+  clicked: PropTypes.func,
+  color: PropTypes.string.isRequired,
+  iconType: PropTypes.string.isRequired,
+  theme: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+authModalButton.defaultProps = {
+  clicked: null,
+  theme: null,
+};
+
+export default authModalButton;

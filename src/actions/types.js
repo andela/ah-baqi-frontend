@@ -20,6 +20,8 @@ const actionTypes = {
   TWITTER_AUTH: 'TWITTER_AUTH',
   FIREBASE_AUTH: firebaseAuth,
   FACEBOOK_AUTH: 'FACEBOOK_AUTH',
+  SIGNUP_ERROR: 'SIGNUP_ERROR',
+  EMAIL_SIGNUP_REQUEST: 'EMAIL_SIGNUP_REQUEST',
 };
 
 export default actionTypes;
