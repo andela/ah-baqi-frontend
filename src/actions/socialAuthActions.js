@@ -31,12 +31,20 @@ export const socialAuthActions = (data, provider, cancel) => async (dispatch) =>
       type: serviceProvider,
       payload: response.data,
     });
-    localStorage.setItem('token', response.data.user.tokem);
+
+    const userDetails = [
+      { token: response.data.user.tokem },
+      { username: response.data.user.username },
+    ];
+    userDetails.forEach((item) => {
+      localStorage.setItem(`${Object.keys(item)}`, Object.values(item));
+    });
+
     localStorage.setItem('isLoggedIn', true);
     handleMessages('success', 'Successfully Signed in 😄');
     cancel();
   } catch (error) {
-    handleMessages('success', 'Oops!! 😬 , an error occured, please try again');
+    handleMessages('error', 'Oops!! 😬 , an error occured, please try again');
   }
 };
 

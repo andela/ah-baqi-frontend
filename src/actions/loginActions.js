@@ -17,10 +17,11 @@ const loginActions = (data, cancel) => async (dispatch) => {
     const userDetails = [
       { token: response.data.user.token },
       { username: response.data.user.username },
+      { isLoggedIn: true },
     ];
-    userDetails.map(item => (
-      localStorage.setItem(`${Object.keys(item)}`, Object.values(item))
-    ));
+    userDetails.forEach((item) => {
+      localStorage.setItem(`${Object.keys(item)}`, Object.values(item));
+    });
     dispatch(getUserProfile(response.data.user.username));
     cancel();
   } catch (error) {

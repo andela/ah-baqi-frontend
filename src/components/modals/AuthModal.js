@@ -77,6 +77,7 @@ const AuthModal = ({
         <div style={{ textAlign: 'center' }}>
           <Login
             submit={submitLogin}
+            onCancel={onCancel}
           />
         </div>
       )

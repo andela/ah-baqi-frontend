@@ -17,6 +17,16 @@ const signupActions = (data, cancel) => async (dispatch) => {
     );
     dispatch(onEmailRequest(response.data.user.data));
 
+    const userDetails = [
+      { token: response.data.user.data.token },
+      { username: response.data.user.data.username },
+    ];
+
+    userDetails.forEach((item) => {
+      localStorage.setItem(`${Object.keys(item)}`, Object.values(item));
+    });
+
+    localStorage.setItem('isLoggedIn', true);
     handleMessages('success', 'Successfully registered 😄');
     localStorage.setItem('isLoggedIn', true);
     cancel();
