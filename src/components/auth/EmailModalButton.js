@@ -8,7 +8,7 @@ const loginModalBtn = (props) => {
       {' '}
       {action}
       {' '}
-      with email
+      with username
       {' '}
     </AuthModalButton>
   );

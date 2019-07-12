@@ -15,9 +15,9 @@ const UserProfile = (props) => {
               <div className="profile-header-info-header">
                 <div className="profile-header-info-username">
                   <strong>
-                    {profile.first_name ? profile.first_name : 'Name'} {/*eslint-disable-line */}
+                    {profile.first_name ? profile.first_name : 'John'} {/*eslint-disable-line */}
 &nbsp;
-                    {profile.last_name ? profile.last_name : 'Name'} {/*eslint-disable-line */}
+                    {profile.last_name ? profile.last_name : 'Doe'} {/*eslint-disable-line */}
                   </strong>
                   <br />
                   <span>{profile.username}</span>

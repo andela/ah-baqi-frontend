@@ -9,7 +9,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   devtool: 'source-map',
-  entry: './src/index.js',
+  entry: ['./src/index.js', 'babel-polyfill'],
   module: {
     rules: [
       {
@@ -38,11 +38,15 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
     port: 3000,
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
+
   },
   plugins: [HtmlWebpackPluginConfig],
 };
