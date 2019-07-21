@@ -5,7 +5,7 @@
     "jest/globals": true
   },
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["airbnb", "prettier"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -17,30 +17,21 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "jest"
-  ],
+  "plugins": ["react", "jest"],
   "rules": {
     "no-shadow": "off",
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "react/prop-types": 0,
     "jsx-a11y/anchor-is-valid": [
-      "error", {
-        "components": [
-          "Link"
-        ],
-        "specialLink": [
-          "to"
-        ]
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"]
       }
     ],
     "function-paren-newline": ["error", "consistent"]
