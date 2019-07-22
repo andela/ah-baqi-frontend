@@ -1,20 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu, Popconfirm } from 'antd';
+import {
+  Layout, Menu, Popconfirm, Icon,
+} from 'antd';
 import './navbar.scss';
 
 const { Header } = Layout;
 const { Item } = Menu;
 
-const Navbar = ({ clickedLogin = null, clickedSignup = null, logOut = null }) => (
+const Navbar = ({ clickedLogin, clickedSignup, logOut }) => (
   <Layout className="nav">
     <Header className="nav">
       <Link to="/" className="logo">
-        Author&rsquo;s Haven
+        <span className="app-name-logo"> Author&rsquo;s Haven </span>
       </Link>
       {localStorage.username && localStorage.token && localStorage.isLoggedIn
         ? (
           <Menu mode="horizontal" style={{ float: 'right' }} data-test="authenticated-menu">
+            <Item>
+              <Link to="/articles/new">
+                <Icon type="plus-circle" className="icon-blue" />
+                <span className="nav-text">New Article</span>
+              </Link>
+            </Item>
             <Item>
               <div className="navbar-profile-pic">
                 <Link to="/profile">

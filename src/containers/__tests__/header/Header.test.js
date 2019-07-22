@@ -15,7 +15,7 @@ const propsTest = {
 };
 
 describe('<Routes /> component', () => {
-  const wrapper = shallow(<UnconnectedHeader {...propsTest} />);
+  const wrapper = shallow(<UnconnectedHeader {...propsTest} onFailure={myMock} />);
 
   test('renders routes successfully', () => {
     expect(wrapper).toHaveLength(1);

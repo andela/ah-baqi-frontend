@@ -1,4 +1,5 @@
-$blue: blue;
+$blue: #0e7fe1;
+@import url('https://fonts.googleapis.com/css?family=Barriecito&display=swap');
 
 .navbar-profile-pic {
   color: $blue;
@@ -8,4 +9,16 @@ $blue: blue;
     height: 42px;
     border-radius: 50%;
   }
+}
+
+.icon-blue {
+  color: $blue;
+}
+
+.nav-text {
+  margin-left: -6px;
+}
+
+.app-name-logo {
+  font-family: 'Barriecito', cursive;
 }

@@ -1,6 +1,6 @@
 import { instance } from '../../utils/axios';
 import store from '../../utils/testUtils';
-import { getUserProfile, editUserProfile } from '../profile/profile';
+import { getUserProfile, editUserProfile, getUserArticles } from '../profileActions';
 
 jest.spyOn(instance, 'get');
 jest.spyOn(instance, 'patch');
@@ -48,5 +48,14 @@ describe('getUserProfile action creator', () => {
     await store.dispatch(editUserProfile('username', editedFields));
     store.dispatch(getUserProfile());
     expect(store.getActions()[2].payload).toEqual(newProfile);
+  });
+  test('Dispatches FETCH_USER_ARTICLES', async () => {
+    await store.dispatch(getUserArticles());
+    const actions = store.getActions();
+    expect(actions).toContainEqual(
+      expect.objectContaining(
+        { type: 'FETCH_USER_ARTICLES', payload: expect.anything() },
+      ),
+    );
   });
 });

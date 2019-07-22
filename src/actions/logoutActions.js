@@ -7,6 +7,7 @@ const logoutActions = () => async (dispatch) => {
   window.location.href = '/';
   localStorage.removeItem('username');
   localStorage.removeItem('token');
+  localStorage.removeItem('user_id');
 };
 
 export default logoutActions;

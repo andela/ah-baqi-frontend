@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Input, Button } from 'antd';
@@ -18,7 +17,7 @@ class ResetConfirm extends Component {
   handleChange = (e) => {
     const { match } = this.props;
     const { name, value } = e.target;
-    const { resetPassword, history } = this.state;
+    const { resetPassword } = this.state;
     resetPassword[name] = value;
     this.setState({ resetPassword, token: match.params.token });
   }
@@ -26,7 +25,7 @@ class ResetConfirm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { resetPassword, token } = this.state;
-    const { resetConfirmActions } = this.props;
+    const { resetConfirmActions } = this.props; // eslint-disable-line
     resetConfirmActions({ resetPassword, token });
   }
 
@@ -41,21 +40,22 @@ class ResetConfirm extends Component {
 
   validateToNextPassword = (rule, value, callback) => {
     const { form } = this.props;
-    if (value && this.state.confirmDirty) {
+    const { confirmDirty } = this.state;
+    if (value && confirmDirty) {
       form.validateFields(['confirm_password'], { force: true });
     }
     callback();
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { form } = this.props;
     return (
       <Form onSubmit={this.handleSubmit} className="reset-form" style={{ textAlign: 'left' }}>
         <div>
           <h1>Create your new password</h1>
         </div>
         <Form.Item className="reset-label" hasFeedback label="Password">
-          {getFieldDecorator('password', {
+          {form.getFieldDecorator('password', {
             rules: [
               {
                 required: true,
@@ -68,7 +68,7 @@ class ResetConfirm extends Component {
           })(<Input.Password type="input" name="password" onChange={this.handleChange} />)}
         </Form.Item>
         <Form.Item className="reset-label" hasFeedback label="Confirm Password">
-          {getFieldDecorator('confirm_password', {
+          {form.getFieldDecorator('confirm_password', {
             rules: [
               {
                 required: true,
@@ -89,11 +89,5 @@ class ResetConfirm extends Component {
     );
   }
 }
-
-ResetConfirm.propTypes = {
-  resetConfirmActions: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-};
 
 export default connect(null, { resetConfirmActions })(Form.create()(withRouter(ResetConfirm)));
