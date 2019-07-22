@@ -1,12 +1,28 @@
 import React from 'react';
-import { Icon } from 'antd';
+import {
+  List, Avatar, Icon, Popconfirm,
+} from 'antd';
+
 import EditProfile from '../../containers/profile/EditProfile';
 import './profile.scss';
 
 const UserProfile = (props) => {
-  const propItems = props;
+  const IconText = ({ type, text }) => (
+    <span>
+      <Icon type={type} style={{ marginRight: 8 }} />
+      {text}
+    </span>
+  );
 
-  const profileRenderLogic = ({ profile }) => { // eslint-disable-line 
+  const profileRenderLogic = ({
+    myProfile, userArticles, getArticle, deleteArticle, history,
+  }) => {
+    const handleClick = (e, slug) => {
+      e.preventDefault();
+      const urlTo = `/articles/${slug}`;
+      getArticle(slug);
+      history.push(urlTo);
+    };
     return (
       <div>
         <div className="profile-header-component">
@@ -15,23 +31,23 @@ const UserProfile = (props) => {
               <div className="profile-header-info-header">
                 <div className="profile-header-info-username">
                   <strong>
-                    {profile.first_name ? profile.first_name : 'John'} {/*eslint-disable-line */}
-&nbsp;
-                    {profile.last_name ? profile.last_name : 'Doe'} {/*eslint-disable-line */}
+                    {myProfile.profile.first_name ? myProfile.profile.first_name : 'John'} {/*eslint-disable-line */}
+                    {' '}
+                    {myProfile.profile.last_name ? myProfile.profile.last_name : 'Doe'} {/*eslint-disable-line */}
                   </strong>
                   <br />
-                  <span>{profile.username}</span>
+                  <span>{myProfile.profile.username}</span>
                 </div>
-                <div className="profile-header-info-edit"><EditProfile {...propItems} /></div>
+                <div className="profile-header-info-edit"><EditProfile {...props} /></div>
               </div>
-              <div className="profile-header-info-bio">{profile.bio}</div>
+              <div className="profile-header-info-bio">{myProfile.profile.bio}</div>
               <br />
               <div className="profile-header-info-followers"> 7 followers &nbsp;&nbsp;&nbsp;  1 Following</div>
             </div>
           </div>
           <div className="profile-pic-holder">
             <img
-              src={`${profile.image}`}
+              src={`${myProfile.profile.image}`}
               onError={(e) => {
                 e.target.src = 'https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png';
               }}
@@ -39,56 +55,57 @@ const UserProfile = (props) => {
             />
           </div>
         </div>
-        <div className="profile-content-component">
-          <p>Profile</p>
-          <h2>Latest</h2>
-          <div className="profile-content-component-articles">
-            <div className="profile-content-component-articles-header">
-              <div className="profile-content-component-articles-pic">
-                <img
-                  className="profile-content-component-articles-picitem"
-                  src={`${profile.image}`}
-                  onError={(e) => {
-                    e.target.src = 'https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png';
-                  }}
-                  alt="Profile Pic"
+        <div className="profile-content-component" data-test="user-articles">
+          <h2>Your posts</h2>
+          <br />
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={userArticles}
+            data-test="articles-list"
+            renderItem={item => (
+              <List.Item
+                key={item.title}
+                data-test="article-list-item"
+                actions={[
+                  <IconText type="heart" text={item.likes} />,
+                  <IconText type="message" text={item.comments.length} />,
+                  <Popconfirm
+                    data-test="delete-article"
+                    title="Are you sure you want to delete this article?"
+                    onConfirm={() => deleteArticle(item.slug, history)}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Icon type="delete" />
+                    {' '}
+                    delete
+                  </Popconfirm>,
+                ]}
+                extra={(
+                  <img
+                    width={270}
+                    height={170}
+                    alt="article"
+                    src={item.image}
+                  />
+                )}
+              >
+                <List.Item.Meta
+                  avatar={<Avatar src={myProfile.profile.image} />}
+                  title={<button type="button" className="article-hover-title" onClick={e => handleClick(e, item.slug)}>{item.title}</button>}
+                  description={item.description}
                 />
-              </div>
-              <div className="profile-content-component-articles-postedon">
-                {profile.first_name ? profile.first_name : 'Name'} {/*eslint-disable-line */}
-                {profile.last_name ? profile.last_name : 'Name'} {/*eslint-disable-line */}
-                <br />
-                <p>July 1st  3min read</p>
-
-              </div>
-            </div>
-            <div className="profile-content-component-articles-contentpic">
-              <img src="https://f1.media.brightcove.com/8/1078702682/1078702682_6004950245001_6004956161001-vs.jpg?pubId=1078702682&videoId=6004956161001" alt="profile pic" />
-            </div>
-            <br />
-            <h1>When the Rubber Meets the Road</h1>
-            <div>
-              <p className="profile-content-component-articles-myarticle">
-Lorem Ipsum is simply dummy text of the
-              printing and typesetting industry. Lorem Ipsum
-              has been the industry standard dummy text ever
-              since the 1500s, when an unknown printer took a
-              </p>
-            </div>
-            <br />
-            <div>
-              <Icon type="like" />
-&nbsp;50 &nbsp;&nbsp;&nbsp;
-              <Icon type="dislike" />
-&nbsp;5
-            </div>
-          </div>
+                {item.content}
+              </List.Item>
+            )}
+          />
         </div>
       </div>
     );
   };
   const renderProfile = () => (
-    props.myProfile ? profileRenderLogic(props.myProfile) : null
+    props.myProfile && profileRenderLogic(props)
   );
   return (
     <div data-test="user-profile-overview">

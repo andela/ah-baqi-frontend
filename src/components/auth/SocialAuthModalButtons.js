@@ -11,7 +11,7 @@ const SocialAuthModalButtons = (props) => {
     twitterResponse,
     facebookResponse,
     googleResponse,
-    action, disabled, onFailure,
+    action, disabled, onFailure, cancel,
   } = props;
 
   const googgleClientId = '1005118583442-8vl6g21ovisrkasced1n5ea0vpcms2ge.apps.googleusercontent.com';
@@ -22,7 +22,7 @@ const SocialAuthModalButtons = (props) => {
         titter-button="twitter button"
         iconType="twitter"
         color="#08c"
-        clicked={twitterResponse}
+        clicked={() => twitterResponse(cancel)}
       >
         <span className="spaceRight">
           {action}

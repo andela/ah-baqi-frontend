@@ -1,11 +1,18 @@
 $primary-white: #fff;
 $primary-black: #000;
+$light-blue: #00bfff;
 $font-stack: Helvetica,
 sans-serif;
-$brand-color:  #262626;
+$brand-color: #262626;
 
 body {
   font: $font-stack;
+}
+
+body,
+* {
+  margin: 0;
+  padding: 0;
 }
 
 .nav {
@@ -16,6 +23,7 @@ body {
   color: $primary-black;
   font-size: 17px;
 }
+
 .reset-form {
   align-content: center;
   align-items: center;
@@ -26,3 +34,32 @@ body {
 }
 
 
+
+.container-body {
+  margin: auto;
+  width: 90%;
+}
+
+.shadow {
+  background-color: $brand-color;
+  height: 2px;
+  opacity: 0.1;
+  width: 100%;
+}
+
+.article-hover,
+button.article-hover-title {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 5px 0;
+  text-align: left;
+}
+
+button.article-hover-title {
+  padding: 0;
+}
+
+.article-hover-title:hover {
+  color: $light-blue;
+}

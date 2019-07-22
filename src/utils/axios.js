@@ -1,9 +1,11 @@
 import axios from 'axios';
 import promise from 'promise';
 
-export const instance = axios.create({
+export const baseAxios = axios.create({
   baseURL: 'https://ah-django-staging.herokuapp.com/api',
 });
+
+export const instance = baseAxios;
 
 instance.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem('token');

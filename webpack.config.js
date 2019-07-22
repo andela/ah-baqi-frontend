@@ -20,8 +20,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        include: /node_modules/,
+        loaders: ['style-loader', 'css-loader'],
       },
       {
         test: /\.scss$/,
@@ -31,6 +31,18 @@ module.exports = {
       {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              disable: true, // webpack@2.x and newer
+            },
+          },
+        ],
       },
     ],
   },
