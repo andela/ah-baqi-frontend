@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Skeleton } from 'antd';
 import { getArticle, deleteArticle, toggleLike } from '../../actions/articleActions';
 import Article from '../../components/articles/Article';
+import { ratingActions } from '../../actions/rateArticles';
 
 class ArticlePage extends Component {
   componentDidMount() {
@@ -14,29 +15,38 @@ class ArticlePage extends Component {
   }
 
   handleEditClick = () => {
-    const { articleData, getArticle, history } = this.props; // eslint-disable-line
-    getArticle(articleData.slug);
-    history.push('/articles/update');
+  const { articleData, getArticle, history } = this.props; // eslint-disable-line
+    getArticle(articleData.slug, history);
   }
 
-  render() {
-    const { articleData, deleteArticle, history, toggleLike, beenLiked,likes } = this.props;  // eslint-disable-line
-    return (
-      <div data-test="article page test">
-        {articleData.id ? (
-          <Article
-            editClick={this.handleEditClick}
-            article={articleData}
-            deleteAction={deleteArticle}
-            beenLiked={beenLiked}
-            history={history}
-            value={likes}
-            liking={() => toggleLike(articleData.slug, history, '')}
-          />
-        ) : <Skeleton active />}
-      </div>
-    );
-  }
+handleRating = (rating) => {
+  const slug = this.props.history.location.pathname.split('/')[2];
+  const { ratingActions, history } = this.props;
+  this.setState({ rating });
+  ratingActions(slug, rating);
+  localStorage.setItem('rating', rating);
+}
+
+
+render() {
+  const { articleData, deleteArticle, history, toggleLike, beenLiked, likes } = this.props;  // eslint-disable-line
+  return (
+    <div data-test="article page test">
+      {articleData.id ? (
+        <Article
+          editClick={this.handleEditClick}
+          article={articleData}
+          deleteAction={deleteArticle}
+          beenLiked={beenLiked}
+          history={history}
+          value={likes}
+          liking={() => toggleLike(articleData.slug, history, '')}
+          rateArticle={this.handleRating}
+        />
+      ) : <Skeleton active />}
+    </div>
+  );
+}
 }
 
 const mapStateToProps = state => ({
@@ -45,4 +55,6 @@ const mapStateToProps = state => ({
   likes: state.article.likes,
 });
 
-export default connect(mapStateToProps, { getArticle, deleteArticle, toggleLike })(ArticlePage);
+export default connect(mapStateToProps, {
+  getArticle, deleteArticle, ratingActions, toggleLike,
+})(ArticlePage);

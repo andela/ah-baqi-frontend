@@ -30,14 +30,14 @@ class PasswordReset extends Component {
   }
 
   render() {
-    const { form } = this.props;
+    const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="reset-form" style={{ textAlign: 'left' }}>
         <div>
-          <h1>Let&apos;s find your account</h1>
+          <h1>Forgot Password</h1>
         </div>
         <Form.Item className="reset-label" label="Email">
-          {form.getFieldDecorator('email', {
+          {getFieldDecorator('email', {
             rules: [{
               type: 'email', message: 'Please enter a valid email',
             },

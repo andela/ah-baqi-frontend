@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
         ...state,
         articleData: { ...action.payload },
         actionCalled: true,
-        created: true
+        created: true,
       };
     case actionTypes.GET_ALL_ARTICLES:
       return {

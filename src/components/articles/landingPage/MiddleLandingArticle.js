@@ -5,7 +5,7 @@ import DateReadTimeRate from '../singlearticle/readTimeAndDate';
 const defImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436762/dummy%20ah/try-new_peb1rk.jpg';
 
 const MidLandingArticle = ({ article, clicked }) => {
-  const { createdAt, reading_time } = article; // eslint-disable-line
+  const { createdAt, reading_time, rating } = article; // eslint-disable-line
   return (
     <Col
       span={24}
@@ -38,6 +38,7 @@ const MidLandingArticle = ({ article, clicked }) => {
                   <DateReadTimeRate
                     createdAt={createdAt}
                     reading_time={reading_time} // eslint-disable-line
+                    rating={rating}
                   />
                 </Col>
               </Row>

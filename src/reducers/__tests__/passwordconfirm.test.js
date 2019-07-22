@@ -7,8 +7,8 @@ const initialState = {
   loading: false,
 };
 
-describe('Fetch reset password link', () => {
-  it('should have the initial state', () => {
+describe('Test fetch confirm password link', () => {
+  it('should have the first state', () => {
     expect(passwordConfirmReducer(initialState, {})).toEqual({
       data: {},
       error: null,
