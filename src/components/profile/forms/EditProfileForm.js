@@ -9,8 +9,8 @@ const EditProfileForm = Form.create({ name: 'form_in_modal' })(
     renderFormInfo = (props, getFieldDecorator) => {
       const {
         image,
-        first_name, // eslint-disable-line 
-        last_name, // eslint-disable-line 
+        first_name, // eslint-disable-line
+        last_name, // eslint-disable-line
         username,
         email,
         country,

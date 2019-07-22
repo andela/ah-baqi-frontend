@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import UserProfile from '../../components/profile/UserProfile';
 import './profile.scss';
-
-
-import { getUserProfile } from '../../actions/profile/profile';
+import { deleteArticle, getArticle } from '../../actions/articleActions';
+import { getUserProfile, getUserArticles } from '../../actions/profileActions';
 
 export class UnconnectedProfile extends Component {
   componentDidMount() {
     const username = localStorage.getItem('username');
-    const { getUserProfile } = this.props; // eslint-disable-line 
+    const userId = localStorage.getItem('user_id');
+    const { getUserProfile, getUserArticles } = this.props; // eslint-disable-line
     getUserProfile(username);
+    getUserArticles(userId);
   }
 
   render() {
-    const { profile } = this.props;
+    const { profile, userArticles, deleteArticle, history } = this.props;  // eslint-disable-line
     return (
       <div className="profile-container">
         <div className="profile-container-wrapper">
-          <UserProfile myProfile={profile} />
+          <UserProfile
+            myProfile={profile}
+            userArticles={userArticles}
+            deleteArticle={deleteArticle}
+            getArticle={getArticle}
+            history={history}
+            onEditClick={this.handleEditClick}
+          />
         </div>
       </div>
 
@@ -27,8 +37,14 @@ export class UnconnectedProfile extends Component {
 }
 const mapStateToProps = ({ userProfile }) => ({
   profile: userProfile.profiles,
+  userArticles: userProfile.userArticles,
 });
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps = dispatch => bindActionCreators({
   getUserProfile,
-})(UnconnectedProfile);
+  getUserArticles,
+  deleteArticle,
+  getArticle,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedProfile);

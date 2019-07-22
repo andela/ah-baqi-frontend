@@ -1,18 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 
-
-import rootReducer from '../../reducers/index';
+import { containerStore } from '../../utils/testUtils';
 import Profile, { UnconnectedProfile } from '../profile/Profile';
 
-const configureStoreItem = (initialState) => {
-  const store = applyMiddleware(thunk)(createStore);
-  return store(rootReducer, initialState);
-};
 const setup = () => {
-  const store = configureStoreItem();
+  const store = containerStore();
   const wrapper = shallow(
     <Profile store={store} />,
   ).dive().dive();
@@ -32,14 +25,18 @@ describe('redux properties', () => {
   });
   test('`getUserProfile` runs on Profile mount', () => {
     const getUserProfileMock = jest.fn();
+    const getUserArticlesMock = jest.fn();
 
     const props = {
       getUserProfile: getUserProfileMock,
+      getUserArticles: getUserArticlesMock,
     };
     const wrapper = shallow(<UnconnectedProfile {...props} />);
     wrapper.instance().componentDidMount();
     const getProfile = getUserProfileMock.mock.calls.length;
+    const getArticles = getUserArticlesMock.mock.calls.length;
 
     expect(getProfile).toBe(1);
+    expect(getArticles).toBe(1);
   });
 });

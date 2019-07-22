@@ -33,7 +33,7 @@ const signupActions = (data, cancel) => async (dispatch) => {
   } catch (error) {
     const error409 = 'A user with that email or username exists 😬';
     const error400 = 'Password must be atleast 8 characters with a number and a special character 😬';
-    /409/.test(error.message)
+    /409/.test(error.message) // eslint-disable-line
       ? handleMessages('error', error409)
       : handleMessages('error', error400);
   }

@@ -1,6 +1,6 @@
 import { instance } from '../utils/axios';
 import handleMessages from '../utils/messages';
-import { getUserProfile } from './profile/profile';
+import { getUserProfile } from './profileActions';
 
 import actionTypes from './types';
 
@@ -18,6 +18,7 @@ const loginActions = (data, cancel) => async (dispatch) => {
       { token: response.data.user.token },
       { username: response.data.user.username },
       { isLoggedIn: true },
+      { user_id: response.data.user.user_id },
     ];
     userDetails.forEach((item) => {
       localStorage.setItem(`${Object.keys(item)}`, Object.values(item));
