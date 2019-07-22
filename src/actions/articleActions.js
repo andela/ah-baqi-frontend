@@ -43,6 +43,7 @@ export const createArticle = (data, history) => async (dispatch) => {
     dispatch({
       type: actionTypes.CREATE_ARTICLE,
       payload: response.data,
+      created: true,
     });
     handleMessages('success', 'Your article was successfully created ??');
     history.push(`/articles/${response.data.slug}`);
@@ -79,5 +80,28 @@ export const deleteArticle = (slug, history) => async (dispatch) => {
     handleMessages('success', 'Article successfully deleted 😄');
   } catch (error) {
     handleMessages('error', 'Failed 😬');
+  }
+};
+
+export const toggleLike = slug => async (dispatch) => {
+  try {
+    response = await baseAxios.post(
+      `/articles/${slug}/like`,
+    );
+    const payload = response.data.reaction.data;
+    dispatch({
+      type: actionTypes.TOGGLE_LIKE,
+      payload,
+    });
+    getArticle(slug);
+    localStorage.setItem('beenLiked', payload.article_liked);
+    localStorage.setItem('likes', payload.likes);
+    payload.article_liked
+      ? handleMessages('success', 'Article liked!')
+      : handleMessages('success', 'Article disliked!');
+  } catch (error) {
+    /403/.test(error.message)
+      ? handleMessages('error', 'You must be logged in to like')
+      : handleMessages('error', 'Oops! An error occurred');
   }
 };

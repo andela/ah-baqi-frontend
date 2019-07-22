@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Skeleton } from 'antd';
-import { getArticle, deleteArticle } from '../../actions/articleActions';
+import { getArticle, deleteArticle, toggleLike } from '../../actions/articleActions';
 import Article from '../../components/articles/Article';
 
 class ArticlePage extends Component {
@@ -20,8 +20,7 @@ class ArticlePage extends Component {
   }
 
   render() {
-    const { articleData, deleteArticle, history } = this.props;  // eslint-disable-line
-
+    const { articleData, deleteArticle, history, toggleLike, beenLiked,likes } = this.props;  // eslint-disable-line
     return (
       <div data-test="article page test">
         {articleData.id ? (
@@ -29,7 +28,10 @@ class ArticlePage extends Component {
             editClick={this.handleEditClick}
             article={articleData}
             deleteAction={deleteArticle}
+            beenLiked={beenLiked}
             history={history}
+            value={likes}
+            liking={() => toggleLike(articleData.slug, history, '')}
           />
         ) : <Skeleton active />}
       </div>
@@ -39,6 +41,8 @@ class ArticlePage extends Component {
 
 const mapStateToProps = state => ({
   articleData: state.article.articleData,
+  beenLiked: state.article.beenLiked,
+  likes: state.article.likes,
 });
 
-export default connect(mapStateToProps, { getArticle, deleteArticle })(ArticlePage);
+export default connect(mapStateToProps, { getArticle, deleteArticle, toggleLike })(ArticlePage);

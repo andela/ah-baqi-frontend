@@ -1,6 +1,6 @@
 $blue: #0e7fe1;
 @import url('https://fonts.googleapis.com/css?family=Barriecito&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Tangerine&display=swap');
 .navbar-profile-pic {
   color: $blue;
 
@@ -20,5 +20,6 @@ $blue: #0e7fe1;
 }
 
 .app-name-logo {
-  font-family: 'Barriecito', cursive;
+  font-family: 'Tangerine', cursive;
+  font-size: 2.5em;
 }

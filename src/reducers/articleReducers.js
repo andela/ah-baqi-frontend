@@ -6,7 +6,9 @@ const initialState = {
   articleCount: 0,
   articles: [],
   nextPage: null,
+  likes: localStorage.likes,
   previousPage: null,
+  actionCalled: false,
   articleData: {
     id: 0,
     title: '',
@@ -25,6 +27,7 @@ const initialState = {
     dislikes: 0,
     likes: 0,
   },
+  beenLiked: localStorage.beenLiked,
 };
 
 export default function (state = initialState, action) {
@@ -33,11 +36,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         articleData: { ...action.payload },
-        created: true,
+        actionCalled: true,
+        created: true
       };
     case actionTypes.GET_ALL_ARTICLES:
       return {
         ...state,
+        actionCalled: true,
         articles: action.payload.results,
         nextPage: action.payload.next,
         previousPage: action.payload.previous,
@@ -47,6 +52,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         articleData: { ...action.payload },
+        actionCalled: true,
         getNew: true,
       };
     case actionTypes.EDIT_ARTICLE:
@@ -54,6 +60,20 @@ export default function (state = initialState, action) {
         ...state,
         articleData: { ...action.payload },
         edited: true,
+        actionCalled: true,
+      };
+    case actionTypes.DELETE_ARTICLE:
+      return {
+        ...state,
+        articleData: { ...action.payload },
+        actionCalled: true,
+      };
+    case actionTypes.TOGGLE_LIKE:
+      return {
+        ...state,
+        beenLiked: action.payload.article_liked,
+        likes: action.payload.likes,
+        actionCalled: true,
       };
     default:
       return state;

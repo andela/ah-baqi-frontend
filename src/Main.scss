@@ -17,6 +17,7 @@ body,
 
 .nav {
   background-color: $primary-white;
+  margin-block: 10px;
 }
 
 .logo {
@@ -62,4 +63,9 @@ button.article-hover-title {
 
 .article-hover-title:hover {
   color: $light-blue;
+}
+
+.ant-statistic-content-value-int {
+  font-size: 18px;
+  font-weight: normal;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Col, Row, Icon } from 'antd';
-
+import { Col, Row } from 'antd';
 import DateReadTimeRate from '../singlearticle/readTimeAndDate';
 
 const defImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436762/dummy%20ah/try-new_peb1rk.jpg';
