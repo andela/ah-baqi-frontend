@@ -1,12 +1,16 @@
 import React from 'react';
-import { Row, Col, Statistic } from 'antd';
-import {IconText} from './ArticleFooter';
+import {
+  Row, Col, Statistic, Rate,
+} from 'antd';
+import { IconText } from './ArticleFooter';
 import Comments from '../comments/Comments';
 import AuthorHeadData from './singlearticle/AuthorArticleData';
 import './landingPage/Singlearticle.scss';
 
+
+const token = localStorage.getItem('token');
 const Article = ({
-  editClick, article, history, deleteAction, liking, beenLiked, value,
+  editClick, article, history, deleteAction, liking, beenLiked, value, rateArticle,
 }) => (
   <div data-test="single-article">
     <Row>
@@ -39,7 +43,7 @@ const Article = ({
           <Col span={24} className="general-article-cols">
             <div
               className="article-body"
-              dangerouslySetInnerHTML={{ __html: article.body }} // eslint-disable-line
+              dangerouslySetInnerHTML={{ __html: article.body }}
             />
           </Col>
           <Col span={24} className="tag-cont" data-test="article tags">
@@ -63,11 +67,16 @@ const Article = ({
                       theme="twoTone"
                       color="#ed4956"
                     />
-)}
+                    )}
                 />
               </Col>
-              <Col className="article-liking" push={16} span={4}>
-                  Rating
+              <Col className="article-liking" span={4}>Liking</Col>
+              <Col className="article-liking" push={14} span={4}>
+                {token ? (
+                  <Rate className="rating" onChange={rateArticle} defaultValue={localStorage.getItem('rating')} />
+                ) : (
+                  <Rate className="rating" onChange={rateArticle} value={0} />
+                )}
               </Col>
             </Row>
           </Col>

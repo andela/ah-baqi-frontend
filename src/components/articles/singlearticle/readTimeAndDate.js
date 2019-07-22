@@ -1,7 +1,7 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { Rate } from 'antd';
 
-const DateReadTimeRate = ({ createdAt, reading_time }) => { // eslint-disable-line
+const DateReadTimeRate = ({ createdAt, reading_time, rating }) => { // eslint-disable-line
   const date = new Date(createdAt);
   const month = date.toLocaleString('default', { month: 'long' });
   const day = date.getDay();
@@ -25,7 +25,7 @@ const DateReadTimeRate = ({ createdAt, reading_time }) => { // eslint-disable-li
         {' '}
       </span>
       <span className="rating-icons-pos">
-        <Icon type="star" theme="filled" style={{ color: 'black', fontSize: '12px' }} />
+        <Rate className="rating" defaultValue={rating} disabled />
       </span>
     </span>
   );

@@ -1,5 +1,9 @@
-import { resetPasswordRequest, resetPassword, resetPasswordError } from '../passwordResetActions';
+import {
+  resetPasswordRequest, resetPassword, resetPasswordError, resetPasswordActions,
+} from '../passwordResetActions';
 import actionTypes from '../types';
+import store from '../../utils/testUtils';
+import { instance } from '../../utils/axios';
 
 const data = {
   password: 'Test@me01',

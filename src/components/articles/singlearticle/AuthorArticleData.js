@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Row, Col, Button, Popconfirm,
+  Row, Col, Button, Popconfirm, Rate, 
 } from 'antd';
 
 const AuthorHeadData = ({
@@ -38,7 +38,10 @@ const AuthorHeadData = ({
             </Col>
           </Row>
         </Col>
-        <Col span={6} offset={5}>
+        <Col span={3} className="pad-top-rate">
+          <Rate className="rating" defaultValue={articleData.rating} disabled />
+        </Col>
+        <Col span={6} offset={2} className="pad-top-rate">
           {+localStorage.user_id === articleData.author
             ? (
               <span>

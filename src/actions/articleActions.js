@@ -4,7 +4,7 @@ import actionTypes from './types';
 
 let response;
 
-export const getArticle = slug => async (dispatch) => {
+export const getArticle = (slug, history=null) => async (dispatch) => {
   try {
     response = await baseAxios.get(
       `/articles/${slug}/`,
@@ -14,6 +14,10 @@ export const getArticle = slug => async (dispatch) => {
       type: actionTypes.GET_SINGLE_ARTICLES,
       payload: response.data,
     });
+
+    if (history) {
+      history.push('/articles/update');
+    }
   } catch (error) {
     handleMessages('error', 'Oops!! 🤭 , an error occured, please try again');
   }
