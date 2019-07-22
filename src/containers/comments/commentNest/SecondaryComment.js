@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment, Icon } from 'antd';
+import { Comment } from 'antd';
 import { connect } from 'react-redux';
 
 import { Editor } from '../helpers/helpers';
