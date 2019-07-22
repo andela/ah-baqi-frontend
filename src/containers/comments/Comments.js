@@ -92,16 +92,14 @@ const mapStateToProps = state => ({
   prop: state,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    addComment,
-    deleteComment,
-    likeComment,
-    dislikeComment,
-  }, dispatch)
-}
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addComment,
+  deleteComment,
+  likeComment,
+  dislikeComment,
+}, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UnconnectedCoomentContainer);

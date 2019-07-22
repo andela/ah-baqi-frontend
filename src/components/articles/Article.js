@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Statistic } from 'antd';
 import {IconText} from './ArticleFooter';
+import Comments from '../comments/Comments';
 import AuthorHeadData from './singlearticle/AuthorArticleData';
 import './landingPage/Singlearticle.scss';
 
@@ -73,10 +74,12 @@ const Article = ({
           <Col span={24} className="general-article-cols">
             <Row>
               <Col className="parent-comment">
-                <Col>Parent Comment</Col>
-                <Row>
-                  <Col span={20} push={4}>Child Comment</Col>
-                </Row>
+                <Col>
+                  <Comments
+                    comments={article.comments}
+                    slug={article.slug}
+                  />
+                </Col>
               </Col>
             </Row>
           </Col>
