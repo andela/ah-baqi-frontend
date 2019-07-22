@@ -1,11 +1,11 @@
 import React from 'react';
-import { Row, Col } from 'antd';
-
+import { Row, Col, Statistic } from 'antd';
+import {IconText} from './ArticleFooter';
 import AuthorHeadData from './singlearticle/AuthorArticleData';
 import './landingPage/Singlearticle.scss';
 
 const Article = ({
-  article, deleteAction, history, editClick,
+  editClick, article, history, deleteAction, liking, beenLiked, value,
 }) => (
   <div data-test="single-article">
     <Row>
@@ -49,10 +49,24 @@ const Article = ({
             ))}
           </Col>
           <Col span={24} className="general-article-cols">
-            <Row>
-              <Col className="article-liking" span={4}>Liking</Col>
+            <Row className="article-footer">
+              <Col className="article-liking" span={4}>
+                <Statistic
+                  className="statistic-size"
+                  value={value}
+                  prefix={(
+                    <IconText
+                      type="heart"
+                      onClick={liking}
+                      beenLiked={beenLiked}
+                      theme="twoTone"
+                      color="#ed4956"
+                    />
+)}
+                />
+              </Col>
               <Col className="article-liking" push={16} span={4}>
-                Rating
+                  Rating
               </Col>
             </Row>
           </Col>

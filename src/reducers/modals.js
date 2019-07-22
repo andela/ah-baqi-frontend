@@ -3,9 +3,9 @@ import actionTypes from '../actions/types';
 const initialState = {
   visible: false,
   authAction: '',
-  email: '',
   error: null,
   isLoggedIn: false,
+  actionCalled: false,
 };
 
 export default (state = initialState, action) => {
@@ -14,42 +14,42 @@ export default (state = initialState, action) => {
       return {
         ...state,
         visible: true,
+        actionCalled: true,
       };
     case actionTypes.HIDE_MODAL:
       return {
         ...state,
         visible: false,
+        actionCalled: true,
       };
     case actionTypes.EMAIL_SIGNUP:
       return {
         ...state,
         visible: true,
         authAction: 'signup',
+        actionCalled: true,
       };
     case actionTypes.EMAIL_LOGIN:
       return {
         ...state,
         visible: true,
         authAction: 'login',
+        actionCalled: true,
       };
     case actionTypes.EMAIL_LOGIN_FORM:
       return {
         ...state,
         visible: true,
         authAction: 'loginForm',
+        actionCalled: true,
       };
     case actionTypes.EMAIL_SIGNUP_FORM:
+
       return {
         ...state,
         visible: true,
         authAction: 'signupForm',
-      };
-    case actionTypes.EMAIL_SIGNUP_REQUEST:
-      return {
-        ...state,
-        visible: true,
-        isLoggedIn: true,
-        email: action.payload,
+        actionCalled: true,
       };
     default:
       return state;

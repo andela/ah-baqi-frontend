@@ -6,6 +6,7 @@ import articleReducer from '../reducers/articleReducers';
 
 const mockStore = configureStore([thunk]);
 const initialState = {
+  beenLiked: false,
   article: {
     articles: [],
   },

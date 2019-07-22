@@ -42,7 +42,14 @@ const UserProfile = (props) => {
               </div>
               <div className="profile-header-info-bio">{myProfile.profile.bio}</div>
               <br />
-              <div className="profile-header-info-followers"> 7 followers &nbsp;&nbsp;&nbsp;  1 Following</div>
+              <div className="profile-header-info-followers">
+                {' '}
+7 followers
+                {' '}
+                {' '}
+                {' '}
+1 Following
+              </div>
             </div>
           </div>
           <div className="profile-pic-holder">
