@@ -2,7 +2,7 @@ import axios from 'axios';
 import promise from 'promise';
 
 export const baseAxios = axios.create({
-  baseURL: 'https://ah-django-staging.herokuapp.com/api',
+  baseURL: `${process.env.BACKEND_BASE_URL}/api`,
 });
 
 export const instance = baseAxios;
