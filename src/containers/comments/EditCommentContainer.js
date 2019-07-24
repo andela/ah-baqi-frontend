@@ -12,16 +12,15 @@ const { TextArea } = Input;
 class EditForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    const { validateFields } = this.props.form;
-    validateFields((err, values) => {
+    const { form, isNest } = this.props;
+    form.validateFields((err, values) => {
       const newComment = {
         comment: {
           body: values.body,
 
         },
       };
-      const { isNest } = this.props;
-      isNest ? this.editNestComment(newComment) : this.editNormalComment(newComment);
+      isNest ? this.editNestComment(newComment) : this.editNormalComment(newComment); // eslint-disable-line
     });
   };
 
@@ -39,7 +38,7 @@ class EditForm extends React.Component {
 
   render() {
     const { btnClass, editorClass, body } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    const { form } = this.props;
     return (
       <Form
         layout="inline"
@@ -48,7 +47,7 @@ class EditForm extends React.Component {
         className="edit-form-item"
       >
         <Form.Item data-test="textarea-container">
-          {getFieldDecorator('body', { initialValue: `${body}` })(<TextArea rows={3} />)}
+          {form.getFieldDecorator('body', { initialValue: `${body}` })(<TextArea rows={3} />)}
         </Form.Item>
         <Form.Item data-test="submit-button-container">
           <Button

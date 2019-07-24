@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { IconText } from '../../articles/ArticleFooter';
+import IconText from '../../articles/ArticleFooter';
 
 describe('<IconText /> component', () => {
   const props = {
@@ -9,7 +9,7 @@ describe('<IconText /> component', () => {
     beenLiked: true,
     onClick: jest.fn(),
   };
-  const wrapper = shallow(
+  let wrapper = shallow(
     <IconText
       type={props.type}
       beenLiked={props.beenLiked}
@@ -17,7 +17,17 @@ describe('<IconText /> component', () => {
     />,
   );
 
-  test('IconText renders correctly', () => {
-    expect(wrapper.find("[data-test='icon-text']")).toHaveLength(1);
+  test('IconText renders correctly when liked', () => {
+    expect(wrapper.find("[data-test='icon-text-liked']")).toHaveLength(1);
+  });
+  test('IconText renders correctly when not liked', () => {
+    wrapper = shallow(
+      <IconText
+        type={props.type}
+        beenLiked={false}
+        onClick={props.onClick}
+      />,
+    );
+    expect(wrapper.find("[data-test='icon-text-not-liked']")).toHaveLength(1);
   });
 });

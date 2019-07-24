@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -30,14 +29,14 @@ class PasswordReset extends Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { form } = this.props;
     return (
       <Form onSubmit={this.handleSubmit} className="reset-form" style={{ textAlign: 'left' }}>
         <div>
           <h1>Forgot Password</h1>
         </div>
         <Form.Item className="reset-label" label="Email">
-          {getFieldDecorator('email', {
+          {form.getFieldDecorator('email', {
             rules: [{
               type: 'email', message: 'Please enter a valid email',
             },
@@ -70,9 +69,5 @@ class PasswordReset extends Component {
     );
   }
 }
-
-PasswordReset.propTypes = {
-  resetPasswordActions: PropTypes.func.isRequired,
-};
 
 export default connect(null, { resetPasswordActions })(Form.create()(PasswordReset));

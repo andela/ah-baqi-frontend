@@ -9,7 +9,7 @@ export const addComment = (slug, value) => async (dispatch) => {
     dispatch(getArticle(slug));
     handleMessages('success', 'Comment added Successfully');
   } catch (error) {
-    error.message.match(/403/)
+    error.message.match(/403/) // eslint-disable-line
       ? handleMessages('error', 'Please login to add acomment')
       : handleMessages('error', 'an error has occured');
   }
@@ -21,7 +21,7 @@ export const addNestedComment = (slug, value, id) => async (dispatch) => {
     handleMessages('success', 'Comment added Successfully');
     dispatch(getArticle(slug));
   } catch (error) {
-    error.message.match(/403/)
+    error.message.match(/403/) // eslint-disable-line
       ? handleMessages('error', 'Please login to add acomment')
       : handleMessages('error', 'an error has occured');
   }

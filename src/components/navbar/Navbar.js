@@ -38,9 +38,9 @@ const Navbar = ({
 }) => (
   <Layout className="nav">
     <Header className="nav">
-      <Link to="/" className="logo">
+      <a href="/" className="logo">
         <span className="app-name-logo"> Author&rsquo;s Haven </span>
-      </Link>
+      </a>
       {localStorage.username && localStorage.token && localStorage.isLoggedIn
         ? (
           <Menu mode="horizontal" data-test="authenticated-menu" className="nav-menu">

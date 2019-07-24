@@ -19,10 +19,6 @@ const FeaturedArticles = ({ articles, handleClick }) => {
   return (
     <div data-test="featured-article">
       <Row>
-        <h3 className="featured-title">
-          <span>Featured Articles</span>
-        </h3>
-        <div className="shadow" />
         <div className="featured-wrapper">
           {articleData}
         </div>

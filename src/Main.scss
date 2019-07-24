@@ -1,5 +1,5 @@
-$primary-white: #fff;
-$primary-black: #000;
+$primary-white: #ffffff;
+$primary-black: #000000;
 $light-blue: #00bfff;
 $font-stack: Helvetica,
 sans-serif;
@@ -71,11 +71,11 @@ button.article-hover-title {
 }
 
 .rating{
-  font-size: 12px;
   color: $primary-black;
+  font-size: 16px;
+  text-align: left;
 }
 
-.share-icon {
-  font-size: 25px;
-  padding: 0;
+.text-center {
+  text-align: center;
 }

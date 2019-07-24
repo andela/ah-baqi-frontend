@@ -6,7 +6,7 @@ import {
   Facebook, Twitter, Reddit, Email,
 } from 'react-sharingbuttons';
 import { user } from '../../containers/comments/helpers/helpers';
-import { IconText } from './ArticleFooter';
+import IconText from './ArticleFooter';
 import Comments from '../comments/Comments';
 import Bookmark from '../../containers/bookmark/Bookmark';
 import AuthorHeadData from './singlearticle/AuthorArticleData';
@@ -52,12 +52,10 @@ const Article = ({
                 <img src={article.image} alt={article.slug} />
               </Col>
             ) : null}
-
             <Col span={24} className="general-article-cols">
               <div
                 className="article-body"
-              // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: article.body }}
+                dangerouslySetInnerHTML={{ __html: article.body }} // eslint-disable-line
               />
             </Col>
             <Col span={24} className="tag-cont" data-test="article tags">
@@ -70,28 +68,33 @@ const Article = ({
             <Col span={24} className="general-article-cols">
               <Row className="article-footer">
                 <Col className="article-liking" span={4}>
-                  <Statistic
-                    className="statistic-size"
-                    value={value}
-                    prefix={(
-                      <IconText
-                        type="heart"
-                        onClick={liking}
-                        beenLiked={beenLiked}
-                        theme="twoTone"
-                        color="#ed4956"
-                      />
-                    )}
-                  />
-                </Col>
-                <Col className="article-liking" push={8}>
+                  <span> Rate this article  </span>
+                  <br />
                   {token ? (
                     <Rate className="rating" onChange={rateArticle} defaultValue={localStorage.getItem('rating')} />
                   ) : (
                     <Rate className="rating" onChange={rateArticle} value={0} />
                   )}
                 </Col>
-                <Col push={14}>
+                <Col className="article-liking" span={4} push={2}>
+                  <Statistic
+                    className="statistic-size"
+                    value={value}
+                    valueStyle={{ fontSize: '22px', marginLeft: '8px', fontWeight: 'light' }}
+                    prefix={(
+                      <IconText
+                        type="heart"
+                        onClick={liking}
+                        history={history}
+                        slug={article.slug}
+                        beenLiked={beenLiked}
+                        theme="filled"
+                        color="#ed4956"
+                      />
+                      )}
+                  />
+                </Col>
+                <Col push={4} className="sharing-icon">
                   <Popover
                     placement="right"
                     content={

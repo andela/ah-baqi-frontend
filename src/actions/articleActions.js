@@ -9,7 +9,6 @@ export const getArticle = (slug, history = null) => async (dispatch) => {
     response = await baseAxios.get(
       `/articles/${slug}/`,
     );
-
     dispatch({
       type: actionTypes.GET_SINGLE_ARTICLES,
       payload: response.data,
@@ -23,10 +22,10 @@ export const getArticle = (slug, history = null) => async (dispatch) => {
   }
 };
 
-export const getAllArticles = () => async (dispatch) => {
+export const getAllArticles = (queryParam = '') => async (dispatch) => {
   try {
     response = await baseAxios.get(
-      '/articles/feed/',
+      `/articles/feed/?${queryParam}`,
     );
     dispatch({
       type: actionTypes.GET_ALL_ARTICLES,
@@ -100,11 +99,11 @@ export const toggleLike = slug => async (dispatch) => {
     getArticle(slug);
     localStorage.setItem('beenLiked', payload.article_liked);
     localStorage.setItem('likes', payload.likes);
-    payload.article_liked
+    payload.article_liked // eslint-disable-line
       ? handleMessages('success', 'Article liked!')
       : handleMessages('success', 'Article disliked!');
   } catch (error) {
-    /403/.test(error.message)
+    /403/.test(error.message) // eslint-disable-line
       ? handleMessages('error', 'You must be logged in to like')
       : handleMessages('error', 'Oops! An error occurred');
   }

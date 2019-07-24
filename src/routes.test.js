@@ -14,7 +14,7 @@ describe('Routes', () => {
   test('<Router /> renders correct routes', () => {
     const pathMap = wrapper.find(Route).reduce((pathMap, route) => {
       const routeProps = route.props();
-      pathMap[routeProps.path] = routeProps.component;
+      pathMap[routeProps.path] = routeProps.component; // eslint-disable-line
       return pathMap;
     }, {});
 

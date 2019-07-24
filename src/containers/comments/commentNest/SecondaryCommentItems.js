@@ -4,7 +4,7 @@ import { Avatar, Icon } from 'antd';
 import EditUserCommentForm from '../EditCommentContainer';
 import { user, editComment } from '../helpers/helpers';
 
-export let commentItems;
+export let commentItems; // eslint-disable-line
 export const getNestedItems = (
   replies,
   slug,
