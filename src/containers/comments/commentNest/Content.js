@@ -25,8 +25,11 @@ const Content = (props) => {
         <Avatar
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
           alt="Han Solo"
-        />{' '}
-        {item.author}{' '}{' '}
+        />
+        {' '}
+        {item.author}
+        {' '}
+        {' '}
         {new Date(Date.parse(item.created_at)).toUTCString()}
         {' '}
         {item.author === user
@@ -38,7 +41,8 @@ const Content = (props) => {
                 onClick={() => editComment(
                   `edit-field-${item.id}`,
                 )}
-              />{' '}
+              />
+              {' '}
               <Icon
                 className="delete-icon"
                 type="delete"
@@ -46,7 +50,9 @@ const Content = (props) => {
               />
             </span>
           )
-        }{' '}{' '}
+        }
+        {' '}
+        {' '}
         <Icon
           className="comment-rating-likes"
           type="like"
@@ -59,7 +65,11 @@ const Content = (props) => {
           onClick={() => dislikeComment(slug, item.id)}
         />
         {item.dislikes}
-        {' '} {' '} {' '}
+        {' '}
+        {' '}
+        {' '}
+        {' '}
+        {' '}
         <Icon
           className={`dropdown-icon-${item.id}`}
           type="message"
@@ -77,7 +87,9 @@ const Content = (props) => {
             `close-up-${item.id}`,
             `dropdown-icon-${item.id}`,
           )}
-        />{' '}{' '}
+        />
+        {' '}
+        {' '}
       </p>
       <div>
         {item.body}

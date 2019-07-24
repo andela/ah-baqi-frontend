@@ -4,7 +4,7 @@ import actionTypes from './types';
 
 let response;
 
-export const getArticle = (slug, history=null) => async (dispatch) => {
+export const getArticle = (slug, history = null) => async (dispatch) => {
   try {
     response = await baseAxios.get(
       `/articles/${slug}/`,

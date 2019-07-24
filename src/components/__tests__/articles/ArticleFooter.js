@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import {IconText} from '../../articles/ArticleFooter';
+import { IconText } from '../../articles/ArticleFooter';
 
 describe('<IconText /> component', () => {
   const props = {

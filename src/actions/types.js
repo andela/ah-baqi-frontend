@@ -43,6 +43,7 @@ const actionTypes = {
   FETCH_USER_ARTICLES: 'FETCH_USER_ARTICLES',
   SEARCH: 'SEARCH',
   TOGGLE_LIKE: 'TOGGLE_LIKE',
+  GET_ALL_BOOKMARKS: 'GET_ALL_BOOKMARKS',
 };
 
 export default actionTypes;

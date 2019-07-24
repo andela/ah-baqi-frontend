@@ -1,5 +1,5 @@
 import {
-  resetConfirmRequest, resetConfirmSuccess, resetConfirmError, resetConfirmActions 
+  resetConfirmRequest, resetConfirmSuccess, resetConfirmError, resetConfirmActions,
 } from '../passwordConfirmActions';
 import actionTypes from '../types';
 import store from '../../utils/testUtils';

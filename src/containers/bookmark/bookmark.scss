@@ -1,0 +1,16 @@
+$bookmarked: #84a2ff;
+
+.bookmark-container {
+  margin-top: 20%;
+  cursor: pointer;
+  z-index: 100;
+  position: fixed;
+
+  &-add-icon {
+    font-size: 30px;
+  }
+  &-remove-icon {
+    font-size: 30px;
+    color: $bookmarked;
+  }
+}

@@ -18,7 +18,7 @@ export const getNestedItems = (
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
           alt="Han Solo"
         />
-        {item.author == user
+        {item.author === user
           ? (
             <span>
 &nbsp;&nbsp;

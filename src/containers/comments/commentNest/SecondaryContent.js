@@ -18,9 +18,13 @@ const SecondaryContent = (props) => {
         <Avatar
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
           alt="Han Solo"
-        />{' '}
-        {item.author}{' '}{' '}
-        {new Date(Date.parse(item.created_at)).toUTCString()}{' '}
+        />
+        {' '}
+        {item.author}
+        {' '}
+        {' '}
+        {new Date(Date.parse(item.created_at)).toUTCString()}
+        {' '}
         {item.author === user
           && (
             <span>
@@ -29,7 +33,8 @@ const SecondaryContent = (props) => {
                 onClick={() => editComment(
                   `comment-edit-field-${item.id}`,
                 )}
-              />{' '}
+              />
+              {' '}
               <Icon
                 className="delete-icon"
                 type="delete"
