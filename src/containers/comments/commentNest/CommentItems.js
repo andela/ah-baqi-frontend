@@ -32,7 +32,7 @@ export const getItems = (
         &nbsp;&nbsp;&nbsp;&nbsp;
         {new Date(Date.parse(item.created_at)).toUTCString()}
         &nbsp;&nbsp;&nbsp;&nbsp;
-        {item.author == user
+        {item.author === user
           ? (
             <span>
 &nbsp;&nbsp;

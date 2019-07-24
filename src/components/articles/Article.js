@@ -5,8 +5,10 @@ import {
 import {
   Facebook, Twitter, Reddit, Email,
 } from 'react-sharingbuttons';
+import { user } from '../../containers/comments/helpers/helpers';
 import { IconText } from './ArticleFooter';
 import Comments from '../comments/Comments';
+import Bookmark from '../../containers/bookmark/Bookmark';
 import AuthorHeadData from './singlearticle/AuthorArticleData';
 import 'react-sharingbuttons/dist/main.css';
 import './landingPage/Singlearticle.scss';
@@ -19,6 +21,11 @@ const Article = ({
   const urlShare = `https://ah-baqi.herokuapp.com//articles${article.slug}`;
   return (
     <div data-test="single-article">
+      {user && (
+      <span className="bookmark-icon-pos">
+        <Bookmark slug={article.slug} />
+      </span>
+      )}
       <Row>
         <Col span={18} offset={3}>
           <Row>

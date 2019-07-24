@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Row, Col, Button, Popconfirm, Rate, 
+  Row, Col, Button, Popconfirm, Rate,
 } from 'antd';
 
 const AuthorHeadData = ({

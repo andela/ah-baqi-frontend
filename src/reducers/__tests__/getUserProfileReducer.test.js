@@ -4,7 +4,6 @@ import getUserProfileReducer from '../getUserProfileReducer';
 describe('getUserProfileReducer', () => {
   test('getUserProfileReducer returns initialState by default', () => {
     const newState = getUserProfileReducer({}, { type: 'default' });
-    console.log(newState)
     expect(newState).toEqual({});
   });
   test('FETCH_USER_ARTICLES', () => {
