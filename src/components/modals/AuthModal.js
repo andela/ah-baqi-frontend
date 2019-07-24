@@ -24,7 +24,7 @@ const AuthModal = ({
   switch (authAction) {
     case 'login': (
       modalData = (
-        <div style={{ textAlign: 'center' }}>
+        <div className="text-center">
           <EmailModalButton
             action="Login"
             clicked={showLoginForm}
@@ -44,7 +44,7 @@ const AuthModal = ({
       break;
     case 'signup': (
       modalData = (
-        <div style={{ textAlign: 'center' }}>
+        <div className="text-center">
           <EmailModalButton
             action="Signup"
             clicked={showSignupForm}
@@ -65,7 +65,7 @@ const AuthModal = ({
       (
 
         modalData = (
-          <div style={{ textAlign: 'center' }}>
+          <div className="text-center">
             <Signup
               form-data="signup form"
               submit={submitSignup}
@@ -76,7 +76,7 @@ const AuthModal = ({
       break;
     case 'loginForm': (
       modalData = (
-        <div style={{ textAlign: 'center' }}>
+        <div className="text-center">
           <Login
             submit={submitLogin}
             onCancel={onCancel}

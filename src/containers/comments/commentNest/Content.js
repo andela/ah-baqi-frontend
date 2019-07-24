@@ -68,8 +68,6 @@ const Content = (props) => {
         {' '}
         {' '}
         {' '}
-        {' '}
-        {' '}
         <Icon
           className={`dropdown-icon-${item.id}`}
           type="message"

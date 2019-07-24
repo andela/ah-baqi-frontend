@@ -3,13 +3,15 @@ import { shallow } from 'enzyme';
 
 import SingleMidLandingArticle from '../../articles/landingPage/MiddleLandingArticle';
 
+const mockFn = jest.fn();
+
 describe('<SingleMidLandingArticle /> component', () => {
   const props = {
     article: {
       title: 'test title',
       description: 'test description',
     },
-    clicked: jest.fn(),
+    clicked: mockFn,
   };
   const wrapper = shallow(
     <SingleMidLandingArticle
@@ -20,5 +22,7 @@ describe('<SingleMidLandingArticle /> component', () => {
 
   test('SingleMidLandingArticle renders correctly', () => {
     expect(wrapper.find("[data-test='single-mid-landing-article']")).toHaveLength(1);
+    wrapper.props().onClick();
+    expect(mockFn).toHaveBeenCalled();
   });
 });

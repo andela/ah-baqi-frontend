@@ -2,11 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Skeleton } from 'antd';
 import ArticlePage from '../../articles/Article';
-// import ArticlesForm from '../../../components/articles/ArticlesForm';
+
 import { containerStore } from '../../../utils/testUtils';
 
 const store = containerStore({});
-const component = shallow(<ArticlePage store={store} />).dive().dive();
+const historyMock = {
+  location: {
+    pathname: 'age-title_username',
+  },
+};
+const component = shallow(<ArticlePage store={store} history={historyMock} />).dive().dive();
 
 describe('<ArticlePage /> rendering', () => {
   test('should render successfully show skeleton on loading', () => {
@@ -25,6 +30,7 @@ describe('<ArticlePage /> rendering', () => {
     const componentMounted = shallow(<ArticlePage
       store={store}
       articleData={articleData}
+      history={historyMock}
     />)
       .dive().dive();
     expect(componentMounted.find(Skeleton)).toHaveLength(1);

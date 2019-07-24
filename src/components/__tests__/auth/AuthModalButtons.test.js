@@ -18,6 +18,7 @@ describe('<SocialAuthModalButtons /> component', () => {
   const wrapper = shallow(<SocialAuthModalButtons
     facebookResponse={myMock}
     googleResponse={myMock}
+    twitterResponse={myMock}
   />);
 
   test('renders without crashing', () => {
@@ -42,6 +43,12 @@ describe('<SocialAuthModalButtons /> component', () => {
     // testing the renderProp
     google.props().render({});
     expect(wrapper.find(AuthModalButtons).exists()).toBe(true);
+  });
+
+  test('should test twitter onClick is called', () => {
+    const twitter = wrapper.find("[titter-button='twitter button']");
+    twitter.props().clicked();
+    expect(myMock).toHaveBeenCalled();
   });
 });
 

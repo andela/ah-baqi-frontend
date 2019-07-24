@@ -1,9 +1,6 @@
 import { instance } from '../utils/axios';
 import actionTypes from './types';
-<<<<<<< HEAD:src/actions/profile.js
-=======
 
->>>>>>> - A user should be able to::src/actions/profileActions.js
 import handleMessages from '../utils/messages';
 
 export const getUserProfile = username => async (dispatch) => {

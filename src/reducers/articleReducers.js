@@ -43,7 +43,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         actionCalled: true,
-        articles: action.payload.results,
+        articles: state.articles.concat(action.payload.results),
         nextPage: action.payload.next,
         previousPage: action.payload.previous,
         articleCount: action.payload.count,
@@ -75,6 +75,7 @@ export default function (state = initialState, action) {
         likes: action.payload.likes,
         actionCalled: true,
       };
+
     default:
       return state;
   }

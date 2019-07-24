@@ -6,8 +6,9 @@ import Article from '../../components/articles/Article';
 import { ratingActions } from '../../actions/rateArticles';
 
 class ArticlePage extends Component {
-  componentDidMount() {
+  componentWillMount() {
     const { articleData, getArticle, history } = this.props; // eslint-disable-line
+    articleData.id = 0;
     if (!articleData.id) {
       const slug = history.location.pathname.split('/')[2];
       getArticle(slug);
@@ -20,8 +21,8 @@ class ArticlePage extends Component {
   }
 
 handleRating = (rating) => {
-  const slug = this.props.history.location.pathname.split('/')[2];
-  const { ratingActions, history } = this.props;
+  const { history, ratingActions } = this.props;
+  const slug = history.location.pathname.split('/')[2];
   this.setState({ rating });
   ratingActions(slug, rating);
   localStorage.setItem('rating', rating);
@@ -40,7 +41,7 @@ render() {
           beenLiked={beenLiked}
           history={history}
           value={likes}
-          liking={() => toggleLike(articleData.slug, history, '')}
+          liking={toggleLike}
           rateArticle={this.handleRating}
         />
       ) : <Skeleton active />}

@@ -5,8 +5,7 @@ import { user, displayComments, editComment } from '../helpers/helpers';
 import EditUserCommentForm from '../EditCommentContainer';
 import SecondaryComment from './SecondaryComment';
 
-export let commentItems;
-
+export let commentItems; // eslint-disable-line
 
 export const getItems = (
   comments,

@@ -87,7 +87,7 @@ class CreateUpdateArticle extends Component {
       image, description, body, tagList, title,
     } = this.state;
     const { create, articleData } = this.props;
-    return (
+    return ( // eslint-disable-line
       <div data-test="article form page">
         {localStorage.user_id ? (
           <div>

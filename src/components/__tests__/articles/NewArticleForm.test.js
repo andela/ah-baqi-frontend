@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CKEditor from 'ckeditor4-react';
-import Dropzone from 'react-dropzone';
 import { Select } from 'antd';
 
 import { componentRenders, propOnchangeTests } from '../../../utils/testUtils';
@@ -37,12 +36,6 @@ describe('<NewArticleForm /> component', () => {
 
   test('should test array mapping for tags and onchange', () => {
     propOnchangeTests(wrapper, Select, mockFn);
-  });
-
-  test('should test dropzone onDrop is called', () => {
-    const dropzone = wrapper.find(Dropzone);
-    dropzone.props().onDrop();
-    expect(mockFn).toHaveBeenCalled();
   });
 
   test('should test form submit method is called', () => {

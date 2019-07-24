@@ -61,7 +61,7 @@ describe('articleReducer', () => {
     expect(newState.edited).toBe(true);
   });
   test('GET_ALL_ARTICLES action returns created:true', () => {
-    const newState = articleReducer('GET_ALL_ARTICLES', { type: 'GET_ALL_ARTICLES', payload });
+    const newState = articleReducer(initialState, { type: 'GET_ALL_ARTICLES', payload });
     expect(newState.articles).toEqual([articleData]);
   });
 });

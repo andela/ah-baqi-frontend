@@ -4,14 +4,9 @@ import { shallow } from 'enzyme';
 import MiddleLandingArticle from '../../articles/landingPage/MiddleLandingArticles';
 
 describe('<MiddleLandingArticle /> component', () => {
-  const props = {
-    articles: ['article1', 'article2', 'article3'],
-    clicked: jest.fn(),
-  };
   const wrapper = shallow(
     <MiddleLandingArticle
-      articles={props.articles}
-      clicked={props.clicked}
+      articles={['article1', 'article2', 'article3']}
     />,
   );
 

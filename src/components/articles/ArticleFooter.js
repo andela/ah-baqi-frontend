@@ -1,30 +1,31 @@
 import React from 'react';
 import { Icon } from 'antd';
 
-export const IconText = ({
-  type, onClick, beenLiked, color, theme,
+const IconText = ({
+  type, onClick, beenLiked, theme, history, slug,
 }) => {
   if (beenLiked) {
     return (
-      <p data-test="icon-text">
+      <p data-test="icon-text-liked">
         <Icon
           type={type}
-          className="single-article-icon"
-          onClick={onClick}
+          className="uploader-icon statistic-like"
+          onClick={() => onClick(slug, history, '')}
           theme={theme}
-          twoToneColor={color}
         />
       </p>
     );
   }
   return (
-    <p data-test="icon-text">
+    <p data-test="icon-text-not-liked">
       <Icon
         type={type}
-        className="single-article-icon"
-        onClick={onClick}
+        className="uploader-icon statistic-like"
+        onClick={() => onClick(slug, history, '')}
       />
     </p>
 
   );
 };
+
+export default IconText;

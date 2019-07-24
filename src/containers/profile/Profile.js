@@ -16,6 +16,14 @@ export class UnconnectedProfile extends Component {
     getUserArticles(userId);
   }
 
+  handleArticleClick = (e, slug) => {
+    const { history, getArticle } = this.props; // eslint-disable-line
+    e.preventDefault();
+    const urlTo = `/articles/${slug}`;
+    getArticle(slug);
+    history.push(urlTo);
+  }
+
   render() {
     const { profile, userArticles, deleteArticle, history } = this.props;  // eslint-disable-line
     return (
@@ -28,6 +36,7 @@ export class UnconnectedProfile extends Component {
             getArticle={getArticle}
             history={history}
             onEditClick={this.handleEditClick}
+            handleClick={this.handleArticleClick}
           />
         </div>
       </div>

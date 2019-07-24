@@ -11,6 +11,11 @@ $light-grey: #f1f8fe;
     margin-bottom: 10px;
 }
 
+.rate-icon {
+  color: $text-black;
+  font-size: 12px;
+}
+
 .article-title {
     width: 80%;
     font-family: 'Lato';
@@ -110,4 +115,15 @@ $light-grey: #f1f8fe;
     margin-right: 10px;
     border-radius: 2px;
     font-size: 13px;
+}
+
+.sharing-icon {
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.share-icon {
+  font-size: 20px;
+  padding-top: 10px;
 }

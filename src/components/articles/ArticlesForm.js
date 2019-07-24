@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  Row, Col, Select, Icon,
+  Row, Col, Select,
 } from 'antd';
 import CKEditor from 'ckeditor4-react';
-import Dropzone from 'react-dropzone';
+
+import ImageUploader from './singlearticle/imageUpload';
 import './NewArticle.scss';
 
 const ArticlesForm = (props) => {
@@ -49,41 +50,13 @@ const ArticlesForm = (props) => {
               />
             </div>
 
-            <div
-              className="input-group"
+            <ImageUploader
+              image={image}
+              imageUrl={imageUrl}
+              imageUpload={imageUpload}
+              handleChange={handleChange}
               data-test="image drop"
-            >
-              <Dropzone
-                onDrop={acceptedFile => imageUpload(acceptedFile, imageUrl, handleChange)}
-                accept="image/*"
-              >
-                {({ getRootProps, getInputProps }) => (
-                  <section data-test="dropzone section">
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      {image || (
-                        <p>
-                          <Icon
-                            type="file-image"
-                            style={{ fontSize: '20px' }}
-                          />
-                          Drag &apos; n &apos; drop image here, or click to select image
-                        </p>
-                      )}
-                    </div>
-                  </section>
-                )}
-              </Dropzone>
-              <div className="show-thumb">
-                {image ? (
-                  <span style={{ color: 'green' }}>
-                    <Icon type="check-circle" />
-                    {' '}
-                    Image successfully uploaded
-                  </span>
-                ) : 'No image Selected Yet'}
-              </div>
-            </div>
+            />
 
             <div className="form-group">
               <CKEditor
@@ -101,7 +74,7 @@ const ArticlesForm = (props) => {
                 size={size}
                 placeholder="Add your tag(s) here"
                 value={tagList}
-                style={{ width: '100%' }}
+                className="full-width"
                 onChange={event => handleChange(event, 'tags')}
               >
                 {children}
