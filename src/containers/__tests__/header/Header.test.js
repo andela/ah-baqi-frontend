@@ -2,20 +2,19 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { UnconnectedHeader } from '../../header/Header';
 import AuthModal from '../../../components/modals/AuthModal';
+import { mockFn } from '../../../utils/testUtils';
 
-
-const myMock = jest.fn();
 const propsTest = {
   isLoggedIn: true,
   modals: {
     authAction: 'login',
   },
-  onFailure: myMock,
+  onFailure: mockFn,
 
 };
 
 describe('<Routes /> component', () => {
-  const wrapper = shallow(<UnconnectedHeader {...propsTest} onFailure={myMock} />);
+  const wrapper = shallow(<UnconnectedHeader {...propsTest} onFailure={mockFn} />);
 
   test('renders routes successfully', () => {
     expect(wrapper).toHaveLength(1);

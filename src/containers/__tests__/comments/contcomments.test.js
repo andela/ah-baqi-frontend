@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 
 import rootReducer from '../../../reducers/index';
 import CoomentContainer, { UnconnectedCoomentContainer } from '../../comments/Comments';
+import { mockFn } from '../../../utils/testUtils';
 
 const configureStoreItem = (initialState) => {
   const store = applyMiddleware(thunk)(createStore);
@@ -25,22 +26,17 @@ describe('<CoomentContainer />', () => {
     expect(wrapper.find("[data-test='comments-container']")).toHaveLength(1);
   });
   test('renders correctly', () => {
-    const deleteCommentMock = jest.fn();
-    const likeCommentMock = jest.fn();
-    const dislikeCommentMock = jest.fn();
-
     const props = {
       comments: [],
       slug: 'my comment',
-      deleteComment: deleteCommentMock,
-      likeComment: likeCommentMock,
-      dislikeComment: dislikeCommentMock,
+      deleteComment: mockFn,
+      likeComment: mockFn,
+      dislikeComment: mockFn,
     };
     const wrapper = shallow(<UnconnectedCoomentContainer />);
-    const handleSubmitMock = jest.fn();
-    wrapper.instance().handleSubmit = handleSubmitMock;
-    handleSubmitMock();
-    expect(handleSubmitMock).toHaveBeenCalled();
+    wrapper.instance().handleSubmit = mockFn;
+    wrapper.instance().handleSubmit();
+    expect(mockFn).toHaveBeenCalled();
     const commentWrapper = wrapper.find("[data-test='comments-container-content']").children();
     expect(commentWrapper).toHaveLength(0);
     const wrapperItem = mount(shallow(<UnconnectedCoomentContainer {...props} />).get(0));

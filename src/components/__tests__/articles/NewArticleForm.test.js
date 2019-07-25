@@ -3,10 +3,8 @@ import { shallow } from 'enzyme';
 import CKEditor from 'ckeditor4-react';
 import { Select } from 'antd';
 
-import { componentRenders, propOnchangeTests } from '../../../utils/testUtils';
+import { componentRenders, propOnchangeTests, mockFn } from '../../../utils/testUtils';
 import NewArticleForm from '../../articles/ArticlesForm';
-
-const mockFn = jest.fn();
 
 const myArticle = {
   slug: '',

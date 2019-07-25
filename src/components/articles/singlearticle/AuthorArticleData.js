@@ -1,8 +1,10 @@
 import React from 'react';
 import {
-  Row, Col, Button, Popconfirm, Rate,
+  Row, Col, Button, Icon, Rate,
 } from 'antd';
 import FollowUnfollow from '../../../containers/profile/FollowUnfollow';
+
+import PopDelete from './PopDelete';
 
 const AuthorHeadData = ({
   onDelete, articleData, history, editClick,
@@ -42,23 +44,26 @@ const AuthorHeadData = ({
           </Row>
         </Col>
         <Col span={3} className="pad-top-rate">
-          <Rate className="rating" defaultValue={articleData.rating} disabled />
+          <Rate className="rating" defaultValue={+articleData.rating} disabled />
         </Col>
         <Col span={6} offset={2} className="pad-top-rate">
           {+localStorage.user_id === articleData.author
             ? (
               <span>
                 {' '}
-                <Button onClick={event => editClick(event)}>Edit</Button>
+                <Button onClick={event => editClick(event)}>
+                  <Icon type="edit" />
+                  {' '}
+                  Edit
+                </Button>
                 {' '}
-                <Popconfirm
-                  title="Are you sure you want to delete this article?"
-                  onConfirm={() => onDelete(articleData.slug, history)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <Button type="danger" ghost>Delete</Button>
-                </Popconfirm>
+                <span className="pop-delete">
+                  <PopDelete
+                    onDelete={onDelete}
+                    slug={articleData.slug}
+                    history={history}
+                  />
+                </span>
               </span>
             ) : null}
         </Col>

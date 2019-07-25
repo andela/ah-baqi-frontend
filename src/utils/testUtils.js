@@ -31,4 +31,6 @@ export const containerStore = (initialStateFull) => {
   return stateStore(rootReducer, initialStateFull);
 };
 
+export const mockFn = jest.fn();
+
 export default store;

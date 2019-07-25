@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../../../reducers/index';
 
 import EditProfile, { UnconnectedEditProfile } from '../../profile/EditProfile';
+import { mockFn } from '../../../utils/testUtils';
 
 const configureStoreItem = (initialState) => {
   const store = applyMiddleware(thunk)(createStore);
@@ -13,7 +14,7 @@ const configureStoreItem = (initialState) => {
 };
 
 const props = {
-  displayModalActions: jest.fn(),
+  displayModalActions: mockFn,
 };
 const setup = () => {
   const store = configureStoreItem();
@@ -34,13 +35,11 @@ describe('redux properties', () => {
     image: 'https://res.cloudinary.com/wekesa931/image/upload/v1554520694/samples/bike',
   };
   describe('`editProfile` action creator', () => {
-    let editProfileMock;
     let wrapper;
     let button;
     beforeEach(() => {
-      editProfileMock = jest.fn();
       wrapper = shallow(<UnconnectedEditProfile
-        editUserProfile={editProfileMock}
+        editUserProfile={mockFn}
         userProfile={profile}
         {...props}
       />);
@@ -51,10 +50,9 @@ describe('redux properties', () => {
       expect(button).toHaveLength(1);
     });
     test('form is cancelled on request', () => {
-      const cancelFormInputMock = jest.fn();
-      wrapper.instance().handleCancel = cancelFormInputMock;
-      cancelFormInputMock();
-      expect(cancelFormInputMock).toHaveBeenCalled();
+      wrapper.instance().handleCancel = mockFn;
+      wrapper.instance().handleCancel();
+      expect(mockFn).toHaveBeenCalled();
     });
     test('`getUserProfile` action creator is a function on the props', () => {
       wrapper = setup();
@@ -72,10 +70,9 @@ describe('redux properties', () => {
       expect(editUserProfile).toBeInstanceOf(Function);
     });
     test('show modal is called', () => {
-      const showModalMock = jest.fn();
-      wrapper.instance().showModal = showModalMock;
-      showModalMock();
-      expect(showModalMock).toHaveBeenCalled();
+      wrapper.instance().showModal = mockFn;
+      wrapper.instance().showModal();
+      expect(mockFn).toHaveBeenCalled();
     });
   });
   describe('test connected component', () => {
@@ -85,10 +82,10 @@ describe('redux properties', () => {
         last_name: 'wamnyonyez',
       };
       const wrapper = setup();
-      const editUserProfileMock = jest.fn();
-      wrapper.instance().editUserProfile = editUserProfileMock;
-      await editUserProfileMock(editedFields);
-      expect(editUserProfileMock).toHaveBeenCalled();
+      wrapper.instance().editUserProfile = mockFn;
+      wrapper.instance().editUserProfile();
+      await mockFn(editedFields);
+      expect(mockFn).toHaveBeenCalled();
     });
   });
 });

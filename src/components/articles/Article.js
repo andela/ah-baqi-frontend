@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Rate, Row, Col, Statistic, Icon, Popover,
+  Row, Col, Statistic, Popover, Icon, Rate,
 } from 'antd';
 import {
   Facebook, Twitter, Reddit, Email,
@@ -71,7 +71,7 @@ const Article = ({
                   <span> Rate this article  </span>
                   <br />
                   {token ? (
-                    <Rate className="rating" onChange={rateArticle} defaultValue={localStorage.getItem('rating')} />
+                    <Rate className="rating" onChange={rateArticle} defaultValue={+localStorage.getItem('rating')} />
                   ) : (
                     <Rate className="rating" onChange={rateArticle} value={0} />
                   )}

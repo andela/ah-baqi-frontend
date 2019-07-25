@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { containerStore } from '../../../utils/testUtils';
+import { containerStore, mockFn } from '../../../utils/testUtils';
 import Profile, { UnconnectedProfile } from '../../profile/Profile';
 
 const setup = () => {
@@ -24,19 +24,16 @@ describe('redux properties', () => {
     expect(getUserProfileProp).toBeInstanceOf(Function);
   });
   test('`getUserProfile` runs on Profile mount', () => {
-    const getUserProfileMock = jest.fn();
-    const getUserArticlesMock = jest.fn();
-
     const props = {
-      getUserProfile: getUserProfileMock,
-      getUserArticles: getUserArticlesMock,
+      getUserProfile: mockFn,
+      getUserArticles: mockFn,
     };
     const wrapper = shallow(<UnconnectedProfile {...props} />);
     wrapper.instance().componentDidMount();
-    const getProfile = getUserProfileMock.mock.calls.length;
-    const getArticles = getUserArticlesMock.mock.calls.length;
+    const getProfile = mockFn.mock.calls.length;
+    const getArticles = mockFn.mock.calls.length;
 
-    expect(getProfile).toBe(1);
-    expect(getArticles).toBe(1);
+    expect(getProfile).toBe(2);
+    expect(getArticles).toBe(2);
   });
 });

@@ -1,5 +1,5 @@
 import { instance } from '../../utils/axios';
-import store from '../../utils/testUtils';
+import store, { mockFn } from '../../utils/testUtils';
 import { firebaseAuthAction, socialAuthActions } from '../socialAuthActions';
 
 
@@ -19,7 +19,6 @@ const providerMissing = {
 
 
 describe('testing firebse calls from twitter', () => {
-  const myMock = jest.fn();
   beforeEach(() => {
     store.clearActions();
   });
@@ -58,10 +57,10 @@ describe('testing firebse calls from twitter', () => {
     }));
 
     try {
-      await store.dispatch(firebaseAuthAction(myMock));
+      await store.dispatch(firebaseAuthAction(mockFn));
     } catch (e) {
       expect(store.getActions()).toEqual([]);
-      expect(myMock).toHaveBeenCalled();
+      expect(mockFn).toHaveBeenCalled();
     }
   });
 });

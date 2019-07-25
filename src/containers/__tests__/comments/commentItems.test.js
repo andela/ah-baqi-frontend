@@ -2,17 +2,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Content from '../../comments/commentNest/Content';
-
-const deleteCommentMock = jest.fn();
-const likeCommentMock = jest.fn();
-const dislikeCommentMock = jest.fn();
+import { mockFn } from '../../../utils/testUtils';
 
 const props = {
   comments: [],
   slug: 'my comment',
-  deleteComment: deleteCommentMock,
-  likeComment: likeCommentMock,
-  dislikeComment: dislikeCommentMock,
+  deleteComment: mockFn,
+  likeComment: mockFn,
+  dislikeComment: mockFn,
 };
 describe('<Content />', () => {
   test('renders without error', () => {

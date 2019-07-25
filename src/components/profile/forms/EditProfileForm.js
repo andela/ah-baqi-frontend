@@ -17,15 +17,13 @@ const EditProfileForm = Form.create({ name: 'form_in_modal' })(
         bio,
       } = props.profile;
 
+
       return (
         <Form layout="vertical">
           <Form.Item label="Profile Picture">
             <div className="modal-image">
               <img
-                src={`${image}`}
-                onError={(e) => {
-                  e.target.src = 'https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png';
-                }}
+                src={image}
                 alt="myprofile"
               />
             </div>

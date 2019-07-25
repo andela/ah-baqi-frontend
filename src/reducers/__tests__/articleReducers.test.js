@@ -11,8 +11,10 @@ describe('articleReducer', () => {
       error: null,
       articleCount: 0,
       articles: [],
+      followees: [],
       nextPage: null,
       previousPage: null,
+      beenLiked: false,
       articleData: {
         id: 0,
         title: '',
@@ -42,6 +44,8 @@ describe('articleReducer', () => {
 
     payload = {
       results: [articleData],
+      count: 5,
+      followees: ['number1', 'number2'],
     };
   });
   test('articleReducer returns initialState by default', () => {
@@ -59,6 +63,26 @@ describe('articleReducer', () => {
   test('EDIT_ARTICLE action returns edited:true', () => {
     const newState = articleReducer(initialState, { type: actionTypes.EDIT_ARTICLE });
     expect(newState.edited).toBe(true);
+  });
+  test('DELETE_ARTICLE action returns actionCalled:true', () => {
+    const newState = articleReducer(initialState, { type: actionTypes.DELETE_ARTICLE });
+    expect(newState.actionCalled).toBe(true);
+  });
+  test('TOGGLE_LIKE action returns actionCalled:true', () => {
+    const newState = articleReducer(initialState, {
+      type: actionTypes.TOGGLE_LIKE,
+      payload: {
+        article_liked: false,
+        likes: 1000,
+      },
+    });
+    expect(newState.actionCalled).toBe(true);
+  });
+  test('EDIT_ARTICLE action returns edited:true', () => {
+    const newState = articleReducer(initialState, {
+      type: actionTypes.FETCH_FOLLOWERS, payload: ['fol1', 'fol2'],
+    });
+    expect(newState.actionCalled).toBe(true);
   });
   test('GET_ALL_ARTICLES action returns created:true', () => {
     const newState = articleReducer(initialState, { type: 'GET_ALL_ARTICLES', payload });

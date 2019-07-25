@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 
 import rootReducer from '../../../reducers/index';
 import SecondaryComment, { UnconnectedSecondaryComment } from '../../comments/commentNest/SecondaryComment';
+import { mockFn } from '../../../utils/testUtils';
 
 const configureStoreItem = (initialState) => {
   const store = applyMiddleware(thunk)(createStore);
@@ -26,11 +27,10 @@ describe('<SecondaryComment />', () => {
   });
   test('renders without error', () => {
     const wrapper = setup();
-    const handleSubmitMock = jest.fn();
-    wrapper.instance().handleSubmit = handleSubmitMock;
-    handleSubmitMock();
-    expect(handleSubmitMock).toHaveBeenCalled();
-    const submit = handleSubmitMock.mock.calls.length;
+    wrapper.instance().handleSubmit = mockFn;
+    wrapper.instance().handleSubmit();
+    expect(mockFn).toHaveBeenCalled();
+    const submit = mockFn.mock.calls.length;
     expect(submit).toBe(1);
     expect(wrapper.instance().state.value).toBe('');
     expect(wrapper.instance().props.addNestedComment).toBeInstanceOf(Function);
@@ -38,10 +38,9 @@ describe('<SecondaryComment />', () => {
   });
   test('submits comment', () => {
     const wrapper = shallow(<UnconnectedSecondaryComment />);
-    const handleSubmitMock = jest.fn();
-    wrapper.instance().handleSubmit = handleSubmitMock;
-    handleSubmitMock();
-    expect(handleSubmitMock).toHaveBeenCalled();
+    wrapper.instance().handleSubmit = mockFn;
+    wrapper.instance().handleSubmit();
+    expect(mockFn).toHaveBeenCalled();
 
     const commentWrapper = wrapper.find("[data-test='comments-container-content']").children();
     expect(commentWrapper).toHaveLength(0);

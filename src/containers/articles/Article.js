@@ -23,7 +23,6 @@ class ArticlePage extends Component {
 handleRating = (rating) => {
   const { history, ratingActions } = this.props;
   const slug = history.location.pathname.split('/')[2];
-  this.setState({ rating });
   ratingActions(slug, rating);
   localStorage.setItem('rating', rating);
 }

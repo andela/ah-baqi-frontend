@@ -12,7 +12,7 @@ export const fetchFollowers = authorId => async (dispatch) => {
       payload: response.data.followers,
     });
   } catch (error) {
-    /403/.test(error.message)
+    /403/.test(error.message) // eslint-disable-line
       ? message('error', 'Login and try again!')
       : message('error', 'Oops! An error occurred');
   }
@@ -25,7 +25,7 @@ export const fetchFollowees = authorId => async (dispatch) => {
     localStorage.setItem('followeesCount', JSON.parse(localStorage.followees).length);
     dispatch(fetchFollowers(authorId));
   } catch (error) {
-    /403/.test(error.message)
+    /403/.test(error.message) // eslint-disable-line
       ? message('error', 'Login and try again!')
       : message('error', 'Oops! An error occurred');
   }
@@ -37,7 +37,7 @@ export const followUser = authorId => async (dispatch) => {
     dispatch({ type: actionTypes.FOLLOW_USER });
     message('success', response.data.detail.message);
   } catch (error) {
-    /403/.test(error.message)
+    /403/.test(error.message) // eslint-disable-line
       ? message('error', 'Login and try again!')
       : message('error', 'Oops! An error occurred');
   }
@@ -49,7 +49,7 @@ export const unfollowUser = authorId => async (dispatch) => {
     dispatch({ type: actionTypes.UNFOLLOW_USER });
     message('success', response.data.message);
   } catch (error) {
-    /403/.test(error.message)
+    /403/.test(error.message) // eslint-disable-line
       ? message('error', 'Login and try again!')
       : message('error', 'Oops! An error occurred');
   }

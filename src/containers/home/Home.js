@@ -10,9 +10,9 @@ import ArticlesScroll from '../../components/articles/articlesScroll';
 
 class Home extends Component {
   componentDidMount() {
-    const { history, getAllArticles } = this.props; // eslint-disable-line
+    const { history, getAllArticles, articleCount } = this.props; // eslint-disable-line
     history.push('/');
-    getAllArticles();
+    !articleCount && getAllArticles(); // eslint-disable-line
   }
 
   handleClick = (slug) => {
@@ -24,11 +24,14 @@ class Home extends Component {
   };
 
   fetchMoreData = (url) => {
-    this.props.getAllArticles(url); // eslint-disable-line
+    const { articleCount, articles, getAllArticles } = this.props; // eslint-disable-line
+    if (articleCount > articles.length) {
+      getAllArticles(url);
+    }
   };
 
   render() {
-    const { articles, nextPage } = this.props; // eslint-disable-line
+    const { articles, nextPage, articleCount } = this.props;
     const loader = <Skeleton active data-test="skeleton-loader" />;
     return (
       <div className="container-body">
@@ -49,6 +52,7 @@ class Home extends Component {
                   nextPage={nextPage}
                   handleClick={this.handleClick}
                   dataLength={articles.length}
+                  hasMore={articleCount > articles.length}
                 />
               </Col>
               <Col span={8} push={1}>
@@ -66,6 +70,7 @@ const mapStateToProps = state => ({
   articles: state.article.articles,
   articleData: state.article.articleData,
   nextPage: state.article.nextPage,
+  articleCount: state.article.articleCount,
 });
 
 export default connect(mapStateToProps, { getAllArticles, getArticle })(Home);

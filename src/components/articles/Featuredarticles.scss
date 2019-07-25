@@ -1,4 +1,6 @@
 $primary-black: #000;
+$red-color: #d23530;
+$black-less: #00000044;
 
 .featured-article-container {
   height: 130px;
@@ -38,4 +40,12 @@ $primary-black: #000;
 .featured-title span {
   border-bottom: 1.5px solid $primary-black;
   padding: 0 0 8px;
+}
+
+.pop-delete {
+  padding: 5px 6px;
+  border-radius: 3px;
+  border: 1px solid $red-color;
+  cursor: pointer;
+  color: $red-color;
 }

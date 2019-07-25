@@ -2,14 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import SecondaryContent from '../../comments/commentNest/SecondaryContent';
-
-const deleteNestedCommentItemMock = jest.fn();
+import { mockFn } from '../../../utils/testUtils';
 
 const props = {
   replies: [],
   slug: 'my comment',
   id: 'id',
-  deleteNestedCommentItem: deleteNestedCommentItemMock,
+  deleteNestedCommentItem: mockFn,
 };
 describe('<SecondaryContent />', () => {
   test('renders without error', () => {
