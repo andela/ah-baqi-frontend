@@ -8,6 +8,7 @@ const initialState = {
   nextPage: null,
   likes: localStorage.likes,
   previousPage: null,
+  followees: [],
   actionCalled: false,
   articleData: {
     id: 0,
@@ -75,7 +76,12 @@ export default function (state = initialState, action) {
         likes: action.payload.likes,
         actionCalled: true,
       };
-
+    case actionTypes.FETCH_FOLLOWERS:
+      return {
+        ...state,
+        followees: [...action.payload],
+        actionCalled: true,
+      };
     default:
       return state;
   }

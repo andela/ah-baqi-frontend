@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../../reducers/index';
+import rootReducer from '../../../reducers/index';
 
-import EditProfile, { UnconnectedEditProfile } from '../profile/EditProfile';
+import EditProfile, { UnconnectedEditProfile } from '../../profile/EditProfile';
 
 const configureStoreItem = (initialState) => {
   const store = applyMiddleware(thunk)(createStore);

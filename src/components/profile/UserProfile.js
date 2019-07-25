@@ -4,6 +4,7 @@ import {
 } from 'antd';
 
 import EditProfile from '../../containers/profile/EditProfile';
+import FollowList from '../../containers/profile/ListFollowers';
 import './profile.scss';
 
 const UserProfile = (props) => {
@@ -42,14 +43,7 @@ const UserProfile = (props) => {
               </div>
               <div className="profile-header-info-bio">{myProfile.profile.bio}</div>
               <br />
-              <div className="profile-header-info-followers">
-                {' '}
-7 followers
-                {' '}
-                {' '}
-                {' '}
-1 Following
-              </div>
+              <FollowList {...props} />
             </div>
           </div>
           <div className="profile-pic-holder">

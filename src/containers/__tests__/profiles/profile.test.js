@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { containerStore } from '../../utils/testUtils';
-import Profile, { UnconnectedProfile } from '../profile/Profile';
+import { containerStore } from '../../../utils/testUtils';
+import Profile, { UnconnectedProfile } from '../../profile/Profile';
 
 const setup = () => {
   const store = containerStore();
