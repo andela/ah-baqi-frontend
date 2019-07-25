@@ -6,6 +6,7 @@ import passwordResetReducer from './passwordResetReducer';
 import passwordConfirmReducer from './passwordConfirmReducer';
 import ratingArticles from './ratingArticles';
 import articleReducer from './articleReducers';
+import searchReducer from './search';
 
 export default combineReducers({
   userProfile,
@@ -15,4 +16,5 @@ export default combineReducers({
   passwordConfirmReducer,
   rating: ratingArticles,
   article: articleReducer,
+  search: searchReducer,
 });

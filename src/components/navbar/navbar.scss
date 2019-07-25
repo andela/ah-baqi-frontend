@@ -24,3 +24,21 @@ $blue: #0e7fe1;
   font-family: 'Tangerine', cursive;
   font-size: 2.5em;
 }
+
+.search-select {
+  width: 90px;
+}
+
+.search-input {
+  vertical-align: middle;
+  width: 250px;
+}
+
+.modified-item {
+  border-bottom: 2px solid transparent !important;
+  color: inherit !important;
+}
+
+.nav-menu {
+  float: right;
+}

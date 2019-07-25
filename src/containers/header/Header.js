@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import AuthModal from '../../components/modals/AuthModal';
 import Navbar from '../../components/navbar/Navbar';
 import loginActions from '../../actions/loginActions';
@@ -18,12 +19,13 @@ import {
   socialAuthActions,
   firebaseAuthAction,
 } from '../../actions/socialAuthActions';
+import searchActions from '../../actions/searchActions';
 
 export const UnconnectedHeader = (props) => {
   const {
     signupActions, hideModalActions, formSignupAction, emailSignupAction, // eslint-disable-line
     authAction, visible, emailLoginAction, formLoginAction, socialAuthActions, // eslint-disable-line
-    firebaseAuthAction, loginActions, logoutActions } = props; // eslint-disable-line
+    firebaseAuthAction, loginActions, logoutActions, searchActions, history } = props; // eslint-disable-line
 
   const handleSignupSubmit = (event, formProp) => {
     event.preventDefault();
@@ -63,6 +65,8 @@ export const UnconnectedHeader = (props) => {
         clickedSignup={emailSignupAction}
         clickedLogin={emailLoginAction}
         logOut={logoutActions}
+        search={searchActions}
+        history={history}
       />
       <AuthModal
         authAction={authAction}
@@ -101,5 +105,6 @@ export default connect(
     firebaseAuthAction,
     loginActions,
     logoutActions,
+    searchActions,
   },
-)(UnconnectedHeader);
+)(withRouter(UnconnectedHeader));

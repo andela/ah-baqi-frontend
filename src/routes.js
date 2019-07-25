@@ -7,6 +7,7 @@ import PasswordReset from './containers/resetpassword/resetPassword';
 import ConfrimReset from './containers/resetpassword/resetConfirm';
 import CreateUpdateArticle from './containers/articles/NewArticle';
 import ArticlePage from './containers/articles/Article';
+import Search from './containers/articles/SearchResults';
 
 const Routes = () => (
   <div>
@@ -28,6 +29,7 @@ const Routes = () => (
           render={props => <CreateUpdateArticle {...props} create={false} />}
         />
         <Route path="/articles/:slug" exact component={ArticlePage} />
+        <Route path="/search" exact component={Search} />
       </Switch>
     </BrowserRouter>
   </div>
