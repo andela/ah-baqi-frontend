@@ -1,14 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Layout, Menu, Popconfirm, Icon,
+  Layout, Menu, Popconfirm, Icon, Input, Select,
 } from 'antd';
 import './navbar.scss';
 
 const { Header } = Layout;
 const { Item } = Menu;
+const { Option } = Select;
+let searchFilter = 'title';
 
-const Navbar = ({ clickedLogin, clickedSignup, logOut }) => (
+const filterOptions = (
+  <Select
+    defaultValue="title"
+    onChange={(value) => { searchFilter = value; }}
+    className="search-select"
+  >
+    <Option value="title">title</Option>
+    <Option value="tag">tag</Option>
+    <Option value="author">author</Option>
+  </Select>
+);
+
+const searchBar = (search, history) => (
+  <Item className="modified-item">
+    <Input.Search
+      placeholder="Search"
+      onSearch={value => value && search(searchFilter, value, history)}
+      addonBefore={filterOptions}
+      className="search-input"
+    />
+  </Item>
+);
+
+const Navbar = ({
+  clickedLogin, clickedSignup, logOut, search, history,
+}) => (
   <Layout className="nav">
     <Header className="nav">
       <Link to="/" className="logo">
@@ -16,7 +43,8 @@ const Navbar = ({ clickedLogin, clickedSignup, logOut }) => (
       </Link>
       {localStorage.username && localStorage.token && localStorage.isLoggedIn
         ? (
-          <Menu mode="horizontal" style={{ float: 'right' }} data-test="authenticated-menu">
+          <Menu mode="horizontal" data-test="authenticated-menu" className="nav-menu">
+            {searchBar(search, history)}
             <Item>
               <Link to="/articles/new">
                 <Icon type="plus-circle" className="icon-blue" />
@@ -24,11 +52,9 @@ const Navbar = ({ clickedLogin, clickedSignup, logOut }) => (
               </Link>
             </Item>
             <Item>
-              <div className="navbar-profile-pic">
-                <Link to="/profile">
+              <Link to="/profile">
                   Profile
-                </Link>
-              </div>
+              </Link>
             </Item>
             <Item>
               <Popconfirm
@@ -43,7 +69,8 @@ const Navbar = ({ clickedLogin, clickedSignup, logOut }) => (
             </Item>
           </Menu>
         ) : (
-          <Menu mode="horizontal" style={{ float: 'right' }} data-test="unauthenticated-menu">
+          <Menu mode="horizontal" data-test="unauthenticated-menu" className="nav-menu">
+            {searchBar(search, history)}
             <Item onClick={clickedLogin}>Sign in</Item>
             <Item onClick={clickedSignup}>Sign up</Item>
           </Menu>
