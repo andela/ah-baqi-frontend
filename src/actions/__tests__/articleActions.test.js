@@ -1,5 +1,5 @@
 import {
-  getAllArticles, getArticle, createArticle, deleteArticle, editArticle,
+  getAllArticles, getArticle, createArticle, deleteArticle, editArticle, toggleLike,
 } from '../articleActions';
 import store from '../../utils/testUtils';
 import { instance } from '../../utils/axios';
@@ -60,5 +60,14 @@ describe('articleActions', () => {
     await store.dispatch(deleteArticle('slug', mockFn));
     expect(store.getActions()[0].payload).toEqual(resDataFT);
     expect(store.getActions()[0].type).toEqual('FETCH_USER_ARTICLES');
+  });
+  test('toggleLike action is called', async () => {
+    instance.get.mockImplementation(() => Promise.resolve({
+
+    }));
+
+    await store.dispatch(toggleLike('some_art'));
+    expect(localStorage.setItem).toHaveBeenCalled();
+    expect(instance.get).toHaveBeenCalledWith('/articles/my_slug/');
   });
 });

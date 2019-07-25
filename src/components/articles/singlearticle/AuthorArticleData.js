@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Row, Col, Button, Popconfirm, Rate,
 } from 'antd';
+import FollowUnfollow from '../../../containers/profile/FollowUnfollow';
 
 const AuthorHeadData = ({
   onDelete, articleData, history, editClick,
@@ -21,7 +22,9 @@ const AuthorHeadData = ({
           <Row className="name-and-reads">
             <Col className="name-and-follow">
               <span className="author-name">John Doe</span>
-              <button type="button" className="follow-button">Follow</button>
+              <FollowUnfollow
+                articleData={articleData}
+              />
             </Col>
             <Col className="created-and-read">
               {date.toLocaleString('default', { month: 'long' })}

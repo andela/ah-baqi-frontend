@@ -5,7 +5,7 @@ import { createArticle, editArticle } from '../../actions/articleActions';
 import imageUploader from '../../utils/imageUploader';
 
 
-class CreateUpdateArticle extends Component {
+export class UnconnectedCreateUpdateArticle extends Component {
   state = {
     title: '',
     description: '',
@@ -90,7 +90,7 @@ class CreateUpdateArticle extends Component {
     return ( // eslint-disable-line
       <div data-test="article form page">
         {localStorage.user_id ? (
-          <div>
+          <div data-test="the_form">
             <ArticlesForm
               image={image}
               handleChange={this.handleChange}
@@ -115,4 +115,4 @@ const mapStateToProps = state => ({
   articleData: state.article.articleData,
 });
 
-export default connect(mapStateToProps, { createArticle, editArticle })(CreateUpdateArticle);
+export default connect(mapStateToProps, { createArticle, editArticle })(UnconnectedCreateUpdateArticle);
