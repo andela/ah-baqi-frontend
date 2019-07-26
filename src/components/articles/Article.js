@@ -18,7 +18,7 @@ const token = localStorage.getItem('token');
 const Article = ({
   editClick, article, history, deleteAction, liking, beenLiked, value, rateArticle,
 }) => {
-  const urlShare = `https://ah-baqi.herokuapp.com//articles${article.slug}`;
+  const urlShare = `https://ah-baqi.herokuapp.com/articles/${article.slug}`;
   return (
     <div data-test="single-article">
       {user && (

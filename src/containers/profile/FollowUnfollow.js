@@ -9,7 +9,8 @@ export class UnconnectedFollowUnfollow extends React.Component {
 
   componentWillMount() {
     const { articleData, fetchFollowers } = this.props;
-    const myFollowers = JSON.parse(localStorage.followers);
+    console.log(localStorage.followers);
+    const myFollowers = localStorage.followers && JSON.parse(localStorage.followers);
     if (localStorage.token && articleData.author != localStorage.user_id) {
       fetchFollowers(articleData.author);
       if (this.hasFollowed(localStorage.username, myFollowers)) {
