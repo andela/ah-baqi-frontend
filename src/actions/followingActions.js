@@ -5,7 +5,6 @@ import message from '../utils/messages';
 export const fetchFollowers = authorId => async (dispatch) => {
   try {
     const response = await instance.get(`profiles/${authorId}/followers/`);
-    console.log(response.data.followers)
     localStorage.setItem('followers', JSON.stringify(response.data.followers));
     localStorage.setItem('followersCount', JSON.parse(localStorage.followers).length);
     dispatch({

@@ -100,10 +100,10 @@ const Article = ({
                     content={
                       (
                         <div>
-                          <Facebook url={urlShare} shareText={article.title} />
+                          <Facebook url={urlShare} />
                           <Twitter url={urlShare} shareText={article.title} />
-                          <Reddit url={urlShare} shareText={article.title} />
-                          <Email url={urlShare} shareText={article.title} />
+                          <Reddit url={urlShare} />
+                          <Email url={urlShare} subject={`Check out this article on Author's Haven: ${article.title}`} />
                         </div>
                       )}
                     trigger="hover"
