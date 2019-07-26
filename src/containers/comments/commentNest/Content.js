@@ -1,8 +1,9 @@
 import React from 'react';
 import { Avatar } from 'antd';
 
-import { user, displayComments, editComment } from '../helpers/helpers';
-import EditUserCommentForm from '../EditCommentContainer';
+import {
+  user, displayComments, editComment, editCommentForm,
+} from '../helpers/helpers';
 import SecondaryComment from './SecondaryComment';
 import customIcon from '../../../utils/icons';
 
@@ -41,19 +42,6 @@ const avatar = (
   />
 );
 
-const editForm = (item, slug) => (
-  <div className={`edit-field-${item.id} hide`}>
-    <EditUserCommentForm
-      btnClass={`cancel-edit-${item.id}`}
-      editorClass={`edit-field-${item.id}`}
-      body={item.body}
-      id={item.id}
-      slug={slug}
-      isNest={false}
-    />
-  </div>
-);
-
 const Content = ({
   comments, slug, deleteComment, likeComment, dislikeComment,
 }) => {
@@ -65,7 +53,7 @@ const Content = ({
       {utilityButtons(item, slug, deleteComment, likeComment, dislikeComment)}
       <div>
         {item.body}
-        {editForm(item, slug)}
+        {editCommentForm(item, slug)}
       </div>
       <div className={`nested-comment-${item.id} hide nested`}>
         <SecondaryComment
