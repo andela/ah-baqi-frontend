@@ -1,8 +1,7 @@
 import React from 'react';
 import { Avatar, Icon } from 'antd';
 
-import { user, displayComments, editComment } from '../helpers/helpers';
-import EditUserCommentForm from '../EditCommentContainer';
+import { user, displayComments, editComment, editCommentForm } from '../helpers/helpers';
 import SecondaryComment from './SecondaryComment';
 
 export let commentItems; // eslint-disable-line
@@ -88,17 +87,7 @@ export const getItems = (
       </p>
       <div>
         {item.body}
-        <div className={`edit-field-${item.id} hide`}>
-          <EditUserCommentForm
-            btnClass={`cancel-edit-${item.id}`}
-            editorClass={`edit-field-${item.id}`}
-            body={item.body}
-            id={item.id}
-            slug={slug}
-            isNest={false}
-          />
-        </div>
-
+        {editCommentForm(item, slug)}
       </div>
       <div className={`nested-comment-${item.id} hide`}>
         <SecondaryComment
