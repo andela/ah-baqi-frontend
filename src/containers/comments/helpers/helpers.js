@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Comment, Form, Button, List, Input,
 } from 'antd';
+import EditUserCommentForm from '../EditCommentContainer';
 
 const { TextArea } = Input;
 export const user = localStorage.getItem('username');
@@ -48,3 +49,16 @@ export const loginRequest = (message, item) => {
   message                                       // eslint-disable-line
     && document.querySelector(`.${item}`).classList.toggle('hide');
 };
+
+export const editCommentForm = (item, slug) => (
+  <div className={`edit-field-${item.id} hide`}>
+    <EditUserCommentForm
+      btnClass={`cancel-edit-${item.id}`}
+      editorClass={`edit-field-${item.id}`}
+      body={item.body}
+      id={item.id}
+      slug={slug}
+      isNest={false}
+    />
+  </div>
+);
