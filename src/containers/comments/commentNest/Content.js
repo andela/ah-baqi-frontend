@@ -1,9 +1,7 @@
 import React from 'react';
 import { Avatar } from 'antd';
 
-import {
-  user, displayComments, editComment, editCommentForm,
-} from '../helpers/helpers';
+import { user, displayComments, editComment, editCommentForm } from '../helpers/helpers';
 import SecondaryComment from './SecondaryComment';
 import customIcon from '../../../utils/icons';
 
