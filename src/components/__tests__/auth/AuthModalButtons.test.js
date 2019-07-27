@@ -7,6 +7,22 @@ import SocialAuthModalButtons from '../../auth/SocialAuthModalButtons';
 import EmailModalButton from '../../auth/EmailModalButton';
 import { mockFn } from '../../../utils/testUtils';
 
+const testFBGoogleCallbacks = (wrapper, element, method) => {
+  test('facebook callback is called', () => {
+    const media = wrapper.find(element);
+    if (method === 'callback') {
+      media.props().callback();
+    } else if (method === 'onSuccess') {
+      media.props().onSuccess();
+    }
+
+    expect(mockFn).toHaveBeenCalled();
+    // testing the renderProp
+    media.props().render({});
+    expect(wrapper.find(AuthModalButtons).exists()).toBe(true);
+  });
+};
+
 
 describe('<authModalButtons /> component', () => {
   test('auth button renders correctly', () => {
@@ -36,14 +52,8 @@ describe('<SocialAuthModalButtons /> component', () => {
     expect(wrapper.find(AuthModalButtons).exists()).toBe(true);
   });
 
-  test('google onSuccess is called', () => {
-    const google = wrapper.find(GoogleLogin);
-    google.props().onSuccess();
-    expect(mockFn).toHaveBeenCalled();
-    // testing the renderProp
-    google.props().render({});
-    expect(wrapper.find(AuthModalButtons).exists()).toBe(true);
-  });
+  testFBGoogleCallbacks(wrapper, FacebookLogin, 'callback');
+  testFBGoogleCallbacks(wrapper, GoogleLogin, 'onSuccess');
 
   test('should test twitter onClick is called', () => {
     const twitter = wrapper.find("[titter-button='twitter button']");
