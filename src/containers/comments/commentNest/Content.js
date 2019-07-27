@@ -1,7 +1,6 @@
 import React from 'react';
-import { Avatar } from 'antd';
 
-import { user, displayComments, editComment, editCommentForm } from '../helpers/helpers';
+import { user, displayComments, editComment, editCommentForm, commentHeader } from '../helpers/helpers';
 import SecondaryComment from './SecondaryComment';
 import customIcon from '../../../utils/icons';
 
@@ -33,21 +32,12 @@ const utilityButtons = (item, slug, deleteComment, likeComment, dislikeComment) 
   </span>
 );
 
-const avatar = (
-  <Avatar
-    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-    alt="Han Solo"
-  />
-);
-
 const Content = ({
   comments, slug, deleteComment, likeComment, dislikeComment,
 }) => {
   const commentItems = comments.map(item => (
     <div key={item.id} className="comment-item-container">
-      {avatar}
-      {item.author}
-      {new Date(Date.parse(item.created_at)).toUTCString()}
+      {commentHeader(item)}
       {utilityButtons(item, slug, deleteComment, likeComment, dislikeComment)}
       <div>
         {item.body}
