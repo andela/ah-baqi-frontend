@@ -53,7 +53,7 @@ export const socialAuthTest = (socialAuthResponse, action, reqData, provider, co
 
   test(`${provider} signin`, async () => {
     instance.post.mockImplementation(() => Promise.resolve({
-      data: { ...socialAuthResponse },
+      data: socialAuthResponse,
     }));
 
     await store.dispatch(action(reqData, provider));
@@ -61,6 +61,27 @@ export const socialAuthTest = (socialAuthResponse, action, reqData, provider, co
     expect(store.getActions()[0].type).toEqual(constant);
     expect(localStorage.setItem).toHaveBeenCalled();
   });
+};
+
+export const instanceMocks = (method, data) => {
+  jest.spyOn(instance, method);
+
+  if (method === 'post') {
+    instance.post.mockImplementation(() => Promise.resolve({
+      data,
+    }));
+  } else if (method === 'get') {
+    instance.get.mockImplementation(() => Promise.resolve({
+      data,
+    }));
+  } else if (method === 'delete') {
+    instance.delete.mockImplementation(() => Promise.resolve({
+    }));
+  } else if (method === 'put') {
+    instance.put.mockImplementation(() => Promise.resolve({
+      data,
+    }));
+  }
 };
 
 export const containerStore = (initialStateFull) => {
