@@ -46,7 +46,6 @@ describe('Tests PasswordResetContainer', () => {
   it('Tests input change in form', () => {
     const form = wrapper.find(Form, Form.Item);
     const input = form.find('[data-test="email"]').at(0);
-    console.log(input.debug())
     input.simulate('change', {
       preventDefault: jest.fn(),
       target: {
