@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import DateReadTimeRate from '../singlearticle/readTimeAndDate';
+import { articleMetaData } from '../../../utils/articleElements';
 
 const defImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436762/dummy%20ah/try-new_peb1rk.jpg';
 
@@ -26,23 +26,7 @@ const MidLandingArticle = ({ article, clicked }) => {
             <Col span={24}>
               <h4 className="mid-art-title">{article.title}</h4>
             </Col>
-            <Row>
-              <Col
-                span={24}
-                className="mid-article-author"
-              >
-                Mona Eltahawy in ZORA
-              </Col>
-              <Row className="mid-article-read-date">
-                <Col span={24}>
-                  <DateReadTimeRate
-                    createdAt={createdAt}
-                    reading_time={reading_time} // eslint-disable-line
-                    rating={rating}
-                  />
-                </Col>
-              </Row>
-            </Row>
+            {articleMetaData(createdAt, reading_time, rating)}
           </Row>
         </Col>
       </Row>
