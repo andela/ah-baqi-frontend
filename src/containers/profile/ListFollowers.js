@@ -32,18 +32,19 @@ export class UnconnectedFollowList extends React.Component {
 
     if (followType === 'following') {
       const followingList = this.listFollows(JSON.parse(localStorage.followees));
-      this.setState({
-        data: followingList,
-        followText: 'Following',
-      });
+      this.changeFollowText(followingList, 'Following');
     } else if (followType === 'followers') {
       const followersList = this.listFollows(JSON.parse(localStorage.followers));
-      this.setState({
-        data: followersList,
-        followText: 'Followers',
-      });
+      this.changeFollowText(followersList, 'Followers');
     }
   };
+
+  changeFollowText = (followList, text) => {
+    this.setState({
+      data: followList,
+      followText: text,
+    });
+  }
 
   followersList = (className, data, followText) => (
     <List

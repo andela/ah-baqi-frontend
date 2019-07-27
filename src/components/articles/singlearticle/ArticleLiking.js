@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { Icon, Statistic } from 'antd';
 
 const IconText = ({
   type, onClick, beenLiked, theme, history, slug,
@@ -9,6 +9,7 @@ const IconText = ({
       <p data-test="icon-text-liked">
         <Icon
           type={type}
+          data-test="like-action"
           className="uploader-icon statistic-like"
           onClick={() => onClick(slug, history, '')}
           theme={theme}
@@ -20,6 +21,7 @@ const IconText = ({
     <p data-test="icon-text-not-liked">
       <Icon
         type={type}
+        data-test="dislike-action"
         className="uploader-icon statistic-like"
         onClick={() => onClick(slug, history, '')}
       />

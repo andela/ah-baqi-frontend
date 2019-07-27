@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import DateReadTimeRate from '../singlearticle/readTimeAndDate';
+import { articleMetaData } from '../../../utils/articleElements';
 
 const newArticleDefImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436267/dummy%20ah/digitization-2076994_1280_q126vd.png';
 
@@ -30,20 +30,7 @@ const LeftLandingArticle = ({ article, clicked }) => {
           <Col span={24} className="left-art-desc">
             {article.description.substr(0, 100)}
           </Col>
-          <Col span={24}>
-            <Row>
-              <Col>David H. Freedman in Elemental</Col>
-              <Row>
-                <Col span={24}>
-                  <DateReadTimeRate
-                    createdAt={createdAt}
-                    reading_time={reading_time} // eslint-disable-line
-                    rating={rating}
-                  />
-                </Col>
-              </Row>
-            </Row>
-          </Col>
+          {articleMetaData(createdAt, reading_time, rating)}
         </Row>
       </Col>
     </Col>
