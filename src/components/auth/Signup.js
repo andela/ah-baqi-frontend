@@ -9,7 +9,7 @@ const SignupDetails = ({ submit, form }) => (
     {formItem(form, 'email-input', 'Email',
       'email', 'user', 'email', 'johndoe@example.com')}
     {formItem(form, 'password-input', 'Password',
-      'password', 'lock', 'password', 'johndoe@example.com')}
+      'password', 'lock', 'password', '*****')}
     {formButton('Register')}
   </Form>
 );

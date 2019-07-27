@@ -10,7 +10,7 @@ const LoginDetails = (props) => {
       {formItem(form, 'username-input', 'Username',
         'username', 'user', 'text', 'john')}
       {formItem(form, 'password-input', 'Password',
-        'password', 'lock', 'password', 'johndoe@example.com')}
+        'password', 'lock', 'password', '*****')}
       {formButton('Log in')}
       <Link to="/passwordreset" onClick={onCancel}>Forgot Password?</Link>
     </Form>
