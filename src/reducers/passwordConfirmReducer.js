@@ -12,18 +12,21 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
+        actionCalled: true,
       };
     case actionTypes.RESETCOFIRMSUCCESS:
       return {
         ...state,
         data: action.payload,
         loading: false,
+        actionCalled: true,
       };
     case actionTypes.RESETCONFIRMERROR:
       return {
         ...state,
         error: action.error,
         loading: false,
+        actionCalled: true,
       };
     default:
       return state;
