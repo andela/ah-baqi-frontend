@@ -1,8 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import DateReadTimeRate from '../singlearticle/readTimeAndDate';
-
-const defImage = 'https://res.cloudinary.com/zonecc/image/upload/v1563436762/dummy%20ah/try-new_peb1rk.jpg';
+import { articleImage, articleMetaData } from '../../../utils/articleElements';
 
 const MidLandingArticle = ({ article, clicked }) => {
   const { createdAt, reading_time, rating } = article; // eslint-disable-line
@@ -14,35 +12,14 @@ const MidLandingArticle = ({ article, clicked }) => {
       data-test="single-mid-landing-article"
     >
       <Row>
-        <Col span={7} className="landing-article-image-mid-cont">
-          <img
-            src={article.image ? article.image : defImage}
-            alt="Article Middle"
-            className="landing-article-image-mid"
-          />
-        </Col>
+        {articleImage(7, 'landing-article-image-mid-cont',
+          article, 'landing-article-image-mid')}
         <Col span={17}>
           <Row className="mid-article-data">
             <Col span={24}>
               <h4 className="mid-art-title">{article.title}</h4>
             </Col>
-            <Row>
-              <Col
-                span={24}
-                className="mid-article-author"
-              >
-                Mona Eltahawy in ZORA
-              </Col>
-              <Row className="mid-article-read-date">
-                <Col span={24}>
-                  <DateReadTimeRate
-                    createdAt={createdAt}
-                    reading_time={reading_time} // eslint-disable-line
-                    rating={rating}
-                  />
-                </Col>
-              </Row>
-            </Row>
+            {articleMetaData(createdAt, reading_time, rating)}
           </Row>
         </Col>
       </Row>

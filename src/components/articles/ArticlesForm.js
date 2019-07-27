@@ -1,11 +1,78 @@
 import React from 'react';
-import {
-  Row, Col, Select,
-} from 'antd';
+import { Row, Col, Select } from 'antd';
 import CKEditor from 'ckeditor4-react';
 
 import ImageUploader from './singlearticle/imageUpload';
 import './NewArticle.scss';
+
+const formTitle = (title, handleChange) => (
+  <div className="form-group">
+    <input
+      type="text"
+      className="article-create-input"
+      placeholder="Add A Title For Your Article"
+      onChange={event => handleChange(event, 'title')}
+      value={title}
+      data-test="title-input"
+    />
+    <input
+      type="submit"
+      className="submit-article-btn"
+      value="Publish"
+    />
+  </div>
+);
+
+const formDescription = (description, handleChange) => (
+  <div className="form-group">
+    <textarea
+      className="article-create-input"
+      placeholder="Add Some Description For Your Article"
+      rows="3"
+      onChange={event => handleChange(event, 'description')}
+      value={description}
+    />
+  </div>
+);
+
+const ckEditor = (body, handleChange) => (
+  <div className="form-group">
+    <CKEditor
+      data={body}
+      editorName="editor1"
+      type="classic"
+      onChange={event => handleChange(event, 'editor')}
+      data-test="text word editor"
+    />
+  </div>
+);
+
+const formImageUploader = (image, imageUrl, imageUpload, handleChange) => (
+  <ImageUploader
+    image={image}
+    imageUrl={imageUrl}
+    imageUpload={imageUpload}
+    handleChange={handleChange}
+    data-test="image drop"
+  />
+);
+
+const formTagsSelect = (size, tagList, handleChange, children) => (
+  <div className="form-group">
+    <Select
+      mode="tags"
+      size={size}
+      placeholder="Add your tag(s) here"
+      value={tagList}
+      className="full-width"
+      onChange={event => handleChange(event, 'tags')}
+    >
+      {children}
+    </Select>
+  </div>
+);
+
+const imageUrl = '';
 
 const ArticlesForm = (props) => {
   const {
@@ -13,7 +80,6 @@ const ArticlesForm = (props) => {
     description, body, tagList, article, image, imageUpload,
   } = props;
 
-  const imageUrl = '';
   const slug = !create && article.slug;
 
   return (
@@ -24,62 +90,11 @@ const ArticlesForm = (props) => {
             className="article-form"
             onSubmit={event => handleSubmit(event, create, slug)}
           >
-            <div className="form-group">
-              <input
-                type="text"
-                className="article-create-input"
-                placeholder="Add A Title For Your Article"
-                onChange={event => handleChange(event, 'title')}
-                value={title}
-                data-test="title-input"
-              />
-              <input
-                type="submit"
-                className="submit-article-btn"
-                value="Publish"
-              />
-            </div>
-
-            <div className="form-group">
-              <textarea
-                className="article-create-input"
-                placeholder="Add Some Description For Your Article"
-                rows="3"
-                onChange={event => handleChange(event, 'description')}
-                value={description}
-              />
-            </div>
-
-            <ImageUploader
-              image={image}
-              imageUrl={imageUrl}
-              imageUpload={imageUpload}
-              handleChange={handleChange}
-              data-test="image drop"
-            />
-
-            <div className="form-group">
-              <CKEditor
-                data={body}
-                editorName="editor1"
-                type="classic"
-                onChange={event => handleChange(event, 'editor')}
-                data-test="text word editor"
-              />
-            </div>
-
-            <div className="form-group">
-              <Select
-                mode="tags"
-                size={size}
-                placeholder="Add your tag(s) here"
-                value={tagList}
-                className="full-width"
-                onChange={event => handleChange(event, 'tags')}
-              >
-                {children}
-              </Select>
-            </div>
+            {formTitle(title, handleChange)}
+            {formDescription(description, handleChange)}
+            {formImageUploader(image, imageUrl, imageUpload, handleChange)}
+            {ckEditor(body, handleChange)}
+            {formTagsSelect(size, tagList, handleChange, children)}
           </form>
         </Col>
       </Row>

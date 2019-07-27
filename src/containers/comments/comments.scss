@@ -43,8 +43,8 @@
   color: red;
 }
 
-.utility-buttons {
-  margin-left: 2%;
+.utility-buttons > .anticon {
+  margin-left: 1%;
 }
 
 .nested {
@@ -56,7 +56,6 @@
 }
 
 .comment-item-container, .nested-comment-item {
-  // margin-bottom: 3%;
   padding: 3%;
 }
 
@@ -72,4 +71,8 @@
 .edit-buttons {
   color: black;
   font-size: 20px;
+}
+
+.comment-header-details > span {
+  margin-left: 1%;
 }

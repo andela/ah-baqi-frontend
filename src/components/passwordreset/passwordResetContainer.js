@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-  Form, Input, Button, Icon,
-} from 'antd';
+import { Form } from 'antd';
 import { resetPasswordActions } from '../../actions/passwordResetActions';
-
+import { formItem, formButton } from '../../utils/formElements';
 
 class PasswordReset extends Component {
   state = {
@@ -19,14 +17,14 @@ class PasswordReset extends Component {
       const { passwordLink } = this.state;
       passwordLink[name] = value;
       this.setState({ passwordLink });
-    }
+    };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { passwordLink } = this.state;
     const { resetPasswordActions } = this.props; // eslint-disable-line
     resetPasswordActions(passwordLink);
-  }
+  };
 
   render() {
     const { form } = this.props;
@@ -35,34 +33,13 @@ class PasswordReset extends Component {
         <div>
           <h1>Forgot Password</h1>
         </div>
-        <Form.Item className="reset-label" label="Email">
-          {form.getFieldDecorator('email', {
-            rules: [{
-              type: 'email', message: 'Please enter a valid email',
-            },
-            {
-              required: true, message: 'Please input your email',
-            }],
-          })(
-            <Input
-              prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Please enter your email "
-              name="email"
-              onChange={this.handleChange}
-              required
-            />,
-          )}
-        </Form.Item>
+        {formItem(form, 'email', 'Email', 'email',
+          'user', 'email', 'johndoe@example.com', '',
+          false, 'email', this.handleChange)}
         <div>
-          <Button type="primary" htmlType="submit" className="login-form-button" block>
-              Find Account
-          </Button>
-          <br />
-          <br />
+          {formButton('Send Reset Password Email')}
           <Link to="/">
-            <Button type="danger" className="cancel-reset-button login-form-button" block>
-                Cancel
-            </Button>
+            Go Back Home
           </Link>
         </div>
       </Form>

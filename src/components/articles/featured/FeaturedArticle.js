@@ -1,9 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 
-import DateReadTimeRate from '../singlearticle/readTimeAndDate';
-
-const defaultImg = 'https://res.cloudinary.com/zonecc/image/upload/v1563479322/dummy%20ah/image-not-av_otvgko.png';
+import { articleMetaData, articleImage } from '../../../utils/articleElements';
 
 const FeaturedArticle = ({ article, clicked }) => {
   const { createdAt, reading_time, rating } = article; // eslint-disable-line
@@ -24,32 +22,11 @@ const FeaturedArticle = ({ article, clicked }) => {
           <Col span={24} className="featured-article-desc">
             {article.description.substr(0, 100)}
           </Col>
-          <Row>
-            <Col
-              span={24}
-              className="mid-article-author"
-            >
-              Mona Eltahawy in ZORA
-            </Col>
-            <Row className="mid-article-read-date">
-              <Col span={24}>
-                <DateReadTimeRate
-                  createdAt={createdAt}
-                  reading_time={reading_time} // eslint-disable-line
-                  rating={rating}
-                />
-              </Col>
-            </Row>
-          </Row>
+          {articleMetaData(createdAt, reading_time, rating)}
         </Row>
       </Col>
-      <Col span={6} className="featured-artical-img-cont">
-        <img
-          src={article.image ? article.image : defaultImg}
-          alt="Article Featured"
-          className="featured-image-article"
-        />
-      </Col>
+      {articleImage(6, 'featured-artical-img-cont',
+        article, 'featured-image-article')}
     </Row>
   );
 };

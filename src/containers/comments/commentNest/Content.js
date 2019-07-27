@@ -1,106 +1,47 @@
 import React from 'react';
-import { Avatar, Icon } from 'antd';
 
-import { user, displayComments, editComment } from '../helpers/helpers';
-import EditUserCommentForm from '../EditCommentContainer';
+import { user, displayComments, editComment, editCommentForm, commentHeader } from '../helpers/helpers';
 import SecondaryComment from './SecondaryComment';
+import customIcon from '../../../utils/icons';
 
-const Content = (props) => {
-  const {
-    comments,
-    slug,
-    deleteComment,
-    likeComment,
-    dislikeComment,
-  } = props;
+const utilityButtons = (item, slug, deleteComment, likeComment, dislikeComment) => (
+  <span className="utility-buttons">
+    {item.author === user
+          && (
+          <span className="utility-buttons">
+            {customIcon('', 'edit', () => editComment(
+              `edit-field-${item.id}`,
+            ))}
+            {customIcon('delete-icon', 'delete', () => deleteComment(item.id, slug))}
+          </span>
+          )}
+    {customIcon('comment-rating-likes', 'like', () => likeComment(slug, item.id))}
+    {item.likes}
+    {customIcon('comment-rating-dislikes', 'dislike', () => dislikeComment(slug, item.id))}
+    {item.dislikes}
+    {customIcon(`dropdown-icon-${item.id}`, 'message', () => displayComments(
+      `nested-comment-${item.id}`,
+      `close-up-${item.id}`,
+      `dropdown-icon-${item.id}`,
+    ))}
+    {customIcon(`close-up-${item.id} hide`, 'up', () => displayComments(
+      `nested-comment-${item.id}`,
+      `close-up-${item.id}`,
+      `dropdown-icon-${item.id}`,
+    ))}
+  </span>
+);
 
+const Content = ({
+  comments, slug, deleteComment, likeComment, dislikeComment,
+}) => {
   const commentItems = comments.map(item => (
     <div key={item.id} className="comment-item-container">
-      <p className="likes-message hide">
-        <strong>
-          Log in to like or dislike
-        </strong>
-      </p>
-      <p>
-        <Avatar
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          alt="Han Solo"
-        />
-        {' '}
-        {item.author}
-        {' '}
-        {' '}
-        {new Date(Date.parse(item.created_at)).toUTCString()}
-        {' '}
-        {item.author === user
-          && (
-            <span className="utility-buttons">
-              {' '}
-              <Icon
-                type="edit"
-                onClick={() => editComment(
-                  `edit-field-${item.id}`,
-                )}
-              />
-              {' '}
-              <Icon
-                className="delete-icon"
-                type="delete"
-                onClick={() => deleteComment(item.id, slug)}
-              />
-            </span>
-          )
-        }
-        {' '}
-        {' '}
-        <Icon
-          className="comment-rating-likes"
-          type="like"
-          onClick={() => likeComment(slug, item.id)}
-        />
-        {item.likes}
-        <Icon
-          className="comment-rating-dislikes"
-          type="dislike"
-          onClick={() => dislikeComment(slug, item.id)}
-        />
-        {item.dislikes}
-        {' '}
-        {' '}
-        {' '}
-        <Icon
-          className={`dropdown-icon-${item.id}`}
-          type="message"
-          onClick={() => displayComments(
-            `nested-comment-${item.id}`,
-            `close-up-${item.id}`,
-            `dropdown-icon-${item.id}`,
-          )}
-        />
-        <Icon
-          className={`close-up-${item.id} hide`}
-          type="up"
-          onClick={() => displayComments(
-            `nested-comment-${item.id}`,
-            `close-up-${item.id}`,
-            `dropdown-icon-${item.id}`,
-          )}
-        />
-        {' '}
-        {' '}
-      </p>
+      {commentHeader(item)}
+      {utilityButtons(item, slug, deleteComment, likeComment, dislikeComment)}
       <div>
         {item.body}
-        <div className={`edit-field-${item.id} hide`}>
-          <EditUserCommentForm
-            btnClass={`cancel-edit-${item.id}`}
-            editorClass={`edit-field-${item.id}`}
-            body={item.body}
-            id={item.id}
-            slug={slug}
-            isNest={false}
-          />
-        </div>
+        {editCommentForm(item, slug)}
       </div>
       <div className={`nested-comment-${item.id} hide nested`}>
         <SecondaryComment

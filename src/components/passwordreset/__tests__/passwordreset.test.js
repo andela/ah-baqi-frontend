@@ -28,12 +28,12 @@ describe('Tests PasswordResetContainer', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
   it('Tests input change in form', () => {
-    const resetBtn = wrapper.findWhere(n => n.type() === Button && n.contains('Find Account'));
+    const resetBtn = wrapper.findWhere(n => n.type() === Button && n.contains('Send Reset Password Email'));
     resetBtn.simulate('click', {
       preventDefault: jest.fn(),
     });
     const form = wrapper.find(Form);
-    const input = form.find(Form.Item);
+    const input = form.find(Form.Item).at(0);
     input.simulate('change', {
       preventDefault: jest.fn(),
       target: {
@@ -45,7 +45,7 @@ describe('Tests PasswordResetContainer', () => {
   });
   it('Tests input change in form', () => {
     const form = wrapper.find(Form, Form.Item);
-    const input = form.find('input[name="email"]');
+    const input = form.find('[data-test="email"]').at(0);
     input.simulate('change', {
       preventDefault: jest.fn(),
       target: {
@@ -55,7 +55,7 @@ describe('Tests PasswordResetContainer', () => {
     expect(input.length).toEqual(1);
   });
   it('handles submit event', () => {
-    const resetBtn = wrapper.findWhere(n => n.type() === Button && n.contains('Find Account'));
+    const resetBtn = wrapper.findWhere(n => n.type() === Button && n.contains('Send Reset Password Email'));
     resetBtn.simulate('submit', {
       preventDefault: jest.fn(),
     });
