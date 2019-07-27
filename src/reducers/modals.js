@@ -1,6 +1,6 @@
 import actionTypes from '../actions/types';
 
-const initialState = {
+export const initialState = {
   visible: false,
   authAction: '',
   error: null,
@@ -52,6 +52,9 @@ export default (state = initialState, action) => {
         actionCalled: true,
       };
     default:
-      return state;
+      return {
+        ...state,
+        actionCalled: true,
+      };
   }
 };

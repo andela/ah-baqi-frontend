@@ -1,10 +1,17 @@
 import actionTypes from '../actions/types';
 
-export default (state = {}, action) => {
+export default (state = { bookmarks: {} }, action) => {
   switch (action.type) {
     case actionTypes.GET_ALL_BOOKMARKS:
-      return action.payload;
+      return {
+        ...state,
+        bookmarks: action.payload,
+        actionCalled: true,
+      };
     default:
-      return state;
+      return {
+        ...state,
+        actionCalled: true,
+      };
   }
 };

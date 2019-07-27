@@ -12,8 +12,12 @@ export default (state = {}, action) => {
         ...state,
         userArticles: action.payload,
         articlesFetched: true,
+        actionCalled: true,
       };
     default:
-      return state;
+      return {
+        ...state,
+        actionCalled: true,
+      };
   }
 };

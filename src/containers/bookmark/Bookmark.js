@@ -85,8 +85,8 @@ export class UnconnectedBookmark extends Component {
   }
 }
 
-const mapStateToProps = ({ bookmarks }) => ({
-  bookmarks,
+const mapStateToProps = state => ({
+  bookmarks: state.bookmarks.bookmarks,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

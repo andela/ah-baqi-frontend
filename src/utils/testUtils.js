@@ -91,4 +91,11 @@ export const containerStore = (initialStateFull) => {
 
 export const mockFn = jest.fn();
 
+export const reducerTest = (action, reducer, payload, initState) => {
+  test(`${action} action returns actionCalled:true`, () => {
+    const newState = reducer(initState, { type: action, payload });
+    expect(newState.actionCalled).toBe(true);
+  });
+};
+
 export default store;

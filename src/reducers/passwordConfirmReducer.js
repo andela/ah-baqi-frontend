@@ -1,6 +1,6 @@
 import actionTypes from '../actions/types';
 
-const initialState = {
+export const initialState = {
   data: {},
   error: null,
   loading: false,
@@ -29,6 +29,9 @@ export default function (state = initialState, action) {
         actionCalled: true,
       };
     default:
-      return state;
+      return {
+        ...state,
+        actionCalled: true,
+      };
   }
 }

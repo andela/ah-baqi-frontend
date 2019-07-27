@@ -1,6 +1,6 @@
 import actionTypes from '../actions/types';
 
-const initialState = {
+export const initialState = {
   loading: false,
   error: null,
   isLoggedIn: false,
@@ -12,29 +12,37 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoggedIn: true,
+        actionCalled: true,
       };
     case actionTypes.FACEBOOK_AUTH:
       return {
         ...state,
         isLoggedIn: true,
+        actionCalled: true,
       };
     case actionTypes.TWITTER_AUTH:
       return {
         ...state,
         isLoggedIn: true,
+        actionCalled: true,
       };
 
     case actionTypes.LOG_IN:
       return {
         ...state,
         isLoggedIn: true,
+        actionCalled: true,
       };
     case actionTypes.LOG_OUT:
       return {
         ...state,
         isLoggedIn: false,
+        actionCalled: true,
       };
     default:
-      return state;
+      return {
+        ...state,
+        actionCalled: true,
+      };
   }
 }

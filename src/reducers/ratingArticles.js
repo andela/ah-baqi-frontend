@@ -12,15 +12,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         data: action.payload,
+        actionCalled: true,
         loading: false,
       };
     case actionTypes.RATE_ARTICLE_ERROR:
       return {
         ...state,
         error: action.error,
+        actionCalled: true,
         loading: false,
       };
     default:
-      return state;
+      return {
+        ...state,
+        actionCalled: true,
+      };
   }
 };
