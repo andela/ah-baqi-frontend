@@ -26,6 +26,13 @@ export const propOnchangeTests = (wrapper, element, mockFn) => {
   expect(mockFn).toHaveBeenCalled();
 };
 
+export const propsOnActionSpy = (wrapper, attributeValue, methosToSpyOn) => {
+  const elementFound = wrapper.dive().find(attributeValue);
+  elementFound.simulate(methosToSpyOn);
+  const methodSpy = jest.spyOn(wrapper.instance().props, methosToSpyOn);
+  expect(methodSpy).toHaveBeenCalled();
+};
+
 export const containerStore = (initialStateFull) => {
   const stateStore = applyMiddleware(thunk)(createStore);
   return stateStore(rootReducer, initialStateFull);

@@ -6,7 +6,11 @@ import { formItem, formButton } from '../../utils/formElements';
 const LoginDetails = (props) => {
   const { submit, form, onCancel } = props;
   return (
-    <Form onSubmit={event => submit(event, form)} style={{ textAlign: 'left' }}>
+    <Form
+      onSubmit={event => submit(event, form)}
+      style={{ textAlign: 'left' }}
+      data-test="login-form"
+    >
       {formItem(form, 'username-input', 'Username',
         'username', 'user', 'text', 'john')}
       {formItem(form, 'password-input', 'Password',
