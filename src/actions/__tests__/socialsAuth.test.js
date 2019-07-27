@@ -1,5 +1,5 @@
 import { instance } from '../../utils/axios';
-import store, { mockFn } from '../../utils/testUtils';
+import store, { mockFn, socialAuthTest } from '../../utils/testUtils';
 import { firebaseAuthAction, socialAuthActions } from '../socialAuthActions';
 
 
@@ -74,27 +74,8 @@ describe('testing facebook and google signin', () => {
     accessToken: '1044559557983375360-uvsfrwszwBxeqiBFTRDmt9MKOQVtQ6',
   };
 
-  test('facebook signin', async () => {
-    instance.post.mockImplementation(() => Promise.resolve({
-      data: { ...socialAuthResponse },
-    }));
-
-    await store.dispatch(socialAuthActions(reqData, 'facebook'));
-    expect(store.getActions()[0].payload).toEqual(socialAuthResponse);
-    expect(store.getActions()[0].type).toEqual('FACEBOOK_AUTH');
-    expect(localStorage.setItem).toHaveBeenCalled();
-  });
-
-  test('google signin', async () => {
-    instance.post.mockImplementation(() => Promise.resolve({
-      data: { ...socialAuthResponse },
-    }));
-
-    await store.dispatch(socialAuthActions(reqData, 'google'));
-    expect(store.getActions()[0].payload).toEqual(socialAuthResponse);
-    expect(store.getActions()[0].type).toEqual('GOOGLE_AUTH');
-    expect(localStorage.setItem).toHaveBeenCalled();
-  });
+  socialAuthTest(socialAuthResponse, socialAuthActions, reqData, 'facebook', 'FACEBOOK_AUTH');
+  socialAuthTest(socialAuthResponse, socialAuthActions, reqData, 'google', 'GOOGLE_AUTH');
 
   test('no provider provided', async () => {
     instance.post.mockImplementation(() => Promise.resolve({
