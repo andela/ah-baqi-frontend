@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Comment, Form, Button, List, Input,
-} from 'antd';
+import { Comment, Form, Button, List, Input, Avatar } from 'antd';
 import EditUserCommentForm from '../EditCommentContainer';
 
 const { TextArea } = Input;
@@ -61,4 +59,32 @@ export const editCommentForm = (item, slug) => (
       isNest={false}
     />
   </div>
+);
+
+export const editNestedCommentForm = (item, id, slug) => (
+  <div className={`comment-edit-field-${item.id} hide`}>
+    <EditUserCommentForm
+      data-test="edit-user-form"
+      btnClass={`btn-cancel-edit-${item.id}`}
+      editorClass={`comment-edit-field-${item.id}`}
+      body={item.body}
+      commentId={id}
+      slug={slug}
+      replyId={item.id}
+      isNest
+    />
+  </div>
+);
+
+export const commentHeader = item => (
+  <span>
+    <Avatar
+      src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+      alt="Han Solo"
+    />
+    <span className="comment-header-details">
+      <span>{item.author}</span>
+      <span>{new Date(Date.parse(item.created_at)).toUTCString()}</span>
+    </span>
+  </span>
 );
