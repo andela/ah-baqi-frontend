@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Form, Icon, Input, Button,
-} from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 
 export const formItem = (form, dataTest, label,
   fieldDecorator, iconType, inputType, placeHolder) => (
