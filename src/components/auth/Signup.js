@@ -4,7 +4,7 @@ import { formItem, formButton } from '../../utils/formElements';
 
 const SignupDetails = ({ submit, form }) => (
   <Form
-    onSubmit={event => submit(event, form)}
+    onSubmit={event => submit(event, form, 'signup')}
     className="login-form"
     style={{ textAlign: 'left' }}
     data-test="signup-form"

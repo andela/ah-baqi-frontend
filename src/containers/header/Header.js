@@ -7,12 +7,12 @@ import loginActions from '../../actions/loginActions';
 import logoutActions from '../../actions/logoutActions';
 
 import {
-  displayModalActions,
-  hideModalActions,
-  emailSignupAction,
-  formSignupAction,
-  emailLoginAction,
   formLoginAction,
+  emailSignupAction,
+  hideModalActions,
+  formSignupAction,
+  displayModalActions,
+  emailLoginAction,
 } from '../../actions/modalActions';
 import signupActions from '../../actions/signupActions';
 import {
@@ -27,20 +27,15 @@ export const UnconnectedHeader = (props) => {
     authAction, visible, emailLoginAction, formLoginAction, socialAuthActions, // eslint-disable-line
     firebaseAuthAction, loginActions, logoutActions, searchActions, history } = props; // eslint-disable-line
 
-  const handleSignupSubmit = (event, formProp) => {
+  const handleSubmit = (event, formProp, action) => {
     event.preventDefault();
     formProp.validateFields((error, values) => {
       if (!error) {
-        signupActions(values, hideModalActions);
-      }
-    });
-  };
-
-  const handleLoginSubmit = (event, formProp) => {
-    event.preventDefault();
-    formProp.validateFields((error, values) => {
-      if (!error) {
-        loginActions(values, hideModalActions);
+        if (action === 'login') {
+          loginActions(values, hideModalActions);
+        } else if (action === 'signup') {
+          signupActions(values, hideModalActions);
+        }
       }
     });
   };
@@ -73,13 +68,13 @@ export const UnconnectedHeader = (props) => {
         visible={visible}
         onCancel={hideModalActions}
         showSignupForm={formSignupAction}
-        submitSignup={handleSignupSubmit}
+        submitSignup={handleSubmit}
         showLoginForm={formLoginAction}
         google={socialAuthResponse}
         facebook={socialAuthResponse}
         twitter={firebaseAuthAction}
         onFailure={onFailure}
-        submitLogin={handleLoginSubmit}
+        submitLogin={handleSubmit}
       />
     </div>
   );
@@ -94,17 +89,17 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    displayModalActions,
-    hideModalActions,
-    emailSignupAction,
-    formSignupAction,
-    signupActions,
-    emailLoginAction,
-    formLoginAction,
     socialAuthActions,
-    firebaseAuthAction,
-    loginActions,
+    displayModalActions,
     logoutActions,
+    hideModalActions,
+    loginActions,
+    emailSignupAction,
+    firebaseAuthAction,
+    formSignupAction,
     searchActions,
+    signupActions,
+    formLoginAction,
+    emailLoginAction,
   },
 )(withRouter(UnconnectedHeader));

@@ -28,7 +28,7 @@ export class UnconnectedBookmark extends Component {
       </Tooltip>
     );
 
-    bookmarks.forEach(article => (
+    bookmarks.forEach(article => ( // eslint-disable-line
       article.slug === slug
       && (
         bookmarkIcon = (

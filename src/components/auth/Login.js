@@ -7,7 +7,7 @@ const LoginDetails = (props) => {
   const { submit, form, onCancel } = props;
   return (
     <Form
-      onSubmit={event => submit(event, form)}
+      onSubmit={event => submit(event, form, 'login')}
       style={{ textAlign: 'left' }}
       data-test="login-form"
     >
