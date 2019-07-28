@@ -1,5 +1,5 @@
 import { instance } from '../../utils/axios';
-import store, { mockFn, socialAuthTest } from '../../utils/testUtils';
+import store, { socialAuthTest } from '../../utils/testUtils';
 import { firebaseAuthAction, socialAuthActions } from '../socialAuthActions';
 
 
@@ -44,24 +44,11 @@ describe('testing firebse calls from twitter', () => {
       data: resDataFT,
     }));
 
-    await store.dispatch(firebaseAuthAction(store.dispatch), store.dispatch(socialAuthActions(twitterReqData, 'twitter')));
+    await store.dispatch(firebaseAuthAction())
+      .then(() => store.dispatch(socialAuthActions(twitterReqData, 'twitter')));
     expect(store.getActions()[0].payload).toEqual(resDataFT);
     expect(store.getActions()[0].type).toEqual('TWITTER_AUTH');
     expect(localStorage.setItem).toHaveBeenCalled();
-  });
-
-  test('tests that firebase failed', async () => {
-    const resDataFT = { ...firebaseResponse, ...socialAuthResponse };
-    instance.post.mockImplementation(() => Promise.resolve({
-      data: resDataFT,
-    }));
-
-    try {
-      await store.dispatch(firebaseAuthAction(mockFn));
-    } catch (e) {
-      expect(store.getActions()).toEqual([]);
-      expect(mockFn).toHaveBeenCalled();
-    }
   });
 });
 

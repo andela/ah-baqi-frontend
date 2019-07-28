@@ -98,4 +98,52 @@ export const reducerTest = (action, reducer, payload, initState) => {
   });
 };
 
+export const testDispatchWithPayload = (store, methodAction, payloadRes, storageCalled = '') => {
+  test(`should test ${payloadRes} action is called`, async () => {
+    await store.dispatch(methodAction());
+    expect(store.getActions()[0].type).toEqual(payloadRes);
+    if (storageCalled) {
+      expect(storageCalled).toHaveBeenCalled();
+    }
+  });
+};
+
+export const rejectPromiseTest = (method, action, actionName, params = '', result) => {
+  jest.spyOn(instance, method);
+
+  test(`shoult test ${actionName} action fail`, async () => {
+    if (method === 'delete') {
+      instance.delete.mockImplementation(() => Promise.reject());
+    } else if (method === 'get') {
+      instance.get.mockImplementation(() => Promise.reject());
+    } else if (method === 'post') {
+      instance.post.mockImplementation(() => Promise.reject());
+    } else if (method === 'put') {
+      instance.put.mockImplementation(() => Promise.reject());
+    }
+
+    await store.dispatch(action(params));
+    expect(store.getActions()[2]).toBe(result);
+  });
+};
+
+export const passwordResetConfTestsPass = (data, requestConst, action, actionName) => {
+  test(`should test ${actionName} successfully`, async () => {
+    instanceMocks('post', data);
+    await store.dispatch(action(data));
+    expect(store.getActions()[0].type).toEqual(requestConst);
+    expect(store.getActions()[1].data).toEqual(data);
+  });
+};
+
+export const passwordResetConfTestsFail = (data, requestConst, action, actionName) => {
+  test(`should test ${actionName} fails`, async () => {
+    jest.spyOn(instance, 'post');
+    instance.post.mockImplementation(() => Promise.reject());
+    await store.dispatch(action(data));
+    expect(store.getActions()[0].type).toBe(requestConst);
+    // expect(store.getActions()[1].type).toBe('RESETPASSWORDLINKERROR');
+  });
+};
+
 export default store;

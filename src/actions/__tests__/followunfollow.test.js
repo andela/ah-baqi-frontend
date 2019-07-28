@@ -1,4 +1,3 @@
-import { instance } from '../../utils/axios';
 import store, { instanceMocks } from '../../utils/testUtils';
 import {
   fetchFollowees, fetchFollowers, followUser, unfollowUser,
