@@ -7,12 +7,14 @@ import store from '../../utils/testUtils';
 
 
 describe('<Home /> component', () => {
-  let wrapper;
+  let confWrapper;
+  let resWrapper;
   beforeAll(() => {
-    wrapper = shallow(<ConfrimReset store={store} />);
-    wrapper = shallow(<ResetPassword store={store} />);
+    confWrapper = shallow(<ConfrimReset store={store} />);
+    resWrapper = shallow(<ResetPassword store={store} />);
   });
   test('renders without crashing', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(confWrapper).toMatchSnapshot();
+    expect(resWrapper).toMatchSnapshot();
   });
 });

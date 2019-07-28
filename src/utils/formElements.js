@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import {
+  Form, Icon, Input, Button,
+} from 'antd';
 
 export const formItem = (form, dataTest, label, fieldDecorator,
   iconType, inputType, placeHolder, validator = '', hasFeedback = false,
@@ -23,6 +25,7 @@ export const formItem = (form, dataTest, label, fieldDecorator,
 export const formButton = buttonText => (
   <Form.Item>
     <Button
+      data-test="submit-button"
       type="primary"
       htmlType="submit"
       className="login-form-button"

@@ -17,7 +17,7 @@ const initialState = {
 const store = mockStore(initialState);
 
 const hasAttributes = (wrapper, attributeValue) => (wrapper.find(`[data-test="${attributeValue}"]`));
-const hasElement = (wrapper, element) => (wrapper.find(element));
+export const hasElement = (wrapper, element) => wrapper.find(element);
 
 export const componentRenders = (wrapper, attributeValue) => {
   const component = hasAttributes(wrapper, attributeValue);
@@ -148,7 +148,6 @@ export const passwordResetConfTestsFail = (data, requestConst, action, actionNam
     instance.post.mockImplementation(() => Promise.reject());
     await store.dispatch(action(data));
     expect(store.getActions()[0].type).toBe(requestConst);
-    // expect(store.getActions()[1].type).toBe('RESETPASSWORDLINKERROR');
   });
 };
 

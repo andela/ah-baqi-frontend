@@ -13,13 +13,15 @@ const setup = () => {
 };
 
 describe('redux properties', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = setup();
+  });
   test('is undefined in the first instance before action is called', () => {
-    const wrapper = setup();
     const initialProfile = wrapper.instance().props.profile;
     expect(initialProfile).toBe(undefined);
   });
   test('`getUserProfile` action creator is a function on the props', () => {
-    const wrapper = setup();
     const getUserProfileProp = wrapper.instance().props.getUserProfile;
     expect(getUserProfileProp).toBeInstanceOf(Function);
   });
