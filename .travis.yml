@@ -7,4 +7,4 @@ cache:
 install:
   - yarn
 script:
-  - yarn test -u
+  - ./cc-test-reporter before-build npm test -- -u --coverage ./cc-test-reporter after-build --exit-code $?
