@@ -66,7 +66,7 @@ const SocialAuthModalButtons = (props) => {
   return (
     <div data-test="social-button-test">
       <AuthModalButton
-        titter-button="twitter button"
+        data-test="twitter button"
         iconType="twitter"
         color="#08c"
         clicked={() => twitterResponse(cancel)}

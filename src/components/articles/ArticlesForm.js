@@ -87,6 +87,7 @@ const ArticlesForm = (props) => {
       <Row>
         <Col span={18} push={3}>
           <form
+            data-test="articles-form"
             className="article-form"
             onSubmit={event => handleSubmit(event, create, slug)}
           >

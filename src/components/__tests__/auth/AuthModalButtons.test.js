@@ -5,7 +5,7 @@ import { GoogleLogin } from 'react-google-login';
 import AuthModalButtons from '../../auth/AuthModalButtons';
 import SocialAuthModalButtons from '../../auth/SocialAuthModalButtons';
 import EmailModalButton from '../../auth/EmailModalButton';
-import { mockFn } from '../../../utils/testUtils';
+import { mockFn, propOnClickTests } from '../../../utils/testUtils';
 
 const testFBGoogleCallbacks = (wrapper, element, method) => {
   test('facebook callback is called', () => {
@@ -56,9 +56,7 @@ describe('<SocialAuthModalButtons /> component', () => {
   testFBGoogleCallbacks(wrapper, GoogleLogin, 'onSuccess');
 
   test('should test twitter onClick is called', () => {
-    const twitter = wrapper.find("[titter-button='twitter button']");
-    twitter.props().clicked();
-    expect(mockFn).toHaveBeenCalled();
+    propOnClickTests(wrapper, 'twitter button', mockFn, 'clicked');
   });
 });
 

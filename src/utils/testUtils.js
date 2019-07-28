@@ -30,9 +30,15 @@ export const propOnchangeTests = (wrapper, element, mockFn) => {
   expect(mockFn).toHaveBeenCalled();
 };
 
-export const propOnClickTests = (wrapper, element, mockFn) => {
+export const propOnClickTests = (wrapper, element, mockFn, method = 'onClick') => {
   const elementf = hasAttributes(wrapper, element);
-  elementf.props().onClick();
+  if (method === 'clicked') {
+    elementf.props().clicked();
+  } else if (method === 'onClick') {
+    elementf.props().onClick();
+  } else if (method === 'onSubmit') {
+    elementf.props().onSubmit();
+  }
   expect(mockFn).toHaveBeenCalled();
 };
 
