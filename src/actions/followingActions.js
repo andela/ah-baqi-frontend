@@ -5,12 +5,12 @@ import message from '../utils/messages';
 export const fetchFollowers = authorId => async (dispatch) => {
   try {
     const response = await instance.get(`profiles/${authorId}/followers/`);
-    localStorage.setItem('followers', JSON.stringify(response.data.followers));
-    localStorage.setItem('followersCount', JSON.parse(localStorage.followers).length);
     dispatch({
       type: actionTypes.FETCH_FOLLOWERS,
       payload: response.data.followers,
     });
+    localStorage.setItem('followers', JSON.stringify(response.data.followers));
+    localStorage.setItem('followersCount', JSON.parse(localStorage.followers).length);
   } catch (error) {
     /403/.test(error.message) // eslint-disable-line
       ? message('error', 'Login and try again!')
@@ -21,9 +21,9 @@ export const fetchFollowers = authorId => async (dispatch) => {
 export const fetchFollowees = authorId => async (dispatch) => {
   try {
     const response = await instance.get(`profiles/${authorId}/following/`);
+    dispatch(fetchFollowers(authorId));
     localStorage.setItem('followees', JSON.stringify(response.data.following));
     localStorage.setItem('followeesCount', JSON.parse(localStorage.followees).length);
-    dispatch(fetchFollowers(authorId));
   } catch (error) {
     /403/.test(error.message) // eslint-disable-line
       ? message('error', 'Login and try again!')
