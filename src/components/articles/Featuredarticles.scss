@@ -42,9 +42,9 @@ $red-color: #d23530;
 }
 
 .pop-delete {
-  padding: 5px 6px;
-  border-radius: 3px;
   border: 1px solid $red-color;
-  cursor: pointer;
+  border-radius: 3px;
   color: $red-color;
+  cursor: pointer;
+  padding: 5px 6px;
 }
