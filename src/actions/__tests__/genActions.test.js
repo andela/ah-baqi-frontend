@@ -18,10 +18,16 @@ import {
   displayModalActions,
 } from '../modalActions';
 import {
-  resetPasswordRequest, resetPassword, resetPasswordError, resetPasswordActions,
+  resetPasswordRequest,
+  resetPassword,
+  resetPasswordError,
+  resetPasswordActions,
 } from '../passwordResetActions';
 import {
-  resetConfirmRequest, resetConfirmSuccess, resetConfirmError, resetConfirmActions,
+  resetConfirmRequest,
+  resetConfirmSuccess,
+  resetConfirmError,
+  resetConfirmActions,
 } from '../passwordConfirmActions';
 
 describe('testing firebse calls from twitter', () => {

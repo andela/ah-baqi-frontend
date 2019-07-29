@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Statistic } from 'antd';
+import { Icon } from 'antd';
 
 const IconText = ({
   type, onClick, beenLiked, theme, history, slug,

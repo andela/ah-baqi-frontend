@@ -4,7 +4,10 @@ import CKEditor from 'ckeditor4-react';
 import { Select } from 'antd';
 
 import {
-  componentRenders, propOnchangeTests, mockFn, propOnClickTests,
+  componentRenders,
+  propOnchangeTests,
+  mockFn,
+  propOnClickTests,
 } from '../../../utils/testUtils';
 import NewArticleForm from '../../articles/ArticlesForm';
 

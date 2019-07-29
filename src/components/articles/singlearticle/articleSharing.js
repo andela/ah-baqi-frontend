@@ -1,8 +1,6 @@
 import React from 'react';
 import { Popover, Icon } from 'antd';
-import {
-  Facebook, Twitter, Reddit, Email,
-} from 'react-sharingbuttons';
+import { Facebook, Twitter, Reddit, Email } from 'react-sharingbuttons';
 
 const sharingIcons = ({ slug, title }) => {
   const urlShare = `https://ah-baqi.herokuapp.com//articles${slug}`;

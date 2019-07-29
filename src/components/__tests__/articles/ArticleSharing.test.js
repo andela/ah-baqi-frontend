@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-  Facebook, Twitter, Reddit, Email,
-} from 'react-sharingbuttons';
 import { shallow } from 'enzyme';
 import SharingIcons from '../../articles/singlearticle/articleSharing';
 

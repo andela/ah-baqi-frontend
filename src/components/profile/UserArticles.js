@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  List, Avatar,
-} from 'antd';
+import { List, Avatar } from 'antd';
 
 import IconText from './IconText';
 import PopDelete from '../articles/singlearticle/PopDelete';
