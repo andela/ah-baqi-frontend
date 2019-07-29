@@ -4,11 +4,7 @@ import { initialState } from './passwordConfirmReducer';
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.RESETPASSWORDREQUEST:
-      return {
-        ...state,
-        loading: true,
-        actionCalled: true,
-      };
+      return { ...state, loading: true, actionCalled: true };
     case actionTypes.RESETPASSWORDLINK:
       return {
         ...state,
@@ -24,9 +20,6 @@ export default function (state = initialState, action) {
         actionCalled: true,
       };
     default:
-      return {
-        ...state,
-        actionCalled: true,
-      };
+      return { ...state, actionCalled: true };
   }
 }
