@@ -9,11 +9,7 @@ export const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.RESETCONFIRMREQUEST:
-      return {
-        ...state,
-        loading: true,
-        actionCalled: true,
-      };
+      return { ...state, loading: true, actionCalled: true };
     case actionTypes.RESETCOFIRMSUCCESS:
       return {
         ...state,
@@ -29,9 +25,6 @@ export default function (state = initialState, action) {
         actionCalled: true,
       };
     default:
-      return {
-        ...state,
-        actionCalled: true,
-      };
+      return { ...state, actionCalled: true };
   }
 }
