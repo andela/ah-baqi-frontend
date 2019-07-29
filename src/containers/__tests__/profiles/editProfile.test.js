@@ -49,30 +49,10 @@ describe('redux properties', () => {
     test('button renders correctly', () => {
       expect(button).toHaveLength(1);
     });
-    test('form is cancelled on request', () => {
-      wrapper.instance().handleCancel = mockFn;
-      wrapper.instance().handleCancel();
-      expect(mockFn).toHaveBeenCalled();
-    });
     test('`getUserProfile` action creator is a function on the props', () => {
       wrapper = setup();
       const { editUserProfile } = wrapper.instance().props;
       expect(editUserProfile).toBeInstanceOf(Function);
-    });
-    test('`getUserProfile` action creator is a function on the props', () => {
-      wrapper = setup();
-      const { editUserProfile } = wrapper.instance().props;
-      expect(editUserProfile).toBeInstanceOf(Function);
-    });
-    test('`displayModalActions` action creator is a function on the props', () => {
-      wrapper = setup();
-      const { editUserProfile } = wrapper.instance().props;
-      expect(editUserProfile).toBeInstanceOf(Function);
-    });
-    test('show modal is called', () => {
-      wrapper.instance().showModal = mockFn;
-      wrapper.instance().showModal();
-      expect(mockFn).toHaveBeenCalled();
     });
   });
   describe('test connected component', () => {
