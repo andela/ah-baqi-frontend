@@ -1,12 +1,11 @@
 import React from 'react';
-import {
-  Modal, Form, Input,
-} from 'antd';
+import { Modal, Form } from 'antd';
 import './edit.scss';
+import { formItem } from '../../../utils/formElements';
 
-const EditProfileForm = Form.create({ name: 'form_in_modal' })(
-  class extends React.Component {
-    renderFormInfo = (props, getFieldDecorator) => {
+// const EditProfileForm = Form.create({ name: 'form_in_modal' })(
+class EditProfileForm extends React.Component {
+    renderFormInfo = (props, form) => {
       const {
         image,
         first_name, // eslint-disable-line
@@ -20,46 +19,44 @@ const EditProfileForm = Form.create({ name: 'form_in_modal' })(
 
       return (
         <Form layout="vertical">
-          <Form.Item label="Profile Picture">
-            <div className="modal-image">
-              <img
-                src={image}
-                alt="myprofile"
-              />
-            </div>
-            <br />
-            {getFieldDecorator('image', { initialValue: `${image}` })(<Input type="text" />)}
-          </Form.Item>
-          <Form.Item label="First Name">
-            {getFieldDecorator('first_name', { initialValue: `${first_name ? first_name : 'Name'}` })(<Input type="text" />)} {/*eslint-disable-line */}
-          </Form.Item>
-          <Form.Item label="Last Name">
-            {getFieldDecorator('last_name', { initialValue: `${last_name ? last_name : 'Name'}` })(<Input type="text" />)} {/*eslint-disable-line */}
-          </Form.Item>
-          <Form.Item label="Username">
-            {getFieldDecorator('username', { initialValue: `${username}` })(<Input type="text" />)}
-          </Form.Item>
-          <Form.Item label="Email">
-            {getFieldDecorator('email', { initialValue: `${email}` })(<Input type="text" />)}
-          </Form.Item>
-          <Form.Item label="Country">
-            {getFieldDecorator('country', { initialValue: `${country}` })(<Input type="text" />)}
-          </Form.Item>
-          <Form.Item label="Bio">
-            {getFieldDecorator('bio', { initialValue: `${bio}` })(<Input type="textarea" />)}
-          </Form.Item>
+          <div className="modal-image">
+            <img
+              src={image}
+              alt="myprofile"
+            />
+          </div>
+          {formItem(form, '', 'Profile Picture',
+            'image', '', 'text', '',
+            null, false, '', '', image, false)}
+          {formItem(form, '', 'First Name',
+            'first_name', '', 'text', 'Name',
+            null, false, '', '', first_name, false)}
+          {formItem(form, '', 'Last Name',
+            'last_name', '', 'text', 'Name',
+            null, false, '', '', last_name, false)}
+          {formItem(form, '', 'Username',
+            'username', '', 'text', '',
+            null, false, '', '', username)}
+          {formItem(form, '', 'Email',
+            'email', '', 'email', '',
+            null, false, '', '', email)}
+          {formItem(form, '', 'Country',
+            'country', '', 'text', '',
+            null, false, '', '', country, false)}
+          {formItem(form, '', 'Bio',
+            'bio', '', 'textarea', '',
+            null, false, '', '', bio, false)}
         </Form>
       );
-    }
+    };
 
     renderForm = () => {
       const { form, currentProfile } = this.props;
-      const { getFieldDecorator } = form;
 
       return (
-        currentProfile ? this.renderFormInfo(currentProfile, getFieldDecorator) : null
+        currentProfile ? this.renderFormInfo(currentProfile, form) : null
       );
-    }
+    };
 
     render() {
       const { visible, onCancel, onCreate } = this.props;
@@ -77,7 +74,6 @@ const EditProfileForm = Form.create({ name: 'form_in_modal' })(
         </div>
       );
     }
-  },
-);
+}
 
-export default EditProfileForm;
+export default Form.create()(EditProfileForm);
