@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Icon, Tooltip } from 'antd';
 import { bindActionCreators } from 'redux';
 import { getBookmarks, addBookmark, removeBookmark } from '../../actions/bookmarks';
 import './bookmark.scss';
+import bookMarkIcon from './bookMarkIcon';
 
 export class UnconnectedBookmark extends Component {
   componentWillMount() {
@@ -13,65 +13,35 @@ export class UnconnectedBookmark extends Component {
 
   checkBookmark = (bookmarks) => {
     const { addBookmark, slug, removeBookmark } = this.props;
-    let bookmarkIcon = (
-      <Tooltip
-        placement="right"
-        title={
-          <span>Bookmark Article</span>}
-      >
-        <Icon
-          type="book"
-          className="bookmark-container-add-icon"
-          data-test="bookmark-container-add-icon"
-          onClick={() => addBookmark(slug)}
-        />
-      </Tooltip>
-    );
-
+    let bookmarkIcon;
     bookmarks.forEach(article => ( // eslint-disable-line
       article.slug === slug
-      && (
-        bookmarkIcon = (
-          <Tooltip
-            placement="right"
-            title={
-              <span>Remove Bookmark</span>}
-          >
-            <Icon
-              type="book"
-              className="bookmark-container-remove-icon"
-              data-test="bookmark-container-remove"
-              onClick={() => removeBookmark(slug)}
-            />
-          </Tooltip>
+        ? (
+          bookmarkIcon = bookMarkIcon('Remove Bookmark',
+            'bookmark-container-remove-icon',
+            'bookmark-container-remove',
+            () => removeBookmark(slug))
+        ) : (
+          bookmarkIcon = bookMarkIcon('Bookmark Article',
+            'bookmark-container-add-icon',
+            'bookmark-container-add-icon',
+            () => addBookmark(slug))
         )
-      )
     ));
     return bookmarkIcon;
-  }
+  };
 
   displayBookmark = () => {
-    const { bookmarks, slug, addBookmark } = this.props;
+    const { bookmarks } = this.props;
     return Object.getOwnPropertyNames(bookmarks).length !== 0
       && (
         bookmarks.message
           ? (
-            <Tooltip
-              placement="right"
-              title={
-                <span>Bookmark Article</span>}
-            >
-              <Icon
-                type="book"
-                className="bookmark-container-add-icon"
-                data-test="bookmark-container-add"
-                onClick={() => addBookmark(slug)}
-              />
-            </Tooltip>
+            this.checkBookmark
           )
           : this.checkBookmark(bookmarks['bookmarked articles'])
       );
-  }
+  };
 
   render() {
     return (
