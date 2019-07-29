@@ -1,19 +1,17 @@
 import React from 'react';
 import { Tooltip, Icon } from 'antd';
 
-const bookMarkIcon = ({
-  method, slug, classname, dataTest,
-}) => (
+const bookMarkIcon = (title, className, dataTest, onClick) => (
   <Tooltip
     placement="right"
     title={
-      <span>Bookmark Article</span>}
+      <span>{title}</span>}
   >
     <Icon
       type="book"
-      className={classname}
+      className={className}
       data-test={dataTest}
-      onClick={() => method(slug)}
+      onClick={onClick}
     />
   </Tooltip>
 );
