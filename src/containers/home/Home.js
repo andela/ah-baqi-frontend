@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import {
-  Row, Col, Skeleton,
-} from 'antd';
+import { Row, Col, Skeleton } from 'antd';
 import { connect } from 'react-redux';
 
 import { getAllArticles, getArticle } from '../../actions/articleActions';
 import LandingArticles from '../../components/articles/LandingArticles';
 import ArticlesScroll from '../../components/articles/articlesScroll';
 
-class Home extends Component {
+export class Home extends Component {
   componentDidMount() {
     const { history, getAllArticles, articleCount } = this.props; // eslint-disable-line
     history.push('/');

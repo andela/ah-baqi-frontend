@@ -21,7 +21,7 @@ import {
 } from '../../actions/socialAuthActions';
 import searchActions from '../../actions/searchActions';
 
-class UnconnectedHeader extends Component {
+export class UnconnectedHeader extends Component {
   handleSubmit = (event, formProp, action) => {
     const { signupActions, loginActions, hideModalActions } = this.props; // eslint-disable-line
     event.preventDefault();
