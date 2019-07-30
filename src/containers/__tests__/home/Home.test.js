@@ -1,20 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
-import Home from '../../home/Home';
+import { Skeleton } from 'antd';
 import store from '../../../utils/testUtils';
-
+import Home from '../../home/Home';
 
 describe('<Home /> component', () => {
-  let wrapper;
-  beforeAll(() => {
-    wrapper = shallow(<Home store={store} />);
-  });
   test('renders without crashing', () => {
+    const wrapper = shallow(<Home
+      store={store}
+    />);
+
     expect(wrapper).toMatchSnapshot();
-  });
-  test('renders skeleton loader', () => {
-    wrapper = wrapper.dive().dive();
-    expect(wrapper.find("[data-test='skeleton-loader']")).toHaveLength(1);
+    expect(wrapper.dive().dive().find(Skeleton)).toHaveLength(1);
   });
 });

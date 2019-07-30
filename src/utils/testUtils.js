@@ -14,7 +14,52 @@ const initialState = {
     articles: [],
   },
 };
+const newState = {
+  article: {
+    articles: [
+      {
+        id: 1,
+        description: 'mini desc',
+        title: 'title',
+        body: 'my bidy',
+      },
+      {
+        id: 2,
+        description: 'mini desc',
+        title: 'title',
+        body: 'my bidy',
+      },
+      {
+        id: 3,
+        description: 'mini desc',
+        title: 'title',
+        body: 'my bidy',
+      },
+      {
+        id: 4,
+        description: 'mini desc',
+        title: 'title',
+        body: 'my bidy',
+      },
+      {
+        id: 5,
+        description: 'mini desc',
+        title: 'title',
+        body: 'my bidy',
+      },
+      {
+        id: 6,
+        description: 'mini desc',
+        title: 'title',
+        body: 'my bidy',
+      },
+    ],
+    nextPage: 'next_page?page=2',
+    articleCount: 6,
+  },
+};
 const store = mockStore(initialState);
+export const upStore = mockStore(newState);
 
 const hasAttributes = (wrapper, attributeValue) => (wrapper.find(`[data-test="${attributeValue}"]`));
 export const hasElement = (wrapper, element) => wrapper.find(element);

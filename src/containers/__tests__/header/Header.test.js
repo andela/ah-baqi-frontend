@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { UnconnectedHeader } from '../../header/Header';
+import { BrowserRouter } from 'react-router-dom';
+import UnconnectedHeader from '../../header/Header';
 import AuthModal from '../../../components/modals/AuthModal';
 import store, { mockFn } from '../../../utils/testUtils';
 
@@ -14,10 +15,12 @@ const props = {
 
 describe('<Routes /> component', () => {
   const wrapper = mount(
-    <UnconnectedHeader
-      store={store}
-      {...props}
-    />,
+    <BrowserRouter>
+      <UnconnectedHeader
+        store={store}
+        {...props}
+      />
+    </BrowserRouter>,
   );
 
   test('renders routes successfully', () => {

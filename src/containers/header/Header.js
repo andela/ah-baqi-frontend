@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import AuthModal from '../../components/modals/AuthModal';
@@ -21,13 +21,9 @@ import {
 } from '../../actions/socialAuthActions';
 import searchActions from '../../actions/searchActions';
 
-export const UnconnectedHeader = (props) => {
-  const {
-    signupActions, hideModalActions, formSignupAction, emailSignupAction, // eslint-disable-line
-    authAction, visible, emailLoginAction, formLoginAction, socialAuthActions, // eslint-disable-line
-    firebaseAuthAction, loginActions, logoutActions, searchActions, history } = props; // eslint-disable-line
-
-  const handleSubmit = (event, formProp, action) => {
+class UnconnectedHeader extends Component {
+  handleSubmit = (event, formProp, action) => {
+    const { signupActions, loginActions, hideModalActions } = this.props; // eslint-disable-line
     event.preventDefault();
     formProp.validateFields((error, values) => {
       if (!error) {
@@ -40,7 +36,8 @@ export const UnconnectedHeader = (props) => {
     });
   };
 
-  const socialAuthResponse = (response, provider) => {
+  socialAuthResponse = (response, provider) => {
+    const { socialAuthActions, hideModalActions } = this.props; // eslint-disable-line
     const authData = {
       token_provider: 'google-oauth2',
       access_token: response.accessToken,
@@ -52,33 +49,40 @@ export const UnconnectedHeader = (props) => {
     socialAuthActions(authData, provider, hideModalActions);
   };
 
-  const onFailure = () => 'failed';
+  onFailure = () => 'failed';
 
-  return (
-    <div data-test="header-section">
-      <Navbar
-        clickedSignup={emailSignupAction}
-        clickedLogin={emailLoginAction}
-        logOut={logoutActions}
-        search={searchActions}
-        history={history}
-      />
-      <AuthModal
-        authAction={authAction}
-        visible={visible}
-        onCancel={hideModalActions}
-        showSignupForm={formSignupAction}
-        submitSignup={handleSubmit}
-        showLoginForm={formLoginAction}
-        google={socialAuthResponse}
-        facebook={socialAuthResponse}
-        twitter={firebaseAuthAction}
-        onFailure={onFailure}
-        submitLogin={handleSubmit}
-      />
-    </div>
-  );
-};
+  render() {
+    const {
+      hideModalActions, formSignupAction, emailSignupAction, // eslint-disable-line
+      authAction, visible, emailLoginAction, formLoginAction, socialAuthActions, // eslint-disable-line
+      firebaseAuthAction, logoutActions, searchActions, history } = this.props; // eslint-disable-line
+
+    return (
+      <div data-test="header-section">
+        <Navbar
+          clickedSignup={emailSignupAction}
+          clickedLogin={emailLoginAction}
+          logOut={logoutActions}
+          search={searchActions}
+          history={history}
+        />
+        <AuthModal
+          authAction={authAction}
+          visible={visible}
+          onCancel={hideModalActions}
+          showSignupForm={formSignupAction}
+          submitSignup={this.handleSubmit}
+          showLoginForm={formLoginAction}
+          google={this.socialAuthResponse}
+          facebook={this.socialAuthResponse}
+          twitter={firebaseAuthAction}
+          onFailure={this.onFailure}
+          submitLogin={this.handleSubmit}
+        />
+      </div>
+    );
+  }
+}
 
 
 const mapStateToProps = state => ({

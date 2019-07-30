@@ -10,6 +10,7 @@ describe('<Navbar /> component', () => {
     wrapper = shallow(<Navbar />);
     expect(wrapper.find('[data-test="unauthenticated-menu"]')).toHaveLength(1);
     expect(wrapper.find('.search-input')).toHaveLength(1);
+    wrapper.find('[data-test="serach-bar"]').props().addonBefore.props.onChange(); // .toHaveLength(1);
   });
 
   test('Navbar renders correctly for authenticated user', () => {
