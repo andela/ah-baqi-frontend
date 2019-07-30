@@ -1,5 +1,7 @@
 import React from 'react';
-import { Comment, Form, Button, List, Input, Avatar } from 'antd';
+import {
+  Comment, Form, Button, List, Input, Avatar,
+} from 'antd';
 import EditUserCommentForm from '../EditCommentContainer';
 
 const { TextArea } = Input;

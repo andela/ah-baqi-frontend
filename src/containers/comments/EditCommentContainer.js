@@ -45,7 +45,7 @@ class EditForm extends React.Component {
           {form.getFieldDecorator('body', { initialValue: `${body}` })(<TextArea rows={3} />)}
         </Form.Item>
         <Form.Item data-test="submit-button-container">
-          <Button type="link" htmlType="submit" onClick={() => closeEditor(editorClass)}>
+          <Button data-test="submit-button-close" type="link" htmlType="submit" onClick={() => closeEditor(editorClass)}>
             <Icon type="check-circle" className="edit-buttons" />
           </Button>
           <Button

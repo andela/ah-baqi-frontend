@@ -115,4 +115,7 @@ const mapStateToProps = state => ({
   articleData: state.article.articleData,
 });
 
-export default connect(mapStateToProps, { createArticle, editArticle })(UnconnectedCreateUpdateArticle);
+export default connect(mapStateToProps, {
+  createArticle,
+  editArticle,
+})(UnconnectedCreateUpdateArticle);

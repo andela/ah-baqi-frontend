@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { user, editComment, commentHeader, editNestedCommentForm } from '../helpers/helpers';
+import {
+  user, editComment, commentHeader, editNestedCommentForm,
+} from '../helpers/helpers';
 import customIcon from '../../../utils/icons';
 
 const SecondaryContent = ({
@@ -11,7 +13,7 @@ const SecondaryContent = ({
       {commentHeader(item)}
       {item.author === user && (
       <span className="utility-buttons">
-        {customIcon('', 'edit', () => editComment(
+        {customIcon('edit-icon-nest', 'edit', () => editComment(
           `comment-edit-field-${item.id}`,
         ))}
         {customIcon('delete-icon', 'delete', () => deleteNestedCommentItem(slug, id, item.id))}
