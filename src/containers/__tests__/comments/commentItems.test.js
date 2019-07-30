@@ -20,15 +20,15 @@ describe('<Content />', () => {
   const dislikeCommentMock = jest.fn();
   const props = {
     comments: [{
-      article: "some-apps-i-use-as-a-devops_Clean",
+      article: 'some-apps-i-use-as-a-devops_Clean',
       author: null,
-      body: "ffff",
-      created_at: "2019-07-29T14:42:19.504610Z",
+      body: 'ffff',
+      created_at: '2019-07-29T14:42:19.504610Z',
       dislikes: 0,
       id: 167,
       likes: 0,
       replies: [],
-      updated_at: "2019-07-29T14:42:19.504900Z",
+      updated_at: '2019-07-29T14:42:19.504900Z',
     }],
     slug: 'my-comment',
     deleteComment: deleteCommentMock,
@@ -37,7 +37,7 @@ describe('<Content />', () => {
   };
   const store = configureStoreItem();
   let container;
-  let wrapperComponent = <Provider store={store} ><Content {...props} /></Provider>
+  const wrapperComponent = <Provider store={store}><Content {...props} /></Provider>;
 
   beforeEach(() => {
     container = document.createElement('div');
@@ -51,18 +51,18 @@ describe('<Content />', () => {
   test('renders without error', () => {
     const wrapper = mount(wrapperComponent);
     expect(wrapper.find("[data-test='comment-item']")).toHaveLength(1);
-    
+
     const deleteButtonIcon = wrapper.find("[className='delete-icon']");
     deleteButtonIcon.simulate('click');
-    expect(deleteCommentMock).toHaveBeenCalled()
+    expect(deleteCommentMock).toHaveBeenCalled();
 
     const likeCommentButton = wrapper.find("[className='comment-rating-likes']");
     likeCommentButton.at(0).simulate('click');
-    expect(likeCommentMock).toHaveBeenCalled()
-    
+    expect(likeCommentMock).toHaveBeenCalled();
+
     const dislikeCommentButton = wrapper.find("[className='comment-rating-dislikes']");
     dislikeCommentButton.at(0).simulate('click');
-    expect(dislikeCommentMock).toHaveBeenCalled()
+    expect(dislikeCommentMock).toHaveBeenCalled();
 
     act(() => {
       ReactDOM.render(wrapperComponent, container);
@@ -70,15 +70,14 @@ describe('<Content />', () => {
 
     const contentItem = wrapper.find("[className='edit-comment-item-btn']");
     contentItem.simulate('click');
-    expect(contentItem).toHaveLength(1)
+    expect(contentItem).toHaveLength(1);
 
     const dropDownIcon = wrapper.find("[className='dropdown-icon-167']");
     dropDownIcon.at(0).simulate('click');
-    expect(dropDownIcon).toHaveLength(1)
+    expect(dropDownIcon).toHaveLength(1);
 
     const closeUpIcon = wrapper.find("[className='close-up-167 hide']");
     closeUpIcon.at(0).simulate('click');
-    expect(closeUpIcon).toHaveLength(1)
-    
+    expect(closeUpIcon).toHaveLength(1);
   });
 });

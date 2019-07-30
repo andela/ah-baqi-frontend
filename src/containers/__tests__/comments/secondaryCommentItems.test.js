@@ -19,7 +19,7 @@ describe('<SecondaryContent />', () => {
   const deleteNestedCommentItemMock = jest.fn();
   const props = {
     replies: [
-      {body: "My comment is ths", author: null},
+      { body: 'My comment is ths', author: null },
     ],
     slug: 'my comment',
     id: 'id',
@@ -28,7 +28,7 @@ describe('<SecondaryContent />', () => {
 
   const store = configureStoreItem();
   let container;
-  let wrapperComponent = <SecondaryContent {...props} />
+  const wrapperComponent = <SecondaryContent {...props} />;
 
   beforeEach(() => {
     container = document.createElement('div');
@@ -43,14 +43,14 @@ describe('<SecondaryContent />', () => {
   test('renders without error', () => {
     const wrapper = shallow(wrapperComponent);
     expect(wrapper.find("[data-test='nested-item']")).toHaveLength(1);
-    const deleteButton = wrapper.find("[className='delete-icon']")
+    const deleteButton = wrapper.find("[className='delete-icon']");
     deleteButton.simulate('click');
     expect(deleteButton).toHaveLength(1);
 
     act(() => {
-      ReactDOM.render(<Provider store={store} >{wrapperComponent}</Provider>, container);
+      ReactDOM.render(<Provider store={store}>{wrapperComponent}</Provider>, container);
     });
-    const editButton = wrapper.find("[className='edit-icon-nest']")
+    const editButton = wrapper.find("[className='edit-icon-nest']");
     editButton.simulate('click');
     expect(editButton).toHaveLength(1);
   });

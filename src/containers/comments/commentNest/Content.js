@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { user, displayComments, editComment, editCommentForm, commentHeader } from '../helpers/helpers';
+import {
+  user, displayComments, editComment, editCommentForm, commentHeader,
+} from '../helpers/helpers';
 import SecondaryComment from './SecondaryComment';
 import customIcon from '../../../utils/icons';
 
@@ -8,8 +10,10 @@ const utilityButtons = (item, slug, deleteComment, likeComment, dislikeComment) 
   <span className="utility-buttons">
     {item.author === user
           && (
-          <span className="utility-buttons"
-            data-test="utility-buttons-tesone">
+          <span
+            className="utility-buttons"
+            data-test="utility-buttons-tesone"
+          >
             {customIcon('edit-comment-item-btn', 'edit', () => editComment(
               `edit-field-${item.id}`,
             ))}
@@ -37,8 +41,11 @@ const Content = ({
   comments, slug, deleteComment, likeComment, dislikeComment,
 }) => {
   const commentItems = comments.map(item => (
-    <div key={item.id} className="comment-item-container"
-      data-test="comment-item-cont">
+    <div
+      key={item.id}
+      className="comment-item-container"
+      data-test="comment-item-cont"
+    >
       {commentHeader(item)}
       {utilityButtons(item, slug, deleteComment, likeComment, dislikeComment)}
       <div>

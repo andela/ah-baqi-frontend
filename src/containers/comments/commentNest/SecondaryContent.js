@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { user, editComment, commentHeader, editNestedCommentForm } from '../helpers/helpers';
+import {
+  user, editComment, commentHeader, editNestedCommentForm,
+} from '../helpers/helpers';
 import customIcon from '../../../utils/icons';
 
 const SecondaryContent = ({

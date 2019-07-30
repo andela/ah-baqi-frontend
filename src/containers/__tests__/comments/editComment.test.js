@@ -17,7 +17,7 @@ const configureStoreItem = (initialState) => {
 
 describe('<EditUserCommentForm />', () => {
   const store = configureStoreItem();
-  const editCommentItemMock = jest.fn()
+  const editCommentItemMock = jest.fn();
   let container;
   const props = {
     btnClass: 'cancel-edit-111',
@@ -26,8 +26,8 @@ describe('<EditUserCommentForm />', () => {
     id: 111,
     slug: 'my-article',
     editCommentItem: editCommentItemMock,
-  }
-  let wrapperComponent = <Provider store={store} ><EditUserCommentForm {...props} /></Provider>
+  };
+  const wrapperComponent = <Provider store={store}><EditUserCommentForm {...props} /></Provider>;
 
   beforeEach(() => {
     container = document.createElement('div');
@@ -40,9 +40,8 @@ describe('<EditUserCommentForm />', () => {
   });
 
   test('form renders without error', () => {
-    
     const wrapper = mount(wrapperComponent);
-    const form = wrapper.find("[data-test='edit-container']")
+    const form = wrapper.find("[data-test='edit-container']");
     form.at(0).simulate('submit');
     expect(form).toHaveLength(2);
 
@@ -52,15 +51,14 @@ describe('<EditUserCommentForm />', () => {
   });
 
   test('nest comment', () => {
-    const editNestedCommentItemMock = jest.fn()
+    const editNestedCommentItemMock = jest.fn();
     const props = {
       editNestedCommentItem: editNestedCommentItemMock,
       isNest: true,
-    }
-    const wrapper = mount(<Provider store={store} ><EditUserCommentForm {...props} /></Provider>);
-    const form = wrapper.find("[data-test='edit-container']")
+    };
+    const wrapper = mount(<Provider store={store}><EditUserCommentForm {...props} /></Provider>);
+    const form = wrapper.find("[data-test='edit-container']");
     form.at(0).simulate('submit');
-    expect(form).toHaveLength(2)
-  })
- 
+    expect(form).toHaveLength(2);
+  });
 });
