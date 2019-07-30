@@ -1,16 +1,35 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { Skeleton } from 'antd';
+import { mount } from 'enzyme';
+
+import { Home } from '../../home/Home';
 import store from '../../../utils/testUtils';
-import Home from '../../home/Home';
 
 describe('<Home /> component', () => {
-  test('renders without crashing', () => {
-    const wrapper = shallow(<Home
+  let homeWrapper;
+  beforeAll(() => {
+    homeWrapper = mount(<Home
       store={store}
+      history={[]}
+      articles={[]}
+      getAllArticles={jest.fn()}
     />);
-
-    expect(wrapper).toMatchSnapshot();
-    expect(wrapper.dive().dive().find(Skeleton)).toHaveLength(1);
+  });
+  test('renders skeleton loader', () => {
+    expect(homeWrapper.find("[data-test='skeleton-loader']")).toHaveLength(1);
+  });
+  test('renders articles', () => {
+    homeWrapper.setProps({
+      articles: [{
+        id: 1,
+        title: 'Article',
+        description: 'Test article',
+      }],
+      articleData: {},
+      getArticle: jest.fn(),
+      clicked: jest.fn(),
+    });
+    homeWrapper = homeWrapper.find('LeftLandingArticle');
+    homeWrapper.simulate('click');
+    expect(homeWrapper).toHaveLength(1);
   });
 });

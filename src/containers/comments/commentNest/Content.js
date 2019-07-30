@@ -8,8 +8,9 @@ const utilityButtons = (item, slug, deleteComment, likeComment, dislikeComment) 
   <span className="utility-buttons">
     {item.author === user
           && (
-          <span className="utility-buttons">
-            {customIcon('', 'edit', () => editComment(
+          <span className="utility-buttons"
+            data-test="utility-buttons-tesone">
+            {customIcon('edit-comment-item-btn', 'edit', () => editComment(
               `edit-field-${item.id}`,
             ))}
             {customIcon('delete-icon', 'delete', () => deleteComment(item.id, slug))}
@@ -36,7 +37,8 @@ const Content = ({
   comments, slug, deleteComment, likeComment, dislikeComment,
 }) => {
   const commentItems = comments.map(item => (
-    <div key={item.id} className="comment-item-container">
+    <div key={item.id} className="comment-item-container"
+      data-test="comment-item-cont">
       {commentHeader(item)}
       {utilityButtons(item, slug, deleteComment, likeComment, dislikeComment)}
       <div>

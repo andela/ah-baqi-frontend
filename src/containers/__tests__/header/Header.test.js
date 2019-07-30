@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { BrowserRouter } from 'react-router-dom';
-import UnconnectedHeader from '../../header/Header';
+import { UnconnectedHeader } from '../../header/Header';
 import AuthModal from '../../../components/modals/AuthModal';
 import store, { mockFn } from '../../../utils/testUtils';
 

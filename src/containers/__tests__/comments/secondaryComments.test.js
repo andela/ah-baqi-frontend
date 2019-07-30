@@ -1,48 +1,41 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from '../../../reducers/index';
-import SecondaryComment, { UnconnectedSecondaryComment } from '../../comments/commentNest/SecondaryComment';
-import { mockFn } from '../../../utils/testUtils';
+import SecondaryComment from '../../comments/commentNest/SecondaryComment';
 
 const configureStoreItem = (initialState) => {
   const store = applyMiddleware(thunk)(createStore);
   return store(rootReducer, initialState);
 };
 
-const setup = () => {
-  const store = configureStoreItem();
-  const wrapper = shallow(
-    <SecondaryComment store={store} replies={[]} />,
-  ).dive().dive();
-  return wrapper;
-};
-
 describe('<SecondaryComment />', () => {
-  test('renders without error', () => {
-    const wrapper = setup();
-    expect(wrapper.find("[data-test='comments-items-container']")).toHaveLength(1);
-  });
-  test('renders without error', () => {
-    const wrapper = setup();
-    wrapper.instance().handleSubmit = mockFn;
-    wrapper.instance().handleSubmit();
-    expect(mockFn).toHaveBeenCalled();
-    const submit = mockFn.mock.calls.length;
-    expect(submit).toBe(1);
-    expect(wrapper.instance().state.value).toBe('');
-    expect(wrapper.instance().props.addNestedComment).toBeInstanceOf(Function);
-    expect(wrapper.instance().props.deleteNestedCommentItem).toBeInstanceOf(Function);
-  });
-  test('submits comment', () => {
-    const wrapper = shallow(<UnconnectedSecondaryComment />);
-    wrapper.instance().handleSubmit = mockFn;
-    wrapper.instance().handleSubmit();
-    expect(mockFn).toHaveBeenCalled();
+  test('Submits form', () => {
+    const props = {
+      replies: [{
+        article: "Some apps I use as a DevOps",
+        author: "luke",
+        body: "rrrr",
+        comment_to: "ffff",
+        created_at: "2019-07-29T17:04:32.970265Z",
+        id: 114,
+        updated_at: "2019-07-29T17:04:32.970301Z",
+      }]
+    }
+    let store = configureStoreItem()
+    let wrapper = mount(<Provider store={store} ><SecondaryComment {...props} /></Provider>)
+    let editor = wrapper.find("[data-test='nest-item-editor']")
+    const event = {target: {name: "pollName", value: "spam"}};
+    editor.props().onChange(event);
+    editor.props().onSubmit();
+    expect(editor).toHaveLength(1);
 
-    const commentWrapper = wrapper.find("[data-test='comments-container-content']").children();
-    expect(commentWrapper).toHaveLength(0);
-  });
+    const nextEvent = {target: {name: "pollName"}};
+    editor.props().onChange(nextEvent);
+    editor.props().onSubmit();
+    expect(wrapper.find("[data-test='comments-items-container']")).toHaveLength(1);
+  })
 });
