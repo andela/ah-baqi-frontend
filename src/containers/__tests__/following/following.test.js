@@ -38,7 +38,6 @@ describe('<FollowUnfollow /> ', () => {
       articleData: articleDataMock,
       fetchFollowers: fetchFollowersMock,
     }
-
     let unconnected = shallow(<UnconnectedFollowUnfollow {...prop}/>)
     unconnected.instance().hasFollowed('bill',[]);
     unconnected.instance().hasFollowed('bill',[{username: 'bill'}]);
