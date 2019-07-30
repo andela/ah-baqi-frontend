@@ -44,7 +44,6 @@ export class UnconnectedCreateUpdateArticle extends Component {
           image: event,
         });
         break;
-
       case 'description':
         this.setState({
           description: event.target.value,
