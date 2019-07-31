@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import AuthModal from '../../components/modals/AuthModal';
 import Navbar from '../../components/navbar/Navbar';
 import loginActions from '../../actions/loginActions';
@@ -20,6 +21,7 @@ import {
   firebaseAuthAction,
 } from '../../actions/socialAuthActions';
 import searchActions from '../../actions/searchActions';
+
 
 export class UnconnectedHeader extends Component {
   handleSubmit = (event, formProp, action) => {
@@ -89,21 +91,19 @@ const mapStateToProps = state => ({
   ...state.modals,
   ...state.login,
 });
+const mapDispatchToProps = dispatch => bindActionCreators({
+  socialAuthActions,
+  displayModalActions,
+  logoutActions,
+  hideModalActions,
+  loginActions,
+  emailSignupAction,
+  firebaseAuthAction,
+  formSignupAction,
+  searchActions,
+  signupActions,
+  formLoginAction,
+  emailLoginAction,
+}, dispatch);
 
-export default connect(
-  mapStateToProps,
-  {
-    socialAuthActions,
-    displayModalActions,
-    logoutActions,
-    hideModalActions,
-    loginActions,
-    emailSignupAction,
-    firebaseAuthAction,
-    formSignupAction,
-    searchActions,
-    signupActions,
-    formLoginAction,
-    emailLoginAction,
-  },
-)(withRouter(UnconnectedHeader));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(UnconnectedHeader));

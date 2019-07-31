@@ -3,8 +3,9 @@ import { shallow } from 'enzyme';
 import UserProfile from '../../profile/UserProfile';
 
 describe('<UserProfile />', () => {
-  test('renders without error', () => {
-    const wrapper = shallow(<UserProfile />);
+  let wrapper;
+  test('renders without error wit no profile', () => {
+    wrapper = shallow(<UserProfile />);
     expect(wrapper.find("[data-test='user-profile-overview']")).toHaveLength(1);
   });
 });
