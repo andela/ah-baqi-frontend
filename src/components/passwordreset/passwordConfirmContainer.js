@@ -50,14 +50,19 @@ class ResetConfirm extends Component {
   render() {
     const { form } = this.props;
     return (
-      <Form onSubmit={this.handleSubmit} className="reset-form" style={{ textAlign: 'left' }}>
+      <Form
+        onSubmit={this.handleSubmit}
+        className="reset-form"
+        data-test="reset-form-cont"
+        style={{ textAlign: 'left' }}
+      >
         <div>
           <h1>Create your new password</h1>
         </div>
-        {formItem(form, '', 'Password', 'password',
+        {formItem(form, 'reset-form-cont-password', 'Password', 'password',
           'lock', 'password', '*****', this.validateToNextPassword,
           true, 'password', this.handleChange)}
-        {formItem(form, '', 'Confirm Password', 'confirm_password',
+        {formItem(form, 'reset-form-cont-reset-password', 'Confirm Password', 'confirm_password',
           'lock', 'password', '*****', this.compareToFirstPassword,
           true, 'confirm_password', this.handleChange)}
         {formButton('Reset Password')}

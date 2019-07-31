@@ -21,7 +21,7 @@ import {
 } from '../../actions/socialAuthActions';
 import searchActions from '../../actions/searchActions';
 
-export class UnconnectedHeader extends Component {
+class Header extends Component {
   handleSubmit = (event, formProp, action) => {
     const { signupActions, loginActions, hideModalActions } = this.props; // eslint-disable-line
     event.preventDefault();
@@ -60,6 +60,7 @@ export class UnconnectedHeader extends Component {
     return (
       <div data-test="header-section">
         <Navbar
+          data-test="navbar-header-section"
           clickedSignup={emailSignupAction}
           clickedLogin={emailLoginAction}
           logOut={logoutActions}
@@ -67,6 +68,7 @@ export class UnconnectedHeader extends Component {
           history={history}
         />
         <AuthModal
+          data-test="navbar-modal-section"
           authAction={authAction}
           visible={visible}
           onCancel={hideModalActions}
@@ -106,4 +108,4 @@ export default connect(
     formLoginAction,
     emailLoginAction,
   },
-)(withRouter(UnconnectedHeader));
+)(withRouter(Header));

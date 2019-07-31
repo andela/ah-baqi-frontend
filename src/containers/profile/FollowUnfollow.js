@@ -37,7 +37,8 @@ export class UnconnectedFollowUnfollow extends React.Component {
 
   handleFollowAction = () => {
     const { articleData, followUser, unfollowUser } = this.props;
-    if (this.state.labelText === 'Follow') {
+    const { labelText } = this.state;
+    if (labelText === 'Follow') {
       this.setState({
         labelText: 'Following',
       });
@@ -51,6 +52,7 @@ export class UnconnectedFollowUnfollow extends React.Component {
   }
 
   render() {
+    const { labelText } = this.state;
     return (
       <button
         data-test="follow-container"
@@ -58,7 +60,7 @@ export class UnconnectedFollowUnfollow extends React.Component {
         className="follow-button"
         onClick={this.handleFollowAction}
       >
-        {this.state.labelText}
+        {labelText}
       </button>
     );
   }

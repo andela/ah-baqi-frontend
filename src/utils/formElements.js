@@ -9,13 +9,14 @@ import {
 export const formItem = (form, dataTest, label, fieldDecorator,
   iconType, inputType, placeHolder, validator = '', hasFeedback = false,
   name = '', onChange = null, initialValue = '', required = true) => (
-    <Form.Item data-test={dataTest} label={label} hasFeedback={hasFeedback}>
+    <Form.Item label={label} hasFeedback={hasFeedback}>
       {form.getFieldDecorator(fieldDecorator, {
         rules: [{ required, message: 'This field is required' },
           { validator: { validator } }],
         initialValue,
       })(
         <Input
+          data-test={dataTest}
           prefix={iconType && <Icon type={iconType} style={{ color: 'rgba(0,0,0,.25)' }} />}
           type={inputType}
           placeholder={placeHolder}

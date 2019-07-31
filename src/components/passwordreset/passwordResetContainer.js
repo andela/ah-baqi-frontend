@@ -29,11 +29,16 @@ class PasswordReset extends Component {
   render() {
     const { form } = this.props;
     return (
-      <Form onSubmit={this.handleSubmit} className="reset-form" style={{ textAlign: 'left' }}>
+      <Form
+        onSubmit={this.handleSubmit}
+        className="reset-form"
+        data-test="reset-form-cont"
+        style={{ textAlign: 'left' }}
+      >
         <div>
           <h1>Forgot Password</h1>
         </div>
-        {formItem(form, 'email', 'Email', 'email',
+        {formItem(form, 'email-reset-passwor', 'Email', 'email',
           'user', 'email', 'johndoe@example.com', '',
           false, 'email', this.handleChange)}
         <div>
