@@ -24,6 +24,7 @@ const UserArticles = ({
         extra={(<img width={270} height={170} alt="article" src={item.image} />)}
       >
         <List.Item.Meta
+          data-test="list-meta-item"
           avatar={<Avatar src={myProfile.profile.image} />}
           title={<button type="button" className="article-hover-title" onClick={e => handleClick(e, item.slug)}>{item.title}</button>}
           description={item.description.substr(0, 150)}
