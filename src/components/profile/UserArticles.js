@@ -19,20 +19,9 @@ const UserArticles = ({
         actions={[
           <IconText type="heart" text={item.likes} />,
           <IconText type="message" text={item.comments.length} />,
-          <PopDelete
-            onDelete={deleteArticle}
-            slug={item.slug}
-            history={history}
-          />,
+          <PopDelete onDelete={deleteArticle} slug={item.slug} history={history} />,
         ]}
-        extra={(
-          <img
-            width={270}
-            height={170}
-            alt="article"
-            src={item.image}
-          />
-        )}
+        extra={(<img width={270} height={170} alt="article" src={item.image} />)}
       >
         <List.Item.Meta
           avatar={<Avatar src={myProfile.profile.image} />}

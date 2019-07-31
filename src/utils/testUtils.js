@@ -196,4 +196,13 @@ export const passwordResetConfTestsFail = (data, requestConst, action, actionNam
   });
 };
 
+export const myProfile = {
+  profile: {
+    image: 'iamge_url',
+    first_name: 'first_name',
+    last_name: 'last_name',
+    bio: 'my_bio',
+  },
+};
+
 export default store;
