@@ -63,7 +63,7 @@ export class UnconnectedFollowList extends React.Component {
     const { className, data, followText } = this.state;
     return (
       <div data-test="list-followers" className="profile-header-info-followers">
-        <span className="span-abit" onClick={() => this.showFollows('followers')} role="presentation">
+        <span data-test="follow-list-span-showfol" className="span-abit" onClick={() => this.showFollows('followers')} role="presentation">
           {followers}
           <span>Followers</span>
         </span>
