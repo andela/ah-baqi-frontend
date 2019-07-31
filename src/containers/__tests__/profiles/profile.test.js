@@ -1,41 +1,30 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from '../../../reducers/index';
+import Profile from '../../profile/Profile';
 
-import { containerStore, mockFn } from '../../../utils/testUtils';
-import Profile, { UnconnectedProfile } from '../../profile/Profile';
-
-const setup = () => {
-  const store = containerStore();
-  const wrapper = shallow(
-    <Profile store={store} />,
-  ).dive().dive();
-  return wrapper;
+const configureStoreItem = (initialState) => {
+  const store = applyMiddleware(thunk)(createStore);
+  return store(rootReducer, initialState);
 };
 
-describe('redux properties', () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = setup();
-  });
-  test('is undefined in the first instance before action is called', () => {
-    const initialProfile = wrapper.instance().props.profile;
-    expect(initialProfile).toBe(undefined);
-  });
-  test('`getUserProfile` action creator is a function on the props', () => {
-    const getUserProfileProp = wrapper.instance().props.getUserProfile;
-    expect(getUserProfileProp).toBeInstanceOf(Function);
-  });
-  test('`getUserProfile` runs on Profile mount', () => {
-    const props = {
-      getUserProfile: mockFn,
-      getUserArticles: mockFn,
-    };
-    const wrapper = shallow(<UnconnectedProfile {...props} />);
-    wrapper.instance().componentDidMount();
-    const getProfile = mockFn.mock.calls.length;
-    const getArticles = mockFn.mock.calls.length;
-
-    expect(getProfile).toBe(2);
-    expect(getArticles).toBe(2);
+describe('<Profile /> ', () => {
+  const store = configureStoreItem();
+  test('it renders correctly', () => {
+    const historyMock = { push: jest.fn() };
+    const wrapper = mount(
+      <Provider store={store}>
+        <Profile history={historyMock} />
+      </Provider>,
+    );
+    const UserProfile = wrapper.find(
+      "[data-test='prof-cont-wrap']",
+    );
+    const event = { preventDefault: jest.fn() };
+    UserProfile.props().handleClick(event);
+    expect(UserProfile).toHaveLength(1);
   });
 });

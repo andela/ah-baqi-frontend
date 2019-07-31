@@ -7,7 +7,7 @@ import './profile.scss';
 import { deleteArticle, getArticle } from '../../actions/articleActions';
 import { getUserProfile, getUserArticles } from '../../actions/profileActions';
 
-export class UnconnectedProfile extends Component {
+class Profile extends Component {
   componentDidMount() {
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('user_id');
@@ -30,6 +30,7 @@ export class UnconnectedProfile extends Component {
       <div className="profile-container">
         <div className="profile-container-wrapper">
           <UserProfile
+            data-test="prof-cont-wrap"
             myProfile={profile}
             userArticles={userArticles}
             deleteArticle={deleteArticle}
@@ -56,4 +57,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getArticle,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
