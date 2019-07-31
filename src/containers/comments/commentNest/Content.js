@@ -1,7 +1,11 @@
 import React from 'react';
 
 import {
-  user, displayComments, editComment, editCommentForm, commentHeader,
+  user,
+  displayComments,
+  editComment,
+  editCommentForm,
+  commentHeader,
 } from '../helpers/helpers';
 import SecondaryComment from './SecondaryComment';
 import customIcon from '../../../utils/icons';
