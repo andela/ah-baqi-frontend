@@ -23,6 +23,8 @@ import {
 import searchActions from '../../actions/searchActions';
 
 class Header extends Component {
+  onFailure = () => 'failed';
+
   handleSubmit = (event, formProp, action) => {
     const { signupActions, loginActions, hideModalActions } = this.props; // eslint-disable-line
     event.preventDefault();
@@ -49,8 +51,6 @@ class Header extends Component {
     }
     socialAuthActions(authData, provider, hideModalActions);
   };
-
-  onFailure = () => 'failed';
 
   render() {
     const {
