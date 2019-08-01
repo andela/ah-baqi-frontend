@@ -5,11 +5,10 @@ import { UnconnectedFollowList } from '../../profile/ListFollowers';
 
 describe('<FollowList /> ', () => {
   test('unconnected One', () => {
-    const fetchFolloweesMock = jest.fn();
-    const fetchFollowersMock = jest.fn();
     const props = {
-      fetchFollowees: fetchFolloweesMock,
-      fetchFollowers: fetchFollowersMock,
+      fetchFollowees: jest.fn(),
+      fetchFollowers: jest.fn(),
+      onClick: jest.fn(),
     };
     const followees = [{ name: 'bill' }];
     const followers = [{ name: 'martin' }];
@@ -20,9 +19,12 @@ describe('<FollowList /> ', () => {
     localStorage.setItem('followers', JSON.stringify(followers));
     uncWrapper.instance().showFollows('followers');
     uncWrapper.instance().followersList(
-      'className', 'data', 'followText',
+      'className',
+      'data',
+      'followText',
     ).props.renderItem([{}]);
-    expect(uncWrapper.find(
-      "[data-test='list-followers']")).toHaveLength(1);
+    uncWrapper.find('.span-abit').at(0).simulate('click');
+    uncWrapper.find('.span-abit').at(1).simulate('click');
+    expect(uncWrapper.find("[data-test='list-followers']")).toHaveLength(1);
   });
 });
