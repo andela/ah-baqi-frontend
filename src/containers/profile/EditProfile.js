@@ -7,7 +7,7 @@ import EditProfileForm from '../../components/profile/forms/EditProfileForm';
 import { editUserProfile } from '../../actions/profileActions';
 import { displayModalActions, hideModalActions } from '../../actions/modalActions';
 
-export class UnconnectedEditProfile extends React.Component {
+class EditProfile extends React.Component {
   showModal = () => {
     const { displayModalActions } = this.props; // eslint-disable-line
     displayModalActions();
@@ -77,4 +77,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(UnconnectedEditProfile);
+)(EditProfile);

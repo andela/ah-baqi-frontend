@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Form, Input, Button } from 'antd';
+import { Form } from 'antd';
 import { resetConfirmActions } from '../../actions/passwordConfirmActions';
-
+import { formItem, formButton } from '../../utils/formElements';
 
 class ResetConfirm extends Component {
   state = {
@@ -50,41 +50,22 @@ class ResetConfirm extends Component {
   render() {
     const { form } = this.props;
     return (
-      <Form onSubmit={this.handleSubmit} className="reset-form" style={{ textAlign: 'left' }}>
+      <Form
+        onSubmit={this.handleSubmit}
+        className="reset-form"
+        data-test="reset-form-cont"
+        style={{ textAlign: 'left' }}
+      >
         <div>
           <h1>Create your new password</h1>
         </div>
-        <Form.Item className="reset-label" hasFeedback label="Password">
-          {form.getFieldDecorator('password', {
-            rules: [
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-              {
-                validator: this.validateToNextPassword,
-              },
-            ],
-          })(<Input.Password type="input" name="password" onChange={this.handleChange} />)}
-        </Form.Item>
-        <Form.Item className="reset-label" hasFeedback label="Confirm Password">
-          {form.getFieldDecorator('confirm_password', {
-            rules: [
-              {
-                required: true,
-                message: 'Please confirm your password!',
-              },
-              {
-                validator: this.compareToFirstPassword,
-              },
-            ],
-          })(<Input.Password name="confirm_password" onChange={this.handleChange} />)}
-        </Form.Item>
-        <div>
-          <Button type="primary" htmlType="submit" className="login-form-button" block>
-            Reset Password
-          </Button>
-        </div>
+        {formItem(form, 'reset-form-cont-password', 'Password', 'password',
+          'lock', 'password', '*****', this.validateToNextPassword,
+          true, 'password', this.handleChange)}
+        {formItem(form, 'reset-form-cont-reset-password', 'Confirm Password', 'confirm_password',
+          'lock', 'password', '*****', this.compareToFirstPassword,
+          true, 'confirm_password', this.handleChange)}
+        {formButton('Reset Password')}
       </Form>
     );
   }

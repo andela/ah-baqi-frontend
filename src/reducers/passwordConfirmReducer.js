@@ -1,6 +1,6 @@
 import actionTypes from '../actions/types';
 
-const initialState = {
+export const initialState = {
   data: {},
   error: null,
   loading: false,
@@ -9,23 +9,22 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case actionTypes.RESETCONFIRMREQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
+      return { ...state, loading: true, actionCalled: true };
     case actionTypes.RESETCOFIRMSUCCESS:
       return {
         ...state,
         data: action.payload,
         loading: false,
+        actionCalled: true,
       };
     case actionTypes.RESETCONFIRMERROR:
       return {
         ...state,
         error: action.error,
         loading: false,
+        actionCalled: true,
       };
     default:
-      return state;
+      return { ...state, actionCalled: true };
   }
 }

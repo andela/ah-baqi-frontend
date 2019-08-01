@@ -2,9 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import AuthorHeadData from '../../articles/singlearticle/AuthorArticleData';
-import { componentRenders } from '../../../utils/testUtils';
-
-const mockFn = jest.fn();
+import { componentRenders, mockFn } from '../../../utils/testUtils';
 
 describe('<AuthorHeadData /> component', () => {
   const props = {

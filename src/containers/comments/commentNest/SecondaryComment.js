@@ -58,6 +58,7 @@ export class UnconnectedSecondaryComment extends React.Component {
         <SecondaryContent {...this.props} />
         <div className="nest-text-editor">
           <Editor
+            data-test="nest-item-editor"
             onChange={this.handleChange}
             onSubmit={this.handleSubmit}
             submitting={submitting}

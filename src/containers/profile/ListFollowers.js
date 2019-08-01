@@ -8,11 +8,10 @@ export class UnconnectedFollowList extends React.Component {
     followText: '',
     className: 'no-display',
     data: [],
-  }
+  };
 
   componentWillMount() {
     const { fetchFollowees, fetchFollowers } = this.props;
-    console.log(localStorage.user_id);
     const userId = localStorage.user_id;
     fetchFollowees(userId);
     fetchFollowers(userId);
@@ -24,67 +23,60 @@ export class UnconnectedFollowList extends React.Component {
       followList.push(arr[i].username);
     }
     return followList;
-  }
+  };
 
   showFollows = (followType) => {
     this.setState({
       className: 'visible',
     });
 
-
     if (followType === 'following') {
       const followingList = this.listFollows(JSON.parse(localStorage.followees));
-      this.setState({
-        data: followingList,
-        followText: 'Following',
-      });
+      this.changeFollowText(followingList, 'Following');
     } else if (followType === 'followers') {
       const followersList = this.listFollows(JSON.parse(localStorage.followers));
-      this.setState({
-        data: followersList,
-        followText: 'Followers',
-      });
+      this.changeFollowText(followersList, 'Followers');
     }
+  };
+
+  changeFollowText = (followList, text) => {
+    this.setState({
+      data: followList,
+      followText: text,
+    });
   }
+
+  followersList = (className, data, followText) => (
+    <List
+      className={className}
+      size="small"
+      header={<div className="table-head">{followText}</div>}
+      bordered
+      dataSource={data}
+      renderItem={item => <List.Item className="list-item">{item}</List.Item>}
+    />
+  );
 
   render() {
     const following = localStorage.followeesCount;
     const followers = localStorage.followersCount;
     const { className, data, followText } = this.state;
     return (
-      <div
-        data-test="list-followers"
-        className="profile-header-info-followers"
-      >
-        {' '}
-        <span
-          className="span-abit"
-          onClick={() => this.showFollows('followers')}
-        >
+      <div data-test="list-followers" className="profile-header-info-followers">
+        <span data-test="follow-list-span-showfol" className="span-abit" onClick={() => this.showFollows('followers')} role="presentation">
           {followers}
-          {' '}
-          Followers
+          <span>Followers</span>
         </span>
-        {' '}
-        {' '}
-        {' '}
         <span
           data-test="follow-list-span"
           className="span-abit"
           onClick={() => this.showFollows('following')}
+          role="presentation"
         >
           {following}
-          {' '}
-          Following
+          <span>Following</span>
         </span>
-        <List
-          className={className}
-          size="small"
-          header={<div className="table-head">{followText}</div>}
-          bordered
-          dataSource={data}
-          renderItem={item => <List.Item className="list-item">{item}</List.Item>}
-        />
+        {this.followersList(className, data, followText)}
         <br />
       </div>
     );

@@ -2,7 +2,6 @@ import { instance } from '../utils/axios';
 import handleMessages from '../utils/messages';
 import { getArticle } from './articleActions';
 
-
 export const addComment = (slug, value) => async (dispatch) => {
   try {
     await instance.post(`/articles/${slug}/comments`, value);

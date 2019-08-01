@@ -1,55 +1,61 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history';
-import configureStore from 'redux-mock-store';
+import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import toJson from 'enzyme-to-json';
-import { Form, Button } from 'antd';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from '../../../reducers/index';
 import ResetConfirm from '../passwordConfirmContainer';
 
-describe('Tests PasswordResetConfirmContainer', () => {
-  const store = configureStore([thunk])({
-    confirmresetpassword: { message: {}, errors: {} },
-  });
-  const props = {
-    match: {
-      params: {
-        token: 'tcvygbuhijn6789',
-      },
-    },
-    showModal: jest.fn(),
-    history: { push: jest.fn() },
-  };
-  const history = createBrowserHistory();
-  const wrapper = mount(
-    <Router history={history}>
+const configureStoreItem = (initialState) => {
+  const store = applyMiddleware(thunk)(createStore);
+  return store(rootReducer, initialState);
+};
+
+describe('<ResetConfirm />', () => {
+  const store = configureStoreItem();
+  test('It renders correctly', () => {
+    const wrapperComponent = mount(
       <Provider store={store}>
-        <ResetConfirm {...props} />
-      </Provider>
-    </Router>,
-  );
-  it('Test mounting of component', () => {
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
-  it('Tests input change in form', () => {
-    const form = wrapper.find(Form, Form.Item);
-    const input = form.find('input[name="password"]');
-    input.simulate('change', {
+        <BrowserRouter>
+          <ResetConfirm />
+        </BrowserRouter>
+      </Provider>,
+    );
+    const formItem = wrapperComponent.find(
+      '[data-test="reset-form-cont"]',
+    );
+    expect(formItem).toHaveLength(2);
+
+    const event = {
+      target: { name: 'password', value: 'Whf34@jfFFdjkv34%#' },
       preventDefault: jest.fn(),
-      target: {
-        value: 'testuser@gmail.com',
-        password: 'AseRtG9176!',
+    };
+    formItem.at(0).props().onSubmit(event);
+    const pass = wrapperComponent.find(
+      '[data-test="reset-form-cont-password"]',
+    );
+    pass.at(0).props().onChange(event);
+    expect(pass).toHaveLength(2);
+
+    const callback = jest.fn();
+    pass.at(0).props()['data-__meta'].rules[1].validator.validator(
+      'rule', 'Whf34@jfFFdjkv34%#', callback,
+    );
+    const confPass = wrapperComponent.find(
+      '[data-test="reset-form-cont-reset-password"]',
+    );
+    confPass.at(0).props()['data-__meta'].rules[1].validator.validator(
+      'rule', 'Whf34@jfFFdjkv34%#', callback,
+    );
+    wrapperComponent.setState({
+      resetPassword: {
+        password: 'Whf34@jfFFdjkv34%#',
       },
     });
-    expect(input.length).toEqual(1);
-  });
-  it('handles submit in form', () => {
-    const PasswordChangeBtn = wrapper.find(Button);
-    PasswordChangeBtn.simulate('submit', {
-      preventDefault: jest.fn(),
-    });
-    expect(PasswordChangeBtn.length).toEqual(1);
+    confPass.at(0).props()['data-__meta'].rules[1].validator.validator(
+      'rule', 'Whf34@jfFFkv34%#', callback,
+    );
+    expect(wrapperComponent.state.resetPassword).toBe(undefined);
   });
 });

@@ -3,6 +3,24 @@ import handleMessages from '../utils/messages';
 
 import actionTypes from './types';
 
+let serviceProvider;
+const selectProvider = (provider) => {
+  switch (provider) {
+    case 'google':
+      serviceProvider = actionTypes.GOOGLE_AUTH;
+      break;
+    case 'facebook':
+      serviceProvider = actionTypes.FACEBOOK_AUTH;
+      break;
+    case 'twitter':
+      serviceProvider = actionTypes.TWITTER_AUTH;
+      break;
+    default:
+      serviceProvider = 'missing provider';
+      break;
+  }
+};
+
 export const socialAuthActions = (data, provider, cancel) => async (dispatch) => {
   try {
     handleMessages('loading', 'Signing in to your account...');
@@ -11,35 +29,15 @@ export const socialAuthActions = (data, provider, cancel) => async (dispatch) =>
       data,
     );
 
-    let serviceProvider = '';
-    switch (provider) {
-      case 'google':
-        serviceProvider = actionTypes.GOOGLE_AUTH;
-        break;
-      case 'facebook':
-        serviceProvider = actionTypes.FACEBOOK_AUTH;
-        break;
-      case 'twitter':
-        serviceProvider = actionTypes.TWITTER_AUTH;
-        break;
-      default:
-        serviceProvider = 'missing provider';
-        break;
-    }
+    selectProvider(provider);
 
     dispatch({
       type: serviceProvider,
       payload: response.data,
     });
 
-    const userDetails = [
-      { token: response.data.user.tokem },
-      { username: response.data.user.username },
-    ];
-    userDetails.forEach((item) => {
-      localStorage.setItem(`${Object.keys(item)}`, Object.values(item));
-    });
-
+    localStorage.setItem('token', response.data.user.tokem);
+    localStorage.setItem('username', response.data.user.username);
     localStorage.setItem('isLoggedIn', true);
     handleMessages('success', 'Successfully Signed in 😄');
     cancel();

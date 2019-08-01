@@ -1,62 +1,29 @@
 import React from 'react';
-import { Avatar, Icon } from 'antd';
 
-import EditUserCommentForm from '../EditCommentContainer';
-import { user, editComment } from '../helpers/helpers';
+import {
+  user,
+  editComment,
+  commentHeader,
+  editNestedCommentForm,
+} from '../helpers/helpers';
+import customIcon from '../../../utils/icons';
 
-const SecondaryContent = (props) => {
-  const {
-    replies,
-    slug,
-    id,
-    deleteNestedCommentItem,
-  } = props;
-
+const SecondaryContent = ({
+  replies, slug, id, deleteNestedCommentItem,
+}) => {
   const contentItem = replies.map(item => (
     <div key={item.id} className="nested-comment-item">
-      <p>
-        <Avatar
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          alt="Han Solo"
-        />
-        {' '}
-        {item.author}
-        {' '}
-        {' '}
-        {new Date(Date.parse(item.created_at)).toUTCString()}
-        {' '}
-        {item.author === user
-          && (
-            <span>
-              <Icon
-                type="edit"
-                onClick={() => editComment(
-                  `comment-edit-field-${item.id}`,
-                )}
-              />
-              {' '}
-              <Icon
-                className="delete-icon"
-                type="delete"
-                onClick={() => deleteNestedCommentItem(slug, id, item.id)}
-              />
-            </span>
-          )
-        }
-      </p>
-      {item.body}
-      <div className={`comment-edit-field-${item.id} hide`}>
-        <EditUserCommentForm
-          data-test="edit-user-form"
-          btnClass={`btn-cancel-edit-${item.id}`}
-          editorClass={`comment-edit-field-${item.id}`}
-          body={item.body}
-          commentId={id}
-          slug={slug}
-          replyId={item.id}
-          isNest
-        />
-      </div>
+      {commentHeader(item)}
+      {item.author === user && (
+      <span className="utility-buttons">
+        {customIcon('edit-icon-nest', 'edit', () => editComment(
+          `comment-edit-field-${item.id}`,
+        ))}
+        {customIcon('delete-icon', 'delete', () => deleteNestedCommentItem(slug, id, item.id))}
+      </span>
+      )}
+      <p>{item.body}</p>
+      {editNestedCommentForm(item, id, slug)}
     </div>
   ));
   return (

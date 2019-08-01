@@ -3,10 +3,13 @@ import { shallow } from 'enzyme';
 import CKEditor from 'ckeditor4-react';
 import { Select } from 'antd';
 
-import { componentRenders, propOnchangeTests } from '../../../utils/testUtils';
+import {
+  componentRenders,
+  propOnchangeTests,
+  mockFn,
+  propOnClickTests,
+} from '../../../utils/testUtils';
 import NewArticleForm from '../../articles/ArticlesForm';
-
-const mockFn = jest.fn();
 
 const myArticle = {
   slug: '',
@@ -39,8 +42,6 @@ describe('<NewArticleForm /> component', () => {
   });
 
   test('should test form submit method is called', () => {
-    const articleForm = wrapper.find('form');
-    articleForm.props().onSubmit();
-    expect(mockFn).toHaveBeenCalled();
+    propOnClickTests(wrapper, 'articles-form', mockFn, 'onSubmit');
   });
 });

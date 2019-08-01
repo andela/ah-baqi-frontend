@@ -9,12 +9,13 @@ const articlesScroll = ({
   fetchMoreData,
   nextPage,
   handleClick,
+  hasMore,
 }) => (
   <InfiniteScroll
     data-test="infinite-article-scroll"
     dataLength={articles.length}
     next={() => fetchMoreData(nextPage.split('?')[1])}
-    hasMore={!!nextPage}
+    hasMore={hasMore}
     loader={(
       <div className="fetured-loader">
         <Skeleton
@@ -32,6 +33,7 @@ const articlesScroll = ({
       handleClick={handleClick}
       articles={articles.slice(4)}
       data-test="featured-articles"
+      key={nextPage || 'last-page'}
     />
   </InfiniteScroll>
 );

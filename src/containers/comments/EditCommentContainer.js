@@ -29,32 +29,23 @@ class EditForm extends React.Component {
       slug, commentId, replyId, editNestedCommentItem,
     } = this.props;
     editNestedCommentItem(slug, commentId, replyId, value);
-  }
+  };
 
   editNormalComment = (value) => {
     const { slug, id, editCommentItem } = this.props;
     editCommentItem(slug, id, value);
-  }
+  };
 
   render() {
     const { btnClass, editorClass, body } = this.props;
     const { form } = this.props;
     return (
-      <Form
-        layout="inline"
-        onSubmit={this.handleSubmit}
-        data-test="edit-container"
-        className="edit-form-item"
-      >
+      <Form layout="inline" onSubmit={this.handleSubmit} data-test="edit-container">
         <Form.Item data-test="textarea-container">
           {form.getFieldDecorator('body', { initialValue: `${body}` })(<TextArea rows={3} />)}
         </Form.Item>
         <Form.Item data-test="submit-button-container">
-          <Button
-            type="link"
-            htmlType="submit"
-            onClick={() => closeEditor(editorClass)}
-          >
+          <Button data-test="submit-button-close" type="link" htmlType="submit" onClick={() => closeEditor(editorClass)}>
             <Icon type="check-circle" className="edit-buttons" />
           </Button>
           <Button

@@ -5,6 +5,23 @@ import { GoogleLogin } from 'react-google-login';
 import AuthModalButtons from '../../auth/AuthModalButtons';
 import SocialAuthModalButtons from '../../auth/SocialAuthModalButtons';
 import EmailModalButton from '../../auth/EmailModalButton';
+import { mockFn, propOnClickTests } from '../../../utils/testUtils';
+
+const testFBGoogleCallbacks = (wrapper, element, method) => {
+  test('facebook callback is called', () => {
+    const media = wrapper.find(element);
+    if (method === 'callback') {
+      media.props().callback();
+    } else if (method === 'onSuccess') {
+      media.props().onSuccess();
+    }
+
+    expect(mockFn).toHaveBeenCalled();
+    // testing the renderProp
+    media.props().render({});
+    expect(wrapper.find(AuthModalButtons).exists()).toBe(true);
+  });
+};
 
 
 describe('<authModalButtons /> component', () => {
@@ -14,11 +31,10 @@ describe('<authModalButtons /> component', () => {
 });
 
 describe('<SocialAuthModalButtons /> component', () => {
-  const myMock = jest.fn();
   const wrapper = shallow(<SocialAuthModalButtons
-    facebookResponse={myMock}
-    googleResponse={myMock}
-    twitterResponse={myMock}
+    twitterResponse={mockFn}
+    facebookResponse={mockFn}
+    googleResponse={mockFn}
   />);
 
   test('renders without crashing', () => {
@@ -30,25 +46,17 @@ describe('<SocialAuthModalButtons /> component', () => {
   test('facebook callback is called', () => {
     const facebook = wrapper.find(FacebookLogin);
     facebook.props().callback();
-    expect(myMock).toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalled();
     // testing the renderProp
     facebook.props().render({});
     expect(wrapper.find(AuthModalButtons).exists()).toBe(true);
   });
 
-  test('google onSuccess is called', () => {
-    const google = wrapper.find(GoogleLogin);
-    google.props().onSuccess();
-    expect(myMock).toHaveBeenCalled();
-    // testing the renderProp
-    google.props().render({});
-    expect(wrapper.find(AuthModalButtons).exists()).toBe(true);
-  });
+  testFBGoogleCallbacks(wrapper, FacebookLogin, 'callback');
+  testFBGoogleCallbacks(wrapper, GoogleLogin, 'onSuccess');
 
   test('should test twitter onClick is called', () => {
-    const twitter = wrapper.find("[titter-button='twitter button']");
-    twitter.props().clicked();
-    expect(myMock).toHaveBeenCalled();
+    propOnClickTests(wrapper, 'twitter button', mockFn, 'clicked');
   });
 });
 

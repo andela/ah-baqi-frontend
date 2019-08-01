@@ -18,8 +18,8 @@ export const resetConfirmError = error => ({
 });
 
 export const resetConfirmActions = data => async (dispatch) => {
-  handleMessages('loading', 'Request processing...');
   try {
+    handleMessages('loading', 'Request processing...');
     const passData = {
       password: data.resetPassword.password,
       confirm_password: data.resetPassword.confirm_password,

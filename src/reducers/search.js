@@ -7,8 +7,12 @@ export default (state = {}, action) => {
         ...state,
         resultsReturned: true,
         searchResults: action.payload,
+        actionCalled: true,
       };
     default:
-      return state;
+      return {
+        ...state,
+        actionCalled: true,
+      };
   }
 };

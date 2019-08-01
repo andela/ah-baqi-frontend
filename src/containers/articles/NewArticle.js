@@ -44,7 +44,6 @@ export class UnconnectedCreateUpdateArticle extends Component {
           image: event,
         });
         break;
-
       case 'description':
         this.setState({
           description: event.target.value,
@@ -115,4 +114,7 @@ const mapStateToProps = state => ({
   articleData: state.article.articleData,
 });
 
-export default connect(mapStateToProps, { createArticle, editArticle })(UnconnectedCreateUpdateArticle);
+export default connect(mapStateToProps, {
+  createArticle,
+  editArticle,
+})(UnconnectedCreateUpdateArticle);

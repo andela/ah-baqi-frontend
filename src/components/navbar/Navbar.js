@@ -26,6 +26,7 @@ const searchBar = (search, history) => (
   <Item className="modified-item">
     <Input.Search
       placeholder="Search"
+      data-test="serach-bar"
       onSearch={value => value && search(searchFilter, value, history)}
       addonBefore={filterOptions}
       className="search-input"

@@ -1,5 +1,5 @@
 import { instance } from '../../utils/axios';
-import store from '../../utils/testUtils';
+import store, { socialAuthTest } from '../../utils/testUtils';
 import { firebaseAuthAction, socialAuthActions } from '../socialAuthActions';
 
 
@@ -19,7 +19,6 @@ const providerMissing = {
 
 
 describe('testing firebse calls from twitter', () => {
-  const myMock = jest.fn();
   beforeEach(() => {
     store.clearActions();
   });
@@ -45,24 +44,11 @@ describe('testing firebse calls from twitter', () => {
       data: resDataFT,
     }));
 
-    await store.dispatch(firebaseAuthAction(store.dispatch), store.dispatch(socialAuthActions(twitterReqData, 'twitter')));
+    await store.dispatch(firebaseAuthAction())
+      .then(() => store.dispatch(socialAuthActions(twitterReqData, 'twitter')));
     expect(store.getActions()[0].payload).toEqual(resDataFT);
     expect(store.getActions()[0].type).toEqual('TWITTER_AUTH');
     expect(localStorage.setItem).toHaveBeenCalled();
-  });
-
-  test('tests that firebase failed', async () => {
-    const resDataFT = { ...firebaseResponse, ...socialAuthResponse };
-    instance.post.mockImplementation(() => Promise.resolve({
-      data: resDataFT,
-    }));
-
-    try {
-      await store.dispatch(firebaseAuthAction(myMock));
-    } catch (e) {
-      expect(store.getActions()).toEqual([]);
-      expect(myMock).toHaveBeenCalled();
-    }
   });
 });
 
@@ -75,27 +61,8 @@ describe('testing facebook and google signin', () => {
     accessToken: '1044559557983375360-uvsfrwszwBxeqiBFTRDmt9MKOQVtQ6',
   };
 
-  test('facebook signin', async () => {
-    instance.post.mockImplementation(() => Promise.resolve({
-      data: { ...socialAuthResponse },
-    }));
-
-    await store.dispatch(socialAuthActions(reqData, 'facebook'));
-    expect(store.getActions()[0].payload).toEqual(socialAuthResponse);
-    expect(store.getActions()[0].type).toEqual('FACEBOOK_AUTH');
-    expect(localStorage.setItem).toHaveBeenCalled();
-  });
-
-  test('google signin', async () => {
-    instance.post.mockImplementation(() => Promise.resolve({
-      data: { ...socialAuthResponse },
-    }));
-
-    await store.dispatch(socialAuthActions(reqData, 'google'));
-    expect(store.getActions()[0].payload).toEqual(socialAuthResponse);
-    expect(store.getActions()[0].type).toEqual('GOOGLE_AUTH');
-    expect(localStorage.setItem).toHaveBeenCalled();
-  });
+  socialAuthTest(socialAuthResponse, socialAuthActions, reqData, 'facebook', 'FACEBOOK_AUTH');
+  socialAuthTest(socialAuthResponse, socialAuthActions, reqData, 'google', 'GOOGLE_AUTH');
 
   test('no provider provided', async () => {
     instance.post.mockImplementation(() => Promise.resolve({

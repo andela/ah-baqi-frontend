@@ -51,16 +51,6 @@ describe('<BookmarkContainer />', () => {
     expect(addBookmarkMock).toHaveBeenCalled();
   });
   test('bookmarks is updated', () => {
-    const bookmarks = { message: 'no bookmarks' };
-    const wrapper = shallow(<UnconnectedBookmark
-      bookmarks={bookmarks}
-      getBookmarks={getBookmarksMock}
-      addBookmark={addBookmarkMock}
-    />);
-    const bookmarkIcon = wrapper.find("[data-test='bookmark-container-add']");
-    bookmarkIcon.simulate('click');
-  });
-  test('bookmarks is updated', () => {
     const slug = 'cant-roll-out-of-bed-in-the-morning_Username';
     const bookmarks = {
       'bookmarked articles': [{

@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import AuthModal from '../../components/modals/AuthModal';
 import Navbar from '../../components/navbar/Navbar';
 import loginActions from '../../actions/loginActions';
 import logoutActions from '../../actions/logoutActions';
 
 import {
-  displayModalActions,
-  hideModalActions,
-  emailSignupAction,
-  formSignupAction,
-  emailLoginAction,
   formLoginAction,
+  emailSignupAction,
+  hideModalActions,
+  formSignupAction,
+  displayModalActions,
+  emailLoginAction,
 } from '../../actions/modalActions';
 import signupActions from '../../actions/signupActions';
 import {
@@ -21,31 +22,25 @@ import {
 } from '../../actions/socialAuthActions';
 import searchActions from '../../actions/searchActions';
 
-export const UnconnectedHeader = (props) => {
-  const {
-    signupActions, hideModalActions, formSignupAction, emailSignupAction, // eslint-disable-line
-    authAction, visible, emailLoginAction, formLoginAction, socialAuthActions, // eslint-disable-line
-    firebaseAuthAction, loginActions, logoutActions, searchActions, history } = props; // eslint-disable-line
+class Header extends Component {
+  onFailure = () => 'failed';
 
-  const handleSignupSubmit = (event, formProp) => {
+  handleSubmit = (event, formProp, action) => {
+    const { signupActions, loginActions, hideModalActions } = this.props; // eslint-disable-line
     event.preventDefault();
     formProp.validateFields((error, values) => {
       if (!error) {
-        signupActions(values, hideModalActions);
+        if (action === 'login') {
+          loginActions(values, hideModalActions);
+        } else if (action === 'signup') {
+          signupActions(values, hideModalActions);
+        }
       }
     });
   };
 
-  const handleLoginSubmit = (event, formProp) => {
-    event.preventDefault();
-    formProp.validateFields((error, values) => {
-      if (!error) {
-        loginActions(values, hideModalActions);
-      }
-    });
-  };
-
-  const socialAuthResponse = (response, provider) => {
+  socialAuthResponse = (response, provider) => {
+    const { socialAuthActions, hideModalActions } = this.props; // eslint-disable-line
     const authData = {
       token_provider: 'google-oauth2',
       access_token: response.accessToken,
@@ -57,54 +52,59 @@ export const UnconnectedHeader = (props) => {
     socialAuthActions(authData, provider, hideModalActions);
   };
 
-  const onFailure = () => 'failed';
+  render() {
+    const {
+      hideModalActions, formSignupAction, emailSignupAction, // eslint-disable-line
+      authAction, visible, emailLoginAction, formLoginAction, socialAuthActions, // eslint-disable-line
+      firebaseAuthAction, logoutActions, searchActions, history } = this.props; // eslint-disable-line
 
-  return (
-    <div data-test="header-section">
-      <Navbar
-        clickedSignup={emailSignupAction}
-        clickedLogin={emailLoginAction}
-        logOut={logoutActions}
-        search={searchActions}
-        history={history}
-      />
-      <AuthModal
-        authAction={authAction}
-        visible={visible}
-        onCancel={hideModalActions}
-        showSignupForm={formSignupAction}
-        submitSignup={handleSignupSubmit}
-        showLoginForm={formLoginAction}
-        google={socialAuthResponse}
-        facebook={socialAuthResponse}
-        twitter={firebaseAuthAction}
-        onFailure={onFailure}
-        submitLogin={handleLoginSubmit}
-      />
-    </div>
-  );
-};
+    return (
+      <div data-test="header-section">
+        <Navbar
+          data-test="navbar-header-section"
+          clickedSignup={emailSignupAction}
+          clickedLogin={emailLoginAction}
+          logOut={logoutActions}
+          search={searchActions}
+          history={history}
+        />
+        <AuthModal
+          data-test="navbar-modal-section"
+          authAction={authAction}
+          visible={visible}
+          onCancel={hideModalActions}
+          showSignupForm={formSignupAction}
+          submitSignup={this.handleSubmit}
+          showLoginForm={formLoginAction}
+          google={this.socialAuthResponse}
+          facebook={this.socialAuthResponse}
+          twitter={firebaseAuthAction}
+          onFailure={this.onFailure}
+          submitLogin={this.handleSubmit}
+        />
+      </div>
+    );
+  }
+}
 
 
 const mapStateToProps = state => ({
   ...state.modals,
   ...state.login,
 });
+const mapDispatchToProps = dispatch => bindActionCreators({
+  socialAuthActions,
+  displayModalActions,
+  logoutActions,
+  hideModalActions,
+  loginActions,
+  emailSignupAction,
+  firebaseAuthAction,
+  formSignupAction,
+  searchActions,
+  signupActions,
+  formLoginAction,
+  emailLoginAction,
+}, dispatch);
 
-export default connect(
-  mapStateToProps,
-  {
-    displayModalActions,
-    hideModalActions,
-    emailSignupAction,
-    formSignupAction,
-    signupActions,
-    emailLoginAction,
-    formLoginAction,
-    socialAuthActions,
-    firebaseAuthAction,
-    loginActions,
-    logoutActions,
-    searchActions,
-  },
-)(withRouter(UnconnectedHeader));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

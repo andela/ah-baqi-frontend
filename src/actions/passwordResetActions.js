@@ -18,8 +18,8 @@ export const resetPasswordError = error => ({
 });
 
 export const resetPasswordActions = data => async (dispatch) => {
-  handleMessages('loading', 'Request processing...');
   try {
+    handleMessages('loading', 'Request processing...');
     dispatch(resetPasswordRequest());
     const response = await instance.post('/account/forgot_password/', data);
     dispatch(resetPassword(response.data));

@@ -1,6 +1,6 @@
 import actionTypes from '../actions/types';
 
-const initialState = {
+export const initialState = {
   loading: false,
   error: null,
   articleCount: 0,
@@ -44,7 +44,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         actionCalled: true,
-        articles: state.articles.concat(action.payload.results),
+        articles: action.payload.count > state.articles.length ? state.articles.concat(action.payload.results) : state.articles, // eslint-disable-line
         nextPage: action.payload.next,
         previousPage: action.payload.previous,
         articleCount: action.payload.count,
@@ -83,6 +83,9 @@ export default function (state = initialState, action) {
         actionCalled: true,
       };
     default:
-      return state;
+      return {
+        ...state,
+        actionCalled: true,
+      };
   }
 }

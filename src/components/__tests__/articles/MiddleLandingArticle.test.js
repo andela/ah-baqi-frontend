@@ -1,16 +1,14 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-
 import MiddleLandingArticle from '../../articles/landingPage/MiddleLandingArticles';
+import { createWrapper, componentRenders } from '../../../utils/testUtils';
+
+const articleProps = {
+  articles: ['article1', 'article2', 'article3'],
+};
 
 describe('<MiddleLandingArticle /> component', () => {
-  const wrapper = shallow(
-    <MiddleLandingArticle
-      articles={['article1', 'article2', 'article3']}
-    />,
-  );
+  const wrapper = createWrapper(MiddleLandingArticle, articleProps);
 
   test('MiddleLandingArticle renders correctly', () => {
-    expect(wrapper.find("[data-test='mid-landing-article']")).toHaveLength(1);
+    componentRenders(wrapper, 'mid-landing-article');
   });
 });

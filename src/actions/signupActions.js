@@ -8,6 +8,14 @@ const onEmailRequest = payload => ({
   payload,
 });
 
+export const addUserDetailsToStorage = (userDetails) => {
+  userDetails.forEach((item) => {
+    localStorage.setItem(`${Object.keys(item)}`, Object.values(item));
+  });
+
+  localStorage.setItem('isLoggedIn', true);
+};
+
 const signupActions = (data, cancel) => async (dispatch) => {
   handleMessages('loading', 'Validating your request...');
   try {
@@ -22,13 +30,8 @@ const signupActions = (data, cancel) => async (dispatch) => {
       { username: response.data.user.data.username },
     ];
 
-    userDetails.forEach((item) => {
-      localStorage.setItem(`${Object.keys(item)}`, Object.values(item));
-    });
-
-    localStorage.setItem('isLoggedIn', true);
+    addUserDetailsToStorage(userDetails);
     handleMessages('success', 'Successfully registered 😄');
-    localStorage.setItem('isLoggedIn', true);
     cancel();
   } catch (error) {
     const error409 = 'A user with that email or username exists 😬';
